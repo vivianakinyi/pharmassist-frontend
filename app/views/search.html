@@ -1,6 +1,55 @@
-<div>
-     <p>
-        <input type="text" class="form-control" placeholder="Search Drugs">
-        <span class="fa fa-search form-control-feedback"></span>
-  </p>
+<header id="head" class="secondary"></header>
+<div class="container">
+
+    <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">About</li>
+    </ol>
+    <article>
+         <header class="page-header">
+            <h1 class="page-title">Search for Drugs</h1>
+        </header>
+        <p>
+        We’d love to hear from you. Interested in working together? Fill out the form below with some info about your project and I will get back to you as soon as I can. Please allow a couple days for me to respond.
+        </p>
+        <br>
+            <form>
+                <div class="row">
+                    <div class="col-sm-6">
+                    <label>Drug Name</label>
+                        <input class="form-control" type="text" placeholder="Type a drug name">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                    <label>Your Address/Location</label>
+                        <input class="form-control" type="text" placeholder="Enter your address">
+                        <p><a href=""><span class="glyphicon glyphicon-map-marker">
+
+                        </span> Detect your location</a></p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Search Within</label>
+                        <select class="form-control">
+                            <option>10 miles</option>
+                            <option>20 miles</option>
+                            <option>30 miles</option>
+                            <option>40 miles</option>
+                            <option>50 miles</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input class="btn btn-action" type="submit" value="Search">
+                    </div>
+                </div>
+            </form>
+
+        </article>
 </div>
