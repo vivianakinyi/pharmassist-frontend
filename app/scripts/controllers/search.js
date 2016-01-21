@@ -8,10 +8,12 @@
  * Controller of the pharmassistApp
  */
 angular.module('pharmassistApp')
-  .controller('SearchCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('SearchCtrl', function ($scope) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position){
+            $scope.$apply(function(){
+                $scope.position = position;
+            });
+        });
+    }
   });

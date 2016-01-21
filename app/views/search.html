@@ -24,10 +24,10 @@
                 <div class="row">
                     <div class="col-sm-6">
                     <label>Your Address/Location</label>
-                        <input class="form-control" type="text" placeholder="Enter your address">
-                        <p><a href=""><span class="glyphicon glyphicon-map-marker">
-
-                        </span> Detect your location</a></p>
+                        <p id="demo"><input class="form-control" type="text" placeholder="Enter your address or allow detect location"></p>
+                        <br>
+                        <button onclick="getLocation()"><span class="glyphicon glyphicon-map-marker">
+                        </span>Detect your location</button>
                     </div>
                 </div>
                 <br>
@@ -53,3 +53,19 @@
 
         </article>
 </div>
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+    " Longitude: " + position.coords.longitude;
+}
+</script>
