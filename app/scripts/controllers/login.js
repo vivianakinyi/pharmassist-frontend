@@ -8,12 +8,14 @@
  * Controller of the pharmassistApp
  */
 angular.module('pharmassistApp')
-  .controller('LoginCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('LoginCtrl', function ($scope, $http) {
+    $scope.sendData = function () {
+      var data = $.params({
+        fName: $scope.firstName
+        lName: $scope.lastName
+
+      });
+    }
   })
   .controller('RegisterCtrl', function () {
     this.awesomeThings = [
