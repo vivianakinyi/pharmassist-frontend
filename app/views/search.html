@@ -1,0 +1,71 @@
+<header id="head" class="secondary"></header>
+<div class="container">
+
+    <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Drug Search</li>
+    </ol>
+    <article>
+         <header class="page-header">
+            <h1 class="page-title">Search for Drugs</h1>
+        </header>
+        <p>
+        Enter a drug name and we will give you all the pharmacies around you that are licenced, have that drug which is authentic and also give you the recomended price of the drug.
+        </p>
+        <br>
+            <form>
+                <div class="row">
+                    <div class="col-sm-6">
+                    <label>Drug Name</label>
+                        <input class="form-control" type="text" placeholder="Type a drug name">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                    <label>Your Address/Location</label>
+                        <p id="loc"><input class="form-control" type="text" placeholder="Enter your address or allow detect location"></p>
+                        <br>
+                        <button onclick="getLocation()"><span class="glyphicon glyphicon-map-marker">
+                        </span>Detect your location</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Search Within</label>
+                        <select class="form-control">
+                            <option>10 km</option>
+                            <option>20 km</option>
+                            <option>30 km</option>
+                            <option>40 km</option>
+                            <option>50 km</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input class="btn btn-action" type="submit" value="Search">
+                    </div>
+                </div>
+            </form>
+
+        </article>
+</div>
+<script>
+var x = document.getElementById("loc");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+    " Longitude: " + position.coords.longitude;
+}
+</script>
