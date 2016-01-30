@@ -24,9 +24,9 @@
                 <div class="row">
                     <div class="col-sm-6">
                     <label>Your Address/Location</label>
-                        <p id="loc"><input class="form-control" type="text" placeholder="Enter your address or allow detect location"></p>
+                        <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location">{{coords}}</p>
                         <br>
-                        <button onclick="getLocation()"><span class="glyphicon glyphicon-map-marker">
+                        <button ng-click="detectLocation()"><span class="glyphicon glyphicon-map-marker">
                         </span>Detect your location</button>
                     </div>
                 </div>
@@ -54,18 +54,3 @@
         </article>
 </div>
 <script>
-var x = document.getElementById("loc");
-
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    " Longitude: " + position.coords.longitude;
-}
-</script>

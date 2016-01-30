@@ -8,12 +8,14 @@
  * Controller of the pharmassistApp
  */
 angular.module('pharmassistApp')
-  .controller('SearchCtrl', function ($scope) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position){
-            $scope.$apply(function(){
-                $scope.position = position;
-            });
+  .controller('SearchCtrl', function ($scope, geolocation) {
+    $scope.detectLocation = function() {
+        geolocation.getLocation().then(function(data){
+            console.log(data);
+            $scope.coords = {
+                lat:data.coords.latitude,
+                long:data.coords.longitude
+            };
         });
     }
   });
