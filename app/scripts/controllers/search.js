@@ -11,7 +11,6 @@ angular.module('pharmassistApp')
   .controller('SearchCtrl', function ($scope, geolocation) {
     $scope.detectLocation = function() {
         geolocation.getLocation().then(function(data){
-            console.log(data);
             $scope.coords = "lat: " + data.coords.latitude +
                              " long: " + data.coords.longitude
 
