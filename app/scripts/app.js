@@ -19,6 +19,11 @@ angular
     'ngSanitize',
     'ngTouch'
   ])
+  .config(["$httpProvider", function ($http) {
+        $http.defaults.xsrfHeaderName = "X-CSRFToken";
+        $http.defaults.xsrfCookieName = "csrftoken";
+    }])
+
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
