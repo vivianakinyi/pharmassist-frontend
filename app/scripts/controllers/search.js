@@ -8,17 +8,17 @@
  * Controller of the pharmassistApp
  */
 angular.module('pharmassistApp')
-  .controller('SearchCtrl', function ($scope, $http) {
-    $http.get("http://localhost:8000/api/drugs/drugs/").then(function(data){
+  .controller('SearchCtrl', function ($scope, geolocation, $http) {
+     $http.get("http://localhost:8000/admin/").then(function(data){
         console.log(data);
         $scope.data = data;
-
     });
-    // if (navigator.geolocation) {
-    //     navigator.geolocation.getCurrentPosition(function(position){
-    //         $scope.$apply(function(){
-    //             $scope.position = position;
-    //         });
-    //     });
-    // }
+
+    $scope.detectLocation = function() {
+        geolocation.getLocation().then(function(data){
+            $scope.coords = "lat: " + data.coords.latitude +
+                             " long: " + data.coords.longitude
+
+        });
+    }
   });
