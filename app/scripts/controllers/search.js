@@ -9,7 +9,7 @@
  */
 angular.module('pharmassistApp')
   .controller('SearchCtrl', function ($scope, geolocation, $http) {
-     $http.get("http://localhost:8000/admin/").then(function(data){
+     $http.get("http://localhost:8000/admin/auth/user/").then(function(data){
         console.log(data);
         $scope.data = data;
     });
