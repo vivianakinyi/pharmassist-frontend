@@ -17,24 +17,15 @@
                 <div class="row">
                     <div class="col-sm-6">
                     <label>Drug Name</label>
-                        <input class="form-control" type="text" placeholder="Type a drug name" required>
                         <!-- ui-select combo box -->
-                        <!-- <ui-select ng-model="selected.value">
+                        <ui-select ng-model="selected.value" theme="bootstrap">
                             <ui-select-match>
-                                <span ng-bind="$selected.selected.name"></span>
+                                <span ng-bind="$select.selected.display_name"></span>
                             </ui-select-match>
-                            <ui-select-choices repeat="item in (data | filter:$select.search) track by item.id">
-                                <span ng-bind="item.county"></span>
+                            <ui-select-choices repeat="drug in (drugs | filter:$select.search) track by drug.id">
+                                <span ng-bind="drug.display_name"></span>
                             </ui-select-choices>
-                        </ui-select> -->
-                        <tr>
-                            <td>id</td>
-                            <td>name</td>
-                        </tr>
-                        <tr ng-repeat="drug in drugs">
-                            <td>1</td>
-                            <td>{{drug.name}}</td>
-                        </tr>
+                        </ui-select>
 
                     </div>
                 </div>
