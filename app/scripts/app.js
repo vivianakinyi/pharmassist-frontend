@@ -18,7 +18,9 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'geolocation'
+    'geolocation',
+    'ngSanitize',
+    'ui.select'
   ])
 
   .config(["$httpProvider", function ($httpProvider) {
