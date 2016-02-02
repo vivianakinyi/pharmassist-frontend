@@ -18,8 +18,20 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'geolocation'
+    'geolocation',
+    'ngSanitize',
+    'ui.select'
   ])
+
+  .config(["$httpProvider", function ($httpProvider) {
+        $httpProvider.defaults.xsrfHeaderName = "X-CSRFToken";
+        $httpProvider.defaults.xsrfCookieName = "csrftoken";
+        $httpProvider.defaults.headers.common = {
+            "Content-Type": "application/json",
+            "Accept": "application/json, */*"
+        };
+    }])
+
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

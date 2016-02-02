@@ -1,0 +1,45 @@
+[
+    {
+        "records": [
+            {
+                "message_type": "PATIENT",
+                "user": {
+                    "id": "cf1e1859-66b0-4925-9f16-fb3b8042de7f"
+                },
+                "content_string": "Lab result for patient is out.",
+                "item_id": "179d5678-e92a-4505-938e-5079656a9408",
+                "organisation": {
+                    "id": "472854fd-8fb4-48d8-91b1-7ae249f5b3f9"
+                },
+                "id": "af0e1e7b-57e3-4fba-b4a6-6937c2ad5475",
+                "read": false
+            },
+            {
+                "message_type": "VISIT",
+                "user": {
+                    "id": "cf1e1859-66b0-4925-9f16-fb3b8042de7f"
+                },
+                "content_string": "Claims has been approved.",
+                "item_id": "cf1e1859-66b0-4925-9f16-fb3b8042de7f",
+                "organisation": {
+                    "id": "472854fd-8fb4-48d8-91b1-7ae249f5b3f9"
+                },
+                "id": "a0d15d27-0fe1-4db0-b525-21c48bb304ef",
+                "read": false
+            },
+            {
+                "message_type": "VISIT",
+                "user": {
+                    "id": "cf1e1859-66b0-4925-9f16-fb3b8042de7f"
+                },
+                "content_string": "Claims has been approved.",
+                "item_id": "cf1e1859-66b0-4925-9f16-fb3b8042de7f",
+                "organisation": {
+                    "id": "472854fd-8fb4-48d8-91b1-7ae249f5b3f9"
+                },
+                "id": "8b04e33a-e845-413c-9f80-87df8a81d6a6",
+                "read": false
+            }
+        ]
+    }
+]
