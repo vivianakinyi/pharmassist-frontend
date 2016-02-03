@@ -9,8 +9,6 @@ angular.module('pharmassistApp')
       }).then(function(response){
         $scope.drugs = response.data.results;
         $scope.selected = { value: $scope.drugs[0] };
-
-        console.log($scope.drugs);
       });
 
     $scope.detectLocation = function() {
@@ -25,11 +23,42 @@ angular.module('pharmassistApp')
       $location.path('/search/results');
     }
   })
+  .controller('SearchResultsCtrl', ['$scope','$http',
+    function($scope, $http) {
+        $scope.gridOptions = {};
 
-  .controller('SearchResultsCtrl', function () {
-    // $scope.search = function() {
-    //   $scope.msg = "Hello";
-    //   $location.path('/search/results');
-    // }
+        $scope.Delete = function(row) {
+            var index = $scope.gridOptions.data.indexOf(row.entity);
+            $scope.gridOptions.data.splice(index, 1);
+        };
+        $scope.gridOptions.columnDefs = [{
+            name: 'Pharmacy',
+            field: 'name'
+        },
+        {
+            name: 'Town',
+            field: 'town'
+        },
+        {   name: 'Street',
+            field: 'street'
+        },
+        {   name: 'County',
+            field: 'county'
+        },
+        {   name: 'Landmarks',
+            field: 'landmarks'
+        },
+        {
+            name: 'ShowScope',
+            cellTemplate: '<button class="btn primary" ng-click="grid.appScope.Delete(row)">Delete Me</button>'
+        }];
 
-  });
+        $http({
+          url: "http://localhost:8000/api/pharmacy/pharmacy/",
+          method: "GET",
+          params: {name:name}
+        }).then(function(response){
+          $scope.gridOptions.data = response.data.results;
+        });
+    }
+]);

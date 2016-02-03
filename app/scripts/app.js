@@ -20,7 +20,9 @@ angular
     'ngTouch',
     'geolocation',
     'ngSanitize',
-    'ui.select'
+    'ui.select',
+    'ui.grid'
+
   ])
 
   .config(["$httpProvider", function ($httpProvider) {
