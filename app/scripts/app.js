@@ -59,6 +59,11 @@ angular
         controller: 'SearchCtrl',
         controllerAs: 'search'
       })
+      .when('/search/results', {
+        templateUrl: 'views/results.html',
+        controller: 'SearchResultsCtrl',
+        controllerAs: 'search'
+      })
       .when('/contact', {
         templateUrl: 'views/contact.html',
         controller: 'ContactCtrl',

@@ -1,14 +1,7 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name pharmassistApp.controller:UserCtrl
- * @description
- * # UserCtrl
- * Controller of the pharmassistApp
- */
 angular.module('pharmassistApp')
-  .controller('SearchCtrl', function ($scope, geolocation, $http) {
+  .controller('SearchCtrl', function ($scope, geolocation, $http, $location) {
       $http({
         url: "http://localhost:8000/api/drugs/drugs/",
         method: "GET",
@@ -20,9 +13,6 @@ angular.module('pharmassistApp')
         console.log($scope.drugs);
       });
 
-        // $scope.data = data;
-
-
     $scope.detectLocation = function() {
         geolocation.getLocation().then(function(data){
             $scope.coords = "lat: " + data.coords.latitude +
@@ -30,4 +20,16 @@ angular.module('pharmassistApp')
 
         });
     }
+
+    $scope.searchResults = function() {
+      $location.path('/search/results');
+    }
+  })
+
+  .controller('SearchResultsCtrl', function () {
+    // $scope.search = function() {
+    //   $scope.msg = "Hello";
+    //   $location.path('/search/results');
+    // }
+
   });
