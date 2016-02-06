@@ -33,20 +33,20 @@ angular.module('pharmassistApp')
         };
         $scope.gridOptions.columnDefs = [{
             name: 'Pharmacy',
-            field: 'name'
+            field: 'properties.name'
         },
         {
             name: 'Town',
-            field: 'town'
+            field: 'properties.town'
         },
         {   name: 'Street',
-            field: 'street'
+            field: 'properties.street'
         },
         {   name: 'County',
-            field: 'county'
+            field: 'properties.county'
         },
         {   name: 'Landmarks',
-            field: 'landmarks'
+            field: 'properties.landmarks'
         },
         {
             name: 'ShowScope',
@@ -58,7 +58,10 @@ angular.module('pharmassistApp')
           method: "GET",
           params: {name:name}
         }).then(function(response){
-          $scope.gridOptions.data = response.data.results;
+          console.log(response);
+          $scope.gridOptions.data = response.data.results.features;
+          console.log($scope.gridOptions.data);
+
         });
     }
 ]);
