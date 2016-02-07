@@ -10,7 +10,7 @@
             <h1 class="page-title">Search Results</h1>
         </header>
         <!-- ui-grid -->
-        <div>
+        <div ng-if="gridOptions.Response !== 'False'">
           <div id="grid1" ui-grid="gridOptions" class="grid"></div>
         </div>
 

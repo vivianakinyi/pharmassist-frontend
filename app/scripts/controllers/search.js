@@ -32,6 +32,10 @@ angular.module('pharmassistApp')
             $scope.gridOptions.data.splice(index, 1);
         };
         $scope.gridOptions.columnDefs = [{
+            name: 'Index',
+            field: 'properties.no'
+        },
+        {
             name: 'Pharmacy',
             field: 'properties.name'
         },
@@ -48,20 +52,18 @@ angular.module('pharmassistApp')
         {   name: 'Landmarks',
             field: 'properties.landmarks'
         },
-        {
-            name: 'ShowScope',
-            cellTemplate: '<button class="btn primary" ng-click="grid.appScope.Delete(row)">Delete Me</button>'
-        }];
+        // {
+        //     name: 'ShowScope',
+        //     cellTemplate: '<button class="btn primary" ng-click="grid.appScope.Delete(row)">Delete Me</button>'
+        // }
+        ];
 
         $http({
           url: "http://localhost:8000/api/pharmacy/pharmacy/",
           method: "GET",
           params: {name:name}
         }).then(function(response){
-          console.log(response);
           $scope.gridOptions.data = response.data.results.features;
-          console.log($scope.gridOptions.data);
-
         });
     }
 ]);
