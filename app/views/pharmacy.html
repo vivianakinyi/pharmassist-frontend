@@ -1,0 +1,81 @@
+<header id="head" class="secondary"></header>
+<div class="container">
+
+    <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Register Pharmacy</li>
+    </ol>
+    <article>
+        <header class="page-header">
+            <h1 class="page-title">Register your Pharmacy</h1>
+        </header>
+        <p>
+        Search for you Pharmacy in the PPB List to confirm if you
+        are registered then register where customers will find you.
+        </p>
+        <br>
+        <form ng-model="pharmacyDetails" ng-submit="savePharmacy()">
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Name</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacyDetails.name"
+                    placeholder="Name"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Town</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacyDetails.town"
+                    placeholder="Town"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Street</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacyDetails.street"
+                    placeholder="Street"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>County</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacyDetails.county"
+                    placeholder="County"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Location</label>
+                    <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location" ng-model="coords"></p>
+                    <br>
+                    <button ng-click="detectLocation()"><span class="glyphicon glyphicon-map-marker">
+                    </span>Detect your location</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Landmark</label>
+                    <p><input class="form-control" type="text"
+                     ng-model="pharmacyDetails.landmarks"
+                    placeholder="Enter a landmark near you"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input class="btn btn-action" type="submit" value="Save">
+                </div>
+            </div>
+        </form>
+
+    </article>
+</div>
