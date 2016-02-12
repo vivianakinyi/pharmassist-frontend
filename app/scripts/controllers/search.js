@@ -1,15 +1,13 @@
 'use strict';
 
 angular.module('pharmassistApp')
-  .controller('SearchCtrl', function ($scope, geolocation, $http, $location) {
-      $http({
-        url: "http://localhost:8000/api/drugs/drugs/",
-        method: "GET",
-        params: {name:name}
-      }).then(function(response){
-        $scope.drugs = response.data.results;
-        $scope.selected = { value: $scope.drugs[0] };
-      });
+  .controller('SearchCtrl', function ($scope, geolocation, apiService, $location) {
+        var url = "http://localhost:8000/api/drugs/drugs/";
+        apiService.get(url).then(function (response) {
+            $scope.drugs = response.data.results;
+            $scope.selected = { value: $scope.drugs[0] };
+
+        });
 
     $scope.detectLocation = function() {
         geolocation.getLocation().then(function(data){
@@ -23,9 +21,10 @@ angular.module('pharmassistApp')
       $location.path('/search/results');
     }
   })
-  .controller('SearchResultsCtrl', ['$scope','$http',
-    function($scope, $http) {
+  .controller('SearchResultsCtrl', ['$scope','apiService',
+    function($scope, apiService) {
         $scope.gridOptions = {};
+        var url = "http://localhost:8000/api/pharmacy/pharmacy/";
 
         $scope.Delete = function(row) {
             var index = $scope.gridOptions.data.indexOf(row.entity);
@@ -58,11 +57,7 @@ angular.module('pharmassistApp')
         // }
         ];
 
-        $http({
-          url: "http://localhost:8000/api/pharmacy/pharmacy/",
-          method: "GET",
-          params: {name:name}
-        }).then(function(response){
+        apiService.get(url).then(function(response){
           $scope.gridOptions.data = response.data.results.features;
         });
     }
