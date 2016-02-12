@@ -56,6 +56,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/pharmacy', {
+        templateUrl: 'views/pharmacy.html',
+        controller: 'PharmacyCtrl',
+        controllerAs: 'pharmacy'
+      })
       .when('/search', {
         templateUrl: 'views/search.html',
         controller: 'SearchCtrl',

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('pharmassistApp')
-  .controller('SearchCtrl', function ($scope, geolocation, apiService, $location) {
+  .controller('SearchCtrl', function ($scope, geolocation, apiService,
+    $location) {
         var url = "http://localhost:8000/api/drugs/drugs/";
         apiService.get(url).then(function (response) {
             $scope.drugs = response.data.results;
@@ -50,6 +51,11 @@ angular.module('pharmassistApp')
         },
         {   name: 'Landmarks',
             field: 'properties.landmarks'
+        },
+        {
+            name: 'Action',
+            cellTemplate: '<button class="btn default">Edit</button>'
+
         },
         // {
         //     name: 'ShowScope',
