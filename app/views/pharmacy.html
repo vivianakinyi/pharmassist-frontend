@@ -54,9 +54,9 @@
             <div class="row">
                 <div class="col-sm-6">
                 <label>Location</label>
-                    <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location" ng-model="coords"></p>
+                    <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location" ng-model="pharmacyDetails.point"></p>
                     <br>
-                    <button ng-click="detectLocation()"><span class="glyphicon glyphicon-map-marker">
+                    <button type="button" ng-click="detectLocation()"><span class="glyphicon glyphicon-map-marker">
                     </span>Detect your location</button>
                 </div>
             </div>

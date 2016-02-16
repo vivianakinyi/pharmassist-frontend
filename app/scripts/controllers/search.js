@@ -12,8 +12,8 @@ angular.module('pharmassistApp')
 
     $scope.detectLocation = function() {
         geolocation.getLocation().then(function(data){
-            $scope.coords = "lat: " + data.coords.latitude +
-                             " long: " + data.coords.longitude
+            console.log(data);
+            $scope.coords = data.coords.latitude + ' ' + data.coords.longitude
 
         });
     }
