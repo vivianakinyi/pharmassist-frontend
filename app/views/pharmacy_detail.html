@@ -1,0 +1,93 @@
+<header id="head" class="secondary"></header>
+<div class="container">
+
+    <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Search Results</li>
+    </ol>
+    <article>
+         <header class="page-header">
+            <h1 class="page-title">Search Results</h1>
+        </header>
+        <!-- trial using own grid-->
+        <ul>
+        <li>Name</li>
+            <li>{{pharmacies[whichPharmacy].properties.name}}</li>
+        </ul>
+
+    </article>
+    <article>
+        <header class="page-header">
+            <h1 class="page-title">Edit Pharmacy Details</h1>
+        </header>
+        <p>
+        Search for you Pharmacy in the PPB List to confirm if you
+        are registered then register where customers will find you.
+        </p>
+        <br>
+        <form ng-model="pharmacyDetails">
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Name</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacies[whichPharmacy].properties.name"
+                    placeholder="Name"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Town</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacies[whichPharmacy].properties.town"
+                    placeholder="Town"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Street</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacies[whichPharmacy].properties.street"
+                    placeholder="Street"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>County</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacies[whichPharmacy].properties.county"
+                    placeholder="County"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Location</label>
+                    <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location" ng-model="pharmacies[whichPharmacy].properties.point"></p>
+                    <br>
+                    <button type="button" ng-click="detectLocation()"><span class="glyphicon glyphicon-map-marker">
+                    </span>Detect your location</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Landmark</label>
+                    <p><input class="form-control" type="text"
+                     ng-model="pharmacies[whichPharmacy].properties.landmarks"
+                    placeholder="Enter a landmark near you"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input class="btn btn-action" type="submit" value="Update">
+                </div>
+            </div>
+        </form>
+
+    </article>
+</div>
+<script>
