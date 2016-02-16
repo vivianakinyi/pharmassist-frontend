@@ -19,7 +19,7 @@ angular.module('pharmassistApp')
     }
 
     $scope.searchResults = function() {
-      $location.go('/search/results');
+      $location.path('/search/results');
     }
   })
   .controller('SearchResultsCtrl', ['$scope','apiService', '$routeParams',
@@ -59,7 +59,7 @@ angular.module('pharmassistApp')
         },
         {
             name: 'Action',
-            cellTemplate: '<a ng-href="#/pharmacy/{{gridOptions.data.indexOf()}}" class="btn default">Edit</a>'
+            cellTemplate: '<a ng-href="#/pharmacy/{{gridOptions.data.indexOf(row.entity)}}" class="btn default">Edit</a>'
 
         },
         // {
