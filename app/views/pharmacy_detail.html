@@ -3,34 +3,38 @@
 
     <ol class="breadcrumb">
             <li><a href="index.html">Home</a></li>
-            <li class="active">Search Results</li>
+            <li class="active">Pharmacy details</li>
     </ol>
     <article>
          <header class="page-header">
-            <h1 class="page-title">Search Results</h1>
+            <h1 class="page-title">Pharmacy detail view</h1>
         </header>
-        <!-- trial using own grid-->
-        <ul>
-        <li>Name</li>
-            <li>{{pharmacies[whichPharmacy].properties.name}}</li>
-        </ul>
+        <!-- panel -->
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Pharmacy Details</h3>
+          </div>
+          <div class="panel-body">
+            <p><strong>Name: </strong> {{pharmacies.name}} </p>
+            <p><strong>Town: </strong> {{pharmacies.town}} </p>
+            <p><strong>Street: </strong> {{pharmacies.street}} </p>
+            <p><strong>County: </strong> {{pharmacies.county}} </p>
+            <p><strong>Landmark: </strong> {{pharmacies.landmarks}} </p>
+            <button class="btn btn-action" ng-click="showDetails = ! showDetails">Edit Details</button>
+          </div>
+        </div>
 
-    </article>
-    <article>
-        <header class="page-header">
-            <h1 class="page-title">Edit Pharmacy Details</h1>
-        </header>
-        <p>
-        Search for you Pharmacy in the PPB List to confirm if you
-        are registered then register where customers will find you.
-        </p>
-        <br>
-        <form ng-model="pharmacyDetails">
+        <div class="panel panel-success" ng-class="{ 'hidden': ! showDetails }">
+          <div class="panel-heading">
+            <h3 class="panel-title">Edit Pharmacy Details</h3>
+          </div>
+          <div class="panel-body">
+          <form ng-model="pharmacyDetails" ng-submit="update()">
             <div class="row">
                 <div class="col-sm-6">
                 <label>Name</label>
                     <p><input class="form-control" type="text"
-                    ng-model="pharmacies[whichPharmacy].properties.name"
+                    ng-model="pharmacies.name"
                     placeholder="Name"></p>
                 </div>
             </div>
@@ -39,7 +43,7 @@
                 <div class="col-sm-6">
                 <label>Town</label>
                     <p><input class="form-control" type="text"
-                    ng-model="pharmacies[whichPharmacy].properties.town"
+                    ng-model="pharmacies.town"
                     placeholder="Town"></p>
                 </div>
             </div>
@@ -48,7 +52,7 @@
                 <div class="col-sm-6">
                 <label>Street</label>
                     <p><input class="form-control" type="text"
-                    ng-model="pharmacies[whichPharmacy].properties.street"
+                    ng-model="pharmacies.street"
                     placeholder="Street"></p>
                 </div>
             </div>
@@ -57,7 +61,7 @@
                 <div class="col-sm-6">
                 <label>County</label>
                     <p><input class="form-control" type="text"
-                    ng-model="pharmacies[whichPharmacy].properties.county"
+                    ng-model="pharmacies.county"
                     placeholder="County"></p>
                 </div>
             </div>
@@ -65,7 +69,7 @@
             <div class="row">
                 <div class="col-sm-6">
                 <label>Location</label>
-                    <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location" ng-model="pharmacies[whichPharmacy].properties.point"></p>
+                    <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location" ng-model="pharmacies.point"></p>
                     <br>
                     <button type="button" ng-click="detectLocation()"><span class="glyphicon glyphicon-map-marker">
                     </span>Detect your location</button>
@@ -76,7 +80,7 @@
                 <div class="col-sm-6">
                 <label>Landmark</label>
                     <p><input class="form-control" type="text"
-                     ng-model="pharmacies[whichPharmacy].properties.landmarks"
+                     ng-model="pharmacies.landmarks"
                     placeholder="Enter a landmark near you"></p>
                 </div>
             </div>
@@ -87,7 +91,8 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
 
-    </article>
 </div>
 <script>
