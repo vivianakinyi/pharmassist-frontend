@@ -1,0 +1,99 @@
+<header id="head" class="secondary"></header>
+<div class="container">
+
+    <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Pharmacy details</li>
+    </ol>
+    <article>
+         <header class="page-header">
+            <h1 class="page-title">Pharmacy detail view</h1>
+        </header>
+        <!-- panel -->
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Pharmacy Details</h3>
+          </div>
+          <div class="panel-body">
+            <p><strong>Name: </strong> {{pharmacies.name}} </p>
+            <p><strong>Town: </strong> {{pharmacies.town}} </p>
+            <p><strong>Street: </strong> {{pharmacies.street}} </p>
+            <p><strong>County: </strong> {{pharmacies.county}} </p>
+            <p><strong>Landmark: </strong> {{pharmacies.landmarks}} </p>
+            <button class="btn btn-action" ng-click="showDetails = ! showDetails">Edit Details</button>
+          </div>
+        </div>
+
+        <div class="panel panel-info" ng-class="{ 'hidden': ! showDetails }">
+          <div class="panel-heading">
+            <h3 class="panel-title">Edit Pharmacy Details</h3>
+          </div>
+          <div class="panel-body">
+          <form ng-model="pharmacies" ng-submit="update()">
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Name</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacies.name"
+                    placeholder="Name"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Town</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacies.town"
+                    placeholder="Town"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Street</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacies.street"
+                    placeholder="Street"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>County</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="pharmacies.county"
+                    placeholder="County"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Location</label>
+                    <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location" ng-model="pharmacies.point"></p>
+                    <br>
+                    <button type="button" ng-click="detectLocation()"><span class="glyphicon glyphicon-map-marker">
+                    </span>Detect your location</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Landmark</label>
+                    <p><input class="form-control" type="text"
+                     ng-model="pharmacies.landmarks"
+                    placeholder="Enter a landmark near you"></p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input class="btn btn-action" type="submit" value="Update"
+                     ng-click="showDetails = ! showDetails">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+<script>
