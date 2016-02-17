@@ -14,7 +14,7 @@ angular.module('pharmassistApp')
     }
 
     $scope.savePharmacy = function(){
-        $scope.pharmacyDetails.no = 125483;
+        $scope.pharmacyDetails.no = 125484;
         console.log($scope.pharmacyDetails);
         apiService.post(url, $scope.pharmacyDetails).then(function (response) {
             var go = '/pharmacy/' + response.data.id;
@@ -31,8 +31,8 @@ angular.module('pharmassistApp')
 
         // $scope.pharmacyDetails.no = 12547;
         var currentID = $routeParams.id
-        var url = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID;
-        $scope.pharmacyDetails = {};
+        var url = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID + "/";
+        $scope.pharmacy = {};
 
         apiService.get(url).then(function(response){
             console.log('Detail view', response);
@@ -48,8 +48,8 @@ angular.module('pharmassistApp')
             });
         }
         $scope.update = function(){
-            var endpoint = "http://localhost:8000/api/pharmacy/pharmacy/" ;
-            apiService.update(endpoint, currentID, $scope.pharmacyDetails)
+            var endpoint = "http://localhost:8000/api/pharmacy/pharmacy/";
+            apiService.update(endpoint, currentID, $scope.pharmacies)
             .then(function(response){
                 console.log(response);
                 console.log("Pharmacy updated successfully");

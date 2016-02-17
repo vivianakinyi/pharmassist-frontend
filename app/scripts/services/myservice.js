@@ -25,7 +25,7 @@ angular.module('pharmassistApp')
         };
 
         e.update = function (url, id, data) {
-            var endPoint = url + id;
+            var endPoint = url + id + '/';
             return $http.patch(endPoint, data)
         };
 
