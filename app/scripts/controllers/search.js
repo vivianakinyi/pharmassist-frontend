@@ -12,7 +12,6 @@ angular.module('pharmassistApp')
 
     $scope.detectLocation = function() {
         geolocation.getLocation().then(function(data){
-            console.log(data);
             $scope.coords = data.coords.latitude + ' ' + data.coords.longitude
 
         });
@@ -22,7 +21,7 @@ angular.module('pharmassistApp')
       $location.path('/search/results');
     }
   })
-  .controller('SearchResultsCtrl', ['$scope','apiService', '$routeParams',
+  .controller('SearchResultsCtrl', ['$scope','apiService',
     function($scope, apiService, $routeParams) {
         $scope.gridOptions = {};
         var url = "http://localhost:8000/api/pharmacy/pharmacy/";
@@ -63,11 +62,6 @@ angular.module('pharmassistApp')
 
         },
         // {
-        //     name: 'Action',
-        //     cellTemplate: '<button class="btn default">Edit</button>'
-
-        // },
-        // {
         //     name: 'ShowScope',
         //     cellTemplate: '<button class="btn primary" ng-click="grid.appScope.Delete(row)">Delete Me</button>'
         // }
@@ -76,8 +70,6 @@ angular.module('pharmassistApp')
         apiService.get(url).then(function(response){
           $scope.gridOptions.data = response.data.results.features;
           $scope.pharmacies = response.data.results.features;
-          console.log($scope.pharmacies);
-          $scope.whichPharmacy = $routeParams.id;
         });
     }
 ]);

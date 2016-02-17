@@ -13,17 +13,6 @@
         <div ng-if="gridOptions.Response !== 'False'">
           <div id="grid1" ui-grid="gridOptions" class="grid"></div>
         </div>
-        <!-- trial using own grid-->
-        <ul>
-            <li ng-repeat="pharm in pharmacies">
-            <a ng-href="#/pharmacy/{{pharmacies.indexOf(pharm)}}">Edit</a>
-                <h3>{{pharm.properties.name}}</h3>
-                <p>{{pharm.properties.street}}</p>
-                <p>{{pharm.properties.county}}</p>
-
-            </li>
-        </ul>
-
-        </article>
+    </article>
 </div>
 <script>
