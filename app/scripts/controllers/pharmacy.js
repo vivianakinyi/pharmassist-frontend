@@ -14,11 +14,12 @@ angular.module('pharmassistApp')
     }
 
     $scope.savePharmacy = function(){
-        $scope.pharmacyDetails.no = 125479;
+        $scope.pharmacyDetails.no = 125483;
         console.log($scope.pharmacyDetails);
         apiService.post(url, $scope.pharmacyDetails).then(function (response) {
+            var go = '/pharmacy/' + response.data.id;
             console.log("Pharmacy saved successfully");
-            $location.path('/search/results');
+            $location.path(go);
         }, function(err) {
             console.log(err);
         });
