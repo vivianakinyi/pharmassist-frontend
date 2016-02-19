@@ -10,9 +10,44 @@
             <h1 class="page-title">Search Results</h1>
         </header>
         <!-- ui-grid -->
-        <div ng-if="gridOptions.Response !== 'False'">
+        <!-- <div ng-if="gridOptions.Response !== 'False'">
           <div id="grid1" ui-grid="gridOptions" class="grid"></div>
-        </div>
+        </div> -->
+
+        <!-- Normal table -->
+        <div>
+            <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Pharmacy</th>
+                    <th>Price</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+                    <tr ng-repeat="pharmacy in pharmacies">
+                        <td>{{pharmacy.properties.no}}</td>
+
+                        <td>{{pharmacy.properties.name}}
+                        <p>
+                        <a href="" ng-click="showDetails = ! showDetails">Click to show pharmacy details</a></p>
+                            <div class="well well-sm" ng-class="{ 'hidden': ! showDetails }">
+
+                               <p><strong>Location Details</strong><p>
+                                <p><strong>Street:</strong> {{pharmacy.properties.street}}</p>
+                                <p><strong>Town: </strong> {{pharmacy.properties.town}}</p>
+                                <p><strong>County: </strong> {{pharmacy.properties.county}}</p>
+                            </div>
+                            <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
+                                <p>Loading map...</p>
+                            </div>
+                        </td>
+                        <td>Ksh 300.00</td>
+
+                        <td class="text-center"><a ng-click="showMap = ! showMap" class='btn btn-info btn-xs' href="">Show Map</a></td>
+                    </tr>
+            </table>
+    </div>
     </article>
 </div>
 <script>
