@@ -12,17 +12,17 @@ angular.module('pharmassistApp')
 
     $scope.detectLocation = function() {
         geolocation.getLocation().then(function(data){
-            $scope.coords = data.coords.latitude + ' ' + data.coords.longitude;
+            $scope.coords = data.coords.latitude + ' ' + data.coords.longitude
 
         });
-    };
+    }
 
     $scope.searchResults = function() {
       $location.path('/search/results');
-    };
+    }
   })
   .controller('SearchResultsCtrl', ['$scope','apiService',
-    function($scope, apiService) {
+    function($scope, apiService, $routeParams) {
         $scope.gridOptions = {};
         var url = "http://localhost:8000/api/pharmacy/pharmacy/";
 

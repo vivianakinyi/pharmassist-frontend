@@ -11,7 +11,7 @@ angular.module('pharmassistApp')
                          " " + data.coords.longitude + ")";
             $scope.pharmacyDetails.point = myPoint;
         });
-    };
+    }
 
     $scope.savePharmacy = function(){
         $scope.pharmacyDetails.no = 125484;
@@ -24,12 +24,12 @@ angular.module('pharmassistApp')
             console.log(err);
         });
         console.log('Geometry at save: ', $scope.pharmacyDetails.point);
-        };
+        }
 })
   .controller('PharmacyDetailCtrl',
     function ($scope, apiService, $routeParams,geolocation) {
 
-        var currentID = $routeParams.id;
+        var currentID = $routeParams.id
         var url = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID + "/";
         $scope.pharmacy = {};
 
@@ -42,14 +42,14 @@ angular.module('pharmassistApp')
                 " " + data.coords.longitude + ")";
                 $scope.pharmacies.point = myPoint;
             });
-        };
+        }
         $scope.update = function(){
             var endpoint = "http://localhost:8000/api/pharmacy/pharmacy/";
             apiService.update(endpoint, currentID, $scope.pharmacies)
             .then(function(response){
-                console.log("Pharmacy updated successfully",response);
+                console.log("Pharmacy updated successfully");
             }, function(err){
                 console.log(err);
             });
-        };
+        }
   });
