@@ -8,6 +8,16 @@
     <article>
          <header class="page-header">
             <h1 class="page-title">Search Results</h1>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Panadol Basic Information</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Form: Tablet</p>
+                    <p>Strength: 200mg</p>
+                    <p>Quantity: 30 Tablets</p>
+                </div>
+            </div>
         </header>
         <!-- ui-grid -->
         <!-- <div ng-if="gridOptions.Response !== 'False'">
@@ -37,6 +47,7 @@
                                 <p><strong>Street:</strong> {{pharmacy.properties.street}}</p>
                                 <p><strong>Town: </strong> {{pharmacy.properties.town}}</p>
                                 <p><strong>County: </strong> {{pharmacy.properties.county}}</p>
+                                <p><strong>Landmark: </strong> {{pharmacy.properties.landmark}}</p>
                             </div>
                             <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
                                 <p>Loading map...</p>
