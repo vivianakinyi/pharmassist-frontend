@@ -70,6 +70,7 @@ angular.module('pharmassistApp')
         apiService.get(url).then(function(response){
           $scope.gridOptions.data = response.data.results.features;
           $scope.pharmacies = response.data.results.features;
+          console.log($scope.pharmacies);
         });
     }
 ]);
