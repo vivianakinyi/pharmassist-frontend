@@ -1,0 +1,55 @@
+<header id="head" class="secondary"></header>
+<div class="container">
+
+    <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pharmacy.html">Pharmacy</a></li>
+            <li class="active">Drugs</li>
+    </ol>
+    <article>
+        <header class="page-header">
+            <h1 class="page-title">Add Drugs</h1>
+        </header>
+        <p>
+        Click on a drug that is available in your pharmacy to add to the list of available drugs in your pharmacy
+        </p>
+        <br>
+        <!-- Take one -->
+        <ul>
+            <input type="text" value="DrugName" ng-model="newDrugName"
+        placeholder="name of drugs...">
+            <button ng-click="addDrug()">Add Me</button>
+        <li ng-repeat="drug in drugs" id="drug{{drug.id}}">
+            <a href="#">{{drug.display_name}}</a>
+            <a ng-click="deleteDrug($index)" class="delete-item">x</a>
+        </li>
+        </ul>
+        <!-- <form ng-model="addDrugs" ng-submit="savePharmacy()">
+            <div class="row">
+                <div class="col-sm-6">
+                <label>Drugs</label>
+                    <p><input class="form-control" type="text"
+                    ng-model="addDrugs.name"
+                    placeholder="Drugs"></p>
+                </div>
+                <button ng-click="addItem()">Add Me</button>
+            </div>
+            <div>
+                <ul>
+                    <li ng-repeat="item in items.data" id="item{{item.id}}">
+                        <a href="#">{{item.title}}</a>
+                        <a ng-click="deleteItem($index)" class="delete-item">x</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input class="btn btn-action" type="submit" value="Save">
+                </div>
+            </div>
+        </form> -->
+
+
+
+    </article>
+</div>

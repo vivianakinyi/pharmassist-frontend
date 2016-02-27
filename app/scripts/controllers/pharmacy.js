@@ -52,4 +52,27 @@ angular.module('pharmassistApp')
                 console.log(err);
             });
         }
+  })
+  .controller('DrugsCtrl', function ($scope, apiService) {
+    var url = "http://localhost:8000/api/drugs/drugs/"
+    apiService.get(url).then(function(drugs){
+        drugs = drugs.data.results
+        $scope.drugs = drugs
+        console.log(drugs)
+
+        $scope.deleteDrug = function(index){
+            drugs.splice(index, 1)
+        }
+
+        $scope.addDrug = function(index){
+            drugs.push({
+                id: $scope.drugs.length + 1,
+                display_name:$scope.newDrugName
+
+            });
+        }
+
+    })
+
   });
+

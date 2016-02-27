@@ -66,6 +66,11 @@ angular
         controller: 'PharmacyDetailCtrl',
         controllerAs: 'pharmacyDetail'
       })
+       .when('/pharmacy/:id/drugs', {
+        templateUrl: 'views/drugs.html',
+        controller: 'DrugsCtrl',
+        controllerAs: 'drugs'
+      })
       .when('/search', {
         templateUrl: 'views/search.html',
         controller: 'SearchCtrl',
