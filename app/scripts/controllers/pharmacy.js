@@ -70,6 +70,8 @@ angular.module('pharmassistApp')
                 display_name:$scope.newDrugName
 
             });
+            $scope.newDrugName = '';
+
         }
 
     })
