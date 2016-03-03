@@ -54,7 +54,7 @@ angular.module('pharmassistApp')
         }
   })
   .controller('DrugsCtrl', function ($scope, apiService) {
-    var url = "http://localhost:8000/api/drugs/drugs/"
+    var url = "http://localhost:8000/api/pharmacy/drugs/"
     apiService.get(url).then(function(drugs){
         drugs = drugs.data.results
         $scope.drugs = drugs
