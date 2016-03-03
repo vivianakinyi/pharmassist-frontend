@@ -3,7 +3,7 @@
 angular.module('pharmassistApp')
   .controller('SearchCtrl', function ($scope, geolocation, apiService,
     $location) {
-        var url = "http://localhost:8000/api/drugs/drugs/";
+        var url = "http://localhost:8000/api/pharmacy/drugs/";
         apiService.get(url).then(function (response) {
             $scope.drugs = response.data.results;
             $scope.selected = { value: $scope.drugs[0] };
