@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('pharmassistApp')
-  .controller('PharmacyCtrl', function ($scope, apiService, geolocation, $location) {
+  .controller('PharmacyCtrl',
+    function ($scope, apiService, geolocation, $location, toastr) {
     var url = "http://localhost:8000/api/pharmacy/pharmacy/";
     $scope.pharmacyDetails = {};
 
@@ -18,7 +19,7 @@ angular.module('pharmassistApp')
 
         apiService.post(url, $scope.pharmacyDetails).then(function (response) {
             var go = '/pharmacy/' + response.data.id;
-            console.log("Pharmacy saved successfully");
+            toastr.success("Pharmacy saved successfully", 'Success');
             $location.path(go);
         }, function(err) {
             console.log(err);
@@ -27,7 +28,7 @@ angular.module('pharmassistApp')
         }
 })
   .controller('PharmacyDetailCtrl',
-    function ($scope, apiService, $routeParams,geolocation) {
+    function ($scope, apiService, $routeParams,geolocation, toastr) {
 
         var currentID = $routeParams.id
         var url = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID + "/";
@@ -47,7 +48,7 @@ angular.module('pharmassistApp')
             var endpoint = "http://localhost:8000/api/pharmacy/pharmacy/";
             apiService.update(endpoint, currentID, $scope.pharmacies)
             .then(function(response){
-                console.log("Pharmacy updated successfully");
+                toastr.success("Pharmacy updated successfully", 'Success');
             }, function(err){
                 console.log(err);
             });

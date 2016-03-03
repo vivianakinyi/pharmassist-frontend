@@ -36,6 +36,7 @@ module.exports = function(config) {
       'bower_components/angularjs-geolocation/src/geolocation.js',
       'bower_components/ui-select/dist/select.js',
       'bower_components/angular-ui-grid/ui-grid.js',
+      'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

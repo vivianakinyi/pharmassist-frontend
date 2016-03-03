@@ -21,7 +21,8 @@ angular
     'geolocation',
     'ngSanitize',
     'ui.select',
-    'ui.grid'
+    'ui.grid',
+    'toastr'
 
   ])
 
