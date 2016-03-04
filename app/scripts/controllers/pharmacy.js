@@ -61,6 +61,10 @@ angular.module('pharmassistApp')
         $scope.drugs = drugs
         console.log(drugs)
 
+        $scope.multipleDrugs = {};
+        // $scope.multipleDrugs.drugs =['test1','test2'];
+
+
         $scope.deleteDrug = function(index){
             drugs.splice(index, 1)
         }
@@ -76,6 +80,23 @@ angular.module('pharmassistApp')
         }
 
     })
+    // trying out of ui-select
+    $scope.availableColors = ['Red','Green','Blue','Yellow','Magenta','Maroon','Umbra','Turquoise'];
+    $scope.multipleDemo = {};
+    $scope.multipleDemo.colors = ['Blue','Red'];
+
+    $scope.selectYellowColor = function(){
+    if($scope.multipleDemo.colors.indexOf($scope.availableColors[3]) == -1){
+      $scope.multipleDemo.colors.push($scope.availableColors[3]);
+    }
+    };
+
+    $scope.deselectYellowColor = function(){
+        if($scope.multipleDemo.colors.indexOf($scope.availableColors[3]) != -1){
+          var index = $scope.multipleDemo.colors.indexOf($scope.availableColors[3]);
+          $scope.multipleDemo.colors.splice(index, 1);
+        }
+    };
 
   });
 

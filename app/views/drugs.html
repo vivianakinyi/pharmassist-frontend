@@ -14,8 +14,28 @@
         Click on a drug that is available in your pharmacy to add to the list of available drugs in your pharmacy
         </p>
         <br>
+        <form>
+            <div class="row">
+                    <div class="col-sm-6">
+                    <label>Select Drug and add to list</label>
+                        <!-- ui-select combo box -->
+                        <ui-select multiple ng-model="multipleDrugs.drugs" theme="bootstrap"
+                        ng-disabled="disabled" sortable="true" close-on-select="True" >
+                            <ui-select-match>
+                                <span ng-bind="$item.display_name"></span>
+                                {{$item.display_name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="drug in (drugs | filter:$select.search) track by drug.id">
+                                <span ng-bind="drug.display_name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+
+                    </div>
+                </div>
+        </form>
+        <br>
         <!-- Take one -->
-        <ul>
+        <!-- <ul>
             <input type="text" value="DrugName" ng-model="newDrugName"
         placeholder="name of drugs...">
             <button ng-click="addDrug()">Add Me</button>
@@ -23,7 +43,33 @@
             <a href="#">{{drug.display_name}}</a>
             <a ng-click="deleteDrug($index)" class="delete-item">x</a>
         </li>
-        </ul>
+        </ul> -->
+
+        <!-- <ui-select multiple ng-model="multipleDrugs.drugs" theme="select2">
+            <ui-select-match placeholder="Select drugs...">{{$item.display_name}}</ui-select-match>
+            <ui-select-choices repeat="drug in drugs | filter:$select.search">
+              {{drug.diplay_name}}
+              <ui-select-choices repeat="drug in (drugs | filter:$select.search) track by drug.id">
+                                <span ng-bind="drug.display_name"></span>
+            </ui-select-choices>
+    </ui-select> -->
+    <p>Selected: {{multipleDrugs}}</p>
+
+    <!-- <h1>Multiple select objects</h1>
+    <ui-select multiple ng-model="multipleDrugs.drugs" theme="bootstrap" ng-disabled="disabled" sortable="true" close-on-select="false" style="width: 800px;">
+    <ui-select-match placeholder="Select person...">{{$item.full_name}} &lt;{{$item.display_name}}&gt;</ui-select-match>
+    <ui-select-choices repeat="drug in drugs | propsFilter: {display_name: $select.search, full_name: $select.search}">
+      <div ng-bind-html="drug.full_name | highlight: $select.search"></div>
+      <small>
+        full_name: {{drug.full_name}}
+        display_name: <span ng-bind-html="''+drug.display_name | highlight: $select.search"></span>
+      </small>
+    </ui-select-choices>
+  </ui-select>
+  <p>Selected: {{multipleDrugs.drugs}}</p> -->
+
+    <input type="button" value="select yellow color" ng-click="selectYellowColor()"/>
+    <input type="button" value="deselect yellow color" ng-click="deselectYellowColor()"/>
         <!-- <form ng-model="addDrugs" ng-submit="savePharmacy()">
             <div class="row">
                 <div class="col-sm-6">
