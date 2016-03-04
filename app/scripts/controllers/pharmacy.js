@@ -24,8 +24,7 @@ angular.module('pharmassistApp')
         }, function(err) {
             console.log(err);
         });
-        console.log('Geometry at save: ', $scope.pharmacyDetails.point);
-        }
+    }
 })
   .controller('PharmacyDetailCtrl',
     function ($scope, apiService, $routeParams,geolocation, toastr) {
