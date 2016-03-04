@@ -19,8 +19,10 @@
                     <div class="col-sm-6">
                     <label>Select Drug and add to list</label>
                         <!-- ui-select combo box -->
+                        <!-- TODO: Research what tagging does -->
                         <ui-select multiple ng-model="multipleDrugs.drugs" theme="bootstrap"
-                        ng-disabled="disabled" sortable="true" close-on-select="false" style="width: 800px;">
+                        ng-disabled="disabled" sortable="true" close-on-select="false"
+                        tagging="tagTransform" tagging-tokens="SPACE|,|/" style="width: 800px;">
                             <ui-select-match placeholder="Search for a drug..">
                                 <span ng-bind="$item.display_name"></span>
                                 {{$item.display_name}}
