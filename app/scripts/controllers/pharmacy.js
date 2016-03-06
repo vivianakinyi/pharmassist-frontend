@@ -28,9 +28,7 @@ angular.module('pharmassistApp')
 })
   .controller('PharmacyDetailCtrl',
     function ($scope, apiService, $routeParams,geolocation, toastr) {
-
-        var currentID = $routeParams.id
-        console.log(currentID)
+        var currentID = $routeParams.id;
         var url = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID + "/";
         $scope.pharmacy = {};
 
@@ -54,16 +52,15 @@ angular.module('pharmassistApp')
             });
         }
   })
-  .controller('DrugsCtrl', function ($scope, apiService) {
-    var url = "http://localhost:8000/api/pharmacy/drugs/"
+  .controller('DrugsCtrl', function ($scope, apiService, $routeParams, toastr) {
+    var url = "http://localhost:8000/api/pharmacy/drugs/";
+    var currentID = $routeParams.id;
+
     apiService.get(url).then(function(drugs){
         drugs = drugs.data.results
         $scope.drugs = drugs
-        console.log(drugs)
-
         $scope.multipleDrugs = {};
-        console.log('Trying out..', $scope.multipleDrugs)
-        // $scope.multipleDrugs.drugs =['test1','test2'];
+        $scope.multipleDrugs.value = [];
 
 
         $scope.deleteDrug = function(index){
@@ -81,19 +78,15 @@ angular.module('pharmassistApp')
         }
 
     })
-
-    $scope.selectYellowColor = function(){
-    if($scope.multipleDemo.colors.indexOf($scope.availableColors[3]) == -1){
-      $scope.multipleDemo.colors.push($scope.availableColors[3]);
+    $scope.saveDrugs = function(){
+        var endpoint = "http://localhost:8000/api/pharmacy/pharmacy/";
+        apiService.update(endpoint, currentID, $scope.multipleDrugs.drugs)
+        .then(function(response){
+            console.log('Saved!', response);
+            toastr.success("Pharmacy drugs updated successfully", 'Success');
+        }, function(err){
+            console.log(err);
+        });
     }
-    };
-
-    $scope.deselectYellowColor = function(){
-        if($scope.multipleDemo.colors.indexOf($scope.availableColors[3]) != -1){
-          var index = $scope.multipleDemo.colors.indexOf($scope.availableColors[3]);
-          $scope.multipleDemo.colors.splice(index, 1);
-        }
-    };
-
   });
 
