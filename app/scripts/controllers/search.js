@@ -36,11 +36,9 @@ angular.module('pharmassistApp')
 
         $scope.gridOptions = {};
 
-        //Results of selected drugs
+        // Detail of selected drug
         apiService.get(drugUrl).then(function(response){
-            console.log('Response',response)
             $scope.drugs = response.data;
-            console.log($scope.drugs)
         });
 
         $scope.Delete = function(row) {
