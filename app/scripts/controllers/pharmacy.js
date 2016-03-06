@@ -30,6 +30,7 @@ angular.module('pharmassistApp')
     function ($scope, apiService, $routeParams,geolocation, toastr) {
 
         var currentID = $routeParams.id
+        console.log(currentID)
         var url = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID + "/";
         $scope.pharmacy = {};
 
