@@ -61,6 +61,7 @@ angular.module('pharmassistApp')
         console.log(drugs)
 
         $scope.multipleDrugs = {};
+        console.log('Trying out..', $scope.multipleDrugs)
         // $scope.multipleDrugs.drugs =['test1','test2'];
 
 

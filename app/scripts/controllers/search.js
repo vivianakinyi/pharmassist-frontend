@@ -7,11 +7,14 @@ angular.module('pharmassistApp')
         // $scope.$watch('selected', function() {
         //     searchResults();
         // });
+        $scope.selected = {};
+        $scope.selected.value = '';
+
         apiService.get(url).then(function (response) {
             $scope.drugs = response.data.results;
-            $scope.selected = { value: $scope.drugs[2] };
-            console.log($scope.selected)
-            console.log($scope.selected.value.id)
+
+            console.log('After',$scope.selected)
+            console.log('After..',$scope.selected.value)
         });
 
     $scope.detectLocation = function() {
@@ -23,14 +26,8 @@ angular.module('pharmassistApp')
 
     $scope.searchResults = function() {
         var url = 'http://localhost:8000/api/pharmacy/prices/';
-        var go = '/search/results/1'
+        var go = '/search/results/' + $scope.selected.value.id + '/'
         $location.path(go);
-        // apiService.get(url).then(function(drugs){
-        //     // console.log(drugs)
-        //     var go = '/search/results/1'
-        //     $location.path(go);
-
-        // });
     }
   })
   .controller('SearchResultsCtrl', ['$scope','apiService',
