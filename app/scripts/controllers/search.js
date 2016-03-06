@@ -11,7 +11,9 @@ angular.module('pharmassistApp')
         $scope.selected.value = '';
 
         apiService.get(url).then(function (response) {
+            console.log(response);
             $scope.drugs = response.data.results;
+            console.log($scope.drugs);
         });
 
     $scope.detectLocation = function() {
