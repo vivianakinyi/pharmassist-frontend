@@ -79,10 +79,6 @@ angular.module('pharmassistApp')
         }
 
     })
-    // trying out of ui-select
-    $scope.availableColors = ['Red','Green','Blue','Yellow','Magenta','Maroon','Umbra','Turquoise'];
-    $scope.multipleDemo = {};
-    $scope.multipleDemo.colors = ['Blue','Red'];
 
     $scope.selectYellowColor = function(){
     if($scope.multipleDemo.colors.indexOf($scope.availableColors[3]) == -1){

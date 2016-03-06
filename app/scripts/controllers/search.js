@@ -4,10 +4,14 @@ angular.module('pharmassistApp')
   .controller('SearchCtrl', function ($scope, geolocation, apiService,
     $location) {
         var url = "http://localhost:8000/api/pharmacy/drugs/";
+        // $scope.$watch('selected', function() {
+        //     searchResults();
+        // });
         apiService.get(url).then(function (response) {
             $scope.drugs = response.data.results;
-            $scope.selected = { value: $scope.drugs[0] };
-
+            $scope.selected = { value: $scope.drugs[2] };
+            console.log($scope.selected)
+            console.log($scope.selected.value.id)
         });
 
     $scope.detectLocation = function() {
@@ -18,7 +22,15 @@ angular.module('pharmassistApp')
     }
 
     $scope.searchResults = function() {
-      $location.path('/search/results');
+        var url = 'http://localhost:8000/api/pharmacy/prices/';
+        var go = '/search/results/1'
+        $location.path(go);
+        // apiService.get(url).then(function(drugs){
+        //     // console.log(drugs)
+        //     var go = '/search/results/1'
+        //     $location.path(go);
+
+        // });
     }
   })
   .controller('SearchResultsCtrl', ['$scope','apiService',

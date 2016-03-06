@@ -77,7 +77,7 @@ angular
         controller: 'SearchCtrl',
         controllerAs: 'search'
       })
-      .when('/search/results', {
+      .when('/search/results/:id', {
         templateUrl: 'views/results.html',
         controller: 'SearchResultsCtrl',
         controllerAs: 'search'
