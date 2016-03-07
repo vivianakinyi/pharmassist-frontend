@@ -52,40 +52,61 @@ angular.module('pharmassistApp')
             });
         }
   })
-  .controller('DrugsCtrl', function ($scope, apiService, $routeParams, toastr) {
+  .controller('DrugsCtrl', function ($scope, apiService, $routeParams, toastr,
+     $q) {
     var url = "http://localhost:8000/api/pharmacy/drugs/";
     var currentID = $routeParams.id;
 
     apiService.get(url).then(function(drugs){
-        drugs = drugs.data.results
-        $scope.drugs = drugs
+        $scope.drugs = drugs.data.results
         $scope.multipleDrugs = {};
         $scope.multipleDrugs.value = [];
 
 
-        $scope.deleteDrug = function(index){
-            drugs.splice(index, 1)
-        }
+        // $scope.deleteDrug = function(index){
+        //     drugs.splice(index, 1)
+        // }
 
-        $scope.addDrug = function(index){
-            drugs.push({
-                id: $scope.drugs.length + 1,
-                display_name:$scope.newDrugName
+        // $scope.addDrug = function(index){
+        //     drugs.push({
+        //         id: $scope.drugs.length + 1,
+        //         display_name:$scope.newDrugName
 
-            });
-            $scope.newDrugName = '';
+        //     });
+        //     $scope.newDrugName = '';
 
-        }
+        // }
 
     })
-    $scope.saveDrugs = function(){
-        var endpoint = "http://localhost:8000/api/pharmacy/pharmacy/";
-        apiService.update(endpoint, currentID, $scope.multipleDrugs.drugs)
-        .then(function(response){
-            console.log('Saved!', response);
-            toastr.success("Pharmacy drugs updated successfully", 'Success');
-        }, function(err){
-            console.log(err);
+    var updateDrug = function updateDrug (drugID) {
+        var defferd = $q.defer();
+        var endpoint = "http://localhost:8000/api/pharmacy/prices/";
+
+        var updateObj = {
+                drug: drugID,
+                pharmacy:currentID,
+                price: 300
+            }
+        apiService.post(endpoint, updateObj)
+        .then(function response (data) {
+            defferd.resolve(data);
+        }, function reject (err) {
+            defferd.reject(err)
+        });
+        return defferd.promise;
+    };
+
+    $scope.saveDrugs = function(data){
+        _.each(data, function getData(value, index) {
+            var drugID = value.id;
+            updateDrug(drugID).then(function resolve(data) {
+                toastr.success("Pharmacy drugs updated successfully", 'Success');
+                console.log("Saved Data", data);
+            }, function error (err) {
+                var msg = "Error saving drug " + value.display_name;
+                toastr.error(msg, 'Error');
+                console.log("Err", err);
+            });
         });
     }
   });

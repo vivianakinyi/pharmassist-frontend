@@ -20,25 +20,25 @@
                     <label>Select Drug and add to list</label>
                         <!-- ui-select combo box -->
                         <!-- TODO: Research what tagging does -->
-                        <ui-select multiple ng-model="multipleDrugs.drugs" theme="bootstrap"
+                        <ui-select multiple ng-model="multipleDrugs.drugs.value" theme="bootstrap"
                         ng-disabled="disabled" sortable="true" close-on-select="false"
                         tagging="tagTransform" tagging-tokens="SPACE|,|/" style="width: 800px;">
                             <ui-select-match placeholder="Search for a drug..">
                                 <span ng-bind="$item.display_name"></span>
                                 {{$item.display_name}}
                             </ui-select-match>
-                            <ui-select-choices repeat="drug in (drugs | filter:$select.search) track by drug.id">
+                            <ui-select-choices repeat="drug in (drugs | propsFilter: {full_name: $select.search, display_name: $select.search}) track by drug.id">
                                 <span ng-bind="drug.display_name"></span>
                             </ui-select-choices>
                         </ui-select>
-                        <p>Selected:{{multipleDrugs.drugs}}</p>
+                        <p>Selected:{{multipleDrugs.drugs.value}}</p>
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col-sm-6">
                         <input class="btn btn-action" type="submit" value="Save Drugs"
-                        ng-click="saveDrugs()">
+                        ng-click="saveDrugs(multipleDrugs.drugs.value)">
                     </div>
                 </div>
         </form>
