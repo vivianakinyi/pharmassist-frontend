@@ -57,6 +57,7 @@ angular.module('pharmassistApp')
     var url = "http://localhost:8000/api/pharmacy/drugs/";
     var currentID = $routeParams.id;
 
+
     apiService.get(url).then(function(drugs){
         $scope.drugs = drugs.data.results
         $scope.multipleDrugs = {};
@@ -81,7 +82,7 @@ angular.module('pharmassistApp')
     var updateDrug = function updateDrug (drugID) {
         var defferd = $q.defer();
         var endpoint = "http://localhost:8000/api/pharmacy/prices/";
-
+        console.log(currentID);
         var updateObj = {
                 drug: drugID,
                 pharmacy:currentID,
@@ -100,7 +101,8 @@ angular.module('pharmassistApp')
         _.each(data, function getData(value, index) {
             var drugID = value.id;
             updateDrug(drugID).then(function resolve(data) {
-                toastr.success("Pharmacy drugs updated successfully", 'Success');
+                var msg = value.display_name + " drug saved successfully!";
+                toastr.success(msg, 'Success');
                 console.log("Saved Data", data);
             }, function error (err) {
                 var msg = "Error saving drug " + value.display_name;
