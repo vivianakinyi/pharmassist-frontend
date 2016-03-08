@@ -27,7 +27,7 @@ angular.module('pharmassistApp')
     }
 })
   .controller('PharmacyDetailCtrl',
-    function ($scope, apiService, $routeParams,geolocation, toastr) {
+    function ($scope, apiService, $routeParams,geolocation, toastr, $location) {
         var currentID = $routeParams.id;
         var url = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID + "/";
         $scope.pharmacy = {};
@@ -50,6 +50,10 @@ angular.module('pharmassistApp')
             }, function(err){
                 console.log(err);
             });
+        }
+        $scope.addDrugs  = function(){
+            var go = "/pharmacy/" + currentID + "/drugs";
+            $location.path(go);
         }
   })
   .controller('DrugsCtrl', function ($scope, apiService, $routeParams, toastr,
