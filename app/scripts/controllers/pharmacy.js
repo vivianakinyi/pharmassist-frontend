@@ -53,7 +53,7 @@ angular.module('pharmassistApp')
         }
   })
   .controller('DrugsCtrl', function ($scope, apiService, $routeParams, toastr,
-     $q) {
+     $q, $location) {
     var url = "http://localhost:8000/api/pharmacy/drugs/";
     var currentID = $routeParams.id;
 
@@ -63,26 +63,10 @@ angular.module('pharmassistApp')
         $scope.multipleDrugs = {};
         $scope.multipleDrugs.value = [];
 
-
-        // $scope.deleteDrug = function(index){
-        //     drugs.splice(index, 1)
-        // }
-
-        // $scope.addDrug = function(index){
-        //     drugs.push({
-        //         id: $scope.drugs.length + 1,
-        //         display_name:$scope.newDrugName
-
-        //     });
-        //     $scope.newDrugName = '';
-
-        // }
-
     })
     var updateDrug = function updateDrug (drugID) {
         var defferd = $q.defer();
         var endpoint = "http://localhost:8000/api/pharmacy/prices/";
-        console.log(currentID);
         var updateObj = {
                 drug: drugID,
                 pharmacy:currentID,
@@ -101,9 +85,11 @@ angular.module('pharmassistApp')
         _.each(data, function getData(value, index) {
             var drugID = value.id;
             updateDrug(drugID).then(function resolve(data) {
+                var redirectTo = '/pharmacy/' + currentID;
                 var msg = value.display_name + " drug saved successfully!";
                 toastr.success(msg, 'Success');
-                console.log("Saved Data", data);
+                $location.path(redirectTo);
+
             }, function error (err) {
                 var msg = "Error saving drug " + value.display_name;
                 toastr.error(msg, 'Error');
