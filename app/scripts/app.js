@@ -67,12 +67,17 @@ angular
         controller: 'PharmacyDetailCtrl',
         controllerAs: 'pharmacyDetail'
       })
+       .when('/pharmacy/:id/drugs', {
+        templateUrl: 'views/drugs.html',
+        controller: 'DrugsCtrl',
+        controllerAs: 'drugs'
+      })
       .when('/search', {
         templateUrl: 'views/search.html',
         controller: 'SearchCtrl',
         controllerAs: 'search'
       })
-      .when('/search/results', {
+      .when('/search/results/:id', {
         templateUrl: 'views/results.html',
         controller: 'SearchResultsCtrl',
         controllerAs: 'search'

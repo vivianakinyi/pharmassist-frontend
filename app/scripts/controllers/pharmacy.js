@@ -24,13 +24,11 @@ angular.module('pharmassistApp')
         }, function(err) {
             console.log(err);
         });
-        console.log('Geometry at save: ', $scope.pharmacyDetails.point);
-        }
+    }
 })
   .controller('PharmacyDetailCtrl',
     function ($scope, apiService, $routeParams,geolocation, toastr) {
-
-        var currentID = $routeParams.id
+        var currentID = $routeParams.id;
         var url = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID + "/";
         $scope.pharmacy = {};
 
@@ -53,4 +51,65 @@ angular.module('pharmassistApp')
                 console.log(err);
             });
         }
+  })
+  .controller('DrugsCtrl', function ($scope, apiService, $routeParams, toastr,
+     $q) {
+    var url = "http://localhost:8000/api/pharmacy/drugs/";
+    var currentID = $routeParams.id;
+
+
+    apiService.get(url).then(function(drugs){
+        $scope.drugs = drugs.data.results
+        $scope.multipleDrugs = {};
+        $scope.multipleDrugs.value = [];
+
+
+        // $scope.deleteDrug = function(index){
+        //     drugs.splice(index, 1)
+        // }
+
+        // $scope.addDrug = function(index){
+        //     drugs.push({
+        //         id: $scope.drugs.length + 1,
+        //         display_name:$scope.newDrugName
+
+        //     });
+        //     $scope.newDrugName = '';
+
+        // }
+
+    })
+    var updateDrug = function updateDrug (drugID) {
+        var defferd = $q.defer();
+        var endpoint = "http://localhost:8000/api/pharmacy/prices/";
+        console.log(currentID);
+        var updateObj = {
+                drug: drugID,
+                pharmacy:currentID,
+                price: 300
+            }
+        apiService.post(endpoint, updateObj)
+        .then(function response (data) {
+            defferd.resolve(data);
+        }, function reject (err) {
+            defferd.reject(err)
+        });
+        return defferd.promise;
+    };
+
+    $scope.saveDrugs = function(data){
+        _.each(data, function getData(value, index) {
+            var drugID = value.id;
+            updateDrug(drugID).then(function resolve(data) {
+                var msg = value.display_name + " drug saved successfully!";
+                toastr.success(msg, 'Success');
+                console.log("Saved Data", data);
+            }, function error (err) {
+                var msg = "Error saving drug " + value.display_name;
+                toastr.error(msg, 'Error');
+                console.log("Err", err);
+            });
+        });
+    }
   });
+

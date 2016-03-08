@@ -17,10 +17,10 @@
         <form ng-model="pharmacyDetails" ng-submit="savePharmacy()">
             <div class="row">
                 <div class="col-sm-6">
-                <label>Name</label>
+                <label>Name *</label>
                     <p><input class="form-control" type="text"
                     ng-model="pharmacyDetails.name"
-                    placeholder="Name"></p>
+                    placeholder="Name" required></p>
                 </div>
             </div>
             <br>
@@ -29,7 +29,7 @@
                 <label>Town</label>
                     <p><input class="form-control" type="text"
                     ng-model="pharmacyDetails.town"
-                    placeholder="Town"></p>
+                    placeholder="Town" required></p>
                 </div>
             </div>
             <br>
@@ -38,7 +38,7 @@
                 <label>Street</label>
                     <p><input class="form-control" type="text"
                     ng-model="pharmacyDetails.street"
-                    placeholder="Street"></p>
+                    placeholder="Street" required></p>
                 </div>
             </div>
             <br>
@@ -47,7 +47,7 @@
                 <label>County</label>
                     <p><input class="form-control" type="text"
                     ng-model="pharmacyDetails.county"
-                    placeholder="County"></p>
+                    placeholder="County" required></p>
                 </div>
             </div>
             <br>
