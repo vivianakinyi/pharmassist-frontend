@@ -95,8 +95,12 @@ angular.module('pharmassistApp')
                 $location.path(redirectTo);
 
             }, function error (err) {
-                var msg = "Error saving drug " + value.display_name;
-                toastr.error(msg, 'Error');
+                var msg = "Sorry " + value.display_name +
+                        " exists. Cannot add same drug twice";
+                toastr.error(msg, 'Error', {
+                    closeButton: true,
+                    timeOut: 0,
+                });
                 console.log("Err", err);
             });
         });
