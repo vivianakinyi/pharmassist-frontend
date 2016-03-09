@@ -8,39 +8,38 @@
     </ol>
     <article>
         <header class="page-header">
-            <h1 class="page-title">Add Drugs</h1>
+            <h1 class="page-title">Drugs</h1>
         </header>
-        <p>
-        Click on a drug that is available in your pharmacy to add to the list of available drugs in your pharmacy
-        </p>
-        <br>
-        <form>
-            <div class="row">
-                    <div class="col-sm-6">
-                    <label>Select Drug and add to list</label>
-                        <!-- ui-select combo box -->
-                        <!-- TODO: Research what tagging does -->
-                        <ui-select multiple ng-model="multipleDrugs.drugs.value" theme="bootstrap"
-                        ng-disabled="disabled" sortable="true" close-on-select="false"
-                        tagging="tagTransform" tagging-tokens="SPACE|,|/" style="width: 800px;">
-                            <ui-select-match placeholder="Search for a drug..">
-                                <span ng-bind="$item.display_name"></span>
-                                {{$item.display_name}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="drug in (drugs | propsFilter: {full_name: $select.search, display_name: $select.search}) track by drug.id">
-                                <span ng-bind="drug.display_name"></span>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Drug List</h3>
+          </div>
+          <div class="panel-body">
+            <!-- Normal table -->
+            <div>
+                <table class="table table-striped custab">
+                    <button class='btn btn-success btn-xs pull-right'
+                    ng-click="addDrugs()">+ Add New Drugs</button>
                 <br>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <input class="btn btn-action" type="submit" value="Save Drugs"
-                        ng-click="saveDrugs(multipleDrugs.drugs.value)">
-                    </div>
-                </div>
-        </form>
-        <br>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Drug</th>
+                        <th>Price</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                        <tr ng-repeat="drug in pharmDrugs">
+                            <td>{{$index+1}}</td>
+                            <td>{{drug}}</td>
+                            <td>200.00</td>
+                            <td class="text-center"><button class='btn btn-danger btn-xs' href="">Remove Drug</button></td>
+
+
+                        </tr>
+                </table>
+            </div>
+          </div>
+        </div>
     </article>
 </div>

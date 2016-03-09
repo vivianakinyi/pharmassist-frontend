@@ -52,15 +52,15 @@ angular.module('pharmassistApp')
             });
         }
         $scope.addDrugs  = function(){
-            var go = "/pharmacy/" + currentID + "/drugs";
+            var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
             $location.path(go);
         }
   })
   .controller('DrugsCtrl', function ($scope, apiService, $routeParams, toastr,
      $q, $location) {
-    var url = "http://localhost:8000/api/pharmacy/drugs/";
     var currentID = $routeParams.id;
-
+    var url = "http://localhost:8000/api/pharmacy/drugs/";
+    var pharmDrugsUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID;
 
     apiService.get(url).then(function(drugs){
         $scope.drugs = drugs.data.results
@@ -68,6 +68,11 @@ angular.module('pharmassistApp')
         $scope.multipleDrugs.value = [];
 
     })
+    apiService.get(pharmDrugsUrl).then(function(response){
+        $scope.pharmDrugs = response.data.properties.drugs;
+        console.log($scope.pharmDrugs);
+    })
+
     var updateDrug = function updateDrug (drugID) {
         var defferd = $q.defer();
         var endpoint = "http://localhost:8000/api/pharmacy/prices/";
@@ -89,9 +94,10 @@ angular.module('pharmassistApp')
         _.each(data, function getData(value, index) {
             var drugID = value.id;
             updateDrug(drugID).then(function resolve(data) {
-                var redirectTo = '/pharmacy/' + currentID;
+                var redirectTo = '/pharmacy/' + currentID +'/drugs/';
                 var msg = value.display_name + " drug saved successfully!";
                 toastr.success(msg, 'Success');
+                // $scope.$apply();
                 $location.path(redirectTo);
 
             }, function error (err) {
@@ -105,5 +111,9 @@ angular.module('pharmassistApp')
             });
         });
     }
+    $scope.addDrugs  = function(){
+            var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
+            $location.path(go);
+        }
   });
 
