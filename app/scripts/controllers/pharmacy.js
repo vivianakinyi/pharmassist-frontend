@@ -70,7 +70,6 @@ angular.module('pharmassistApp')
     })
     apiService.get(pharmDrugsUrl).then(function(response){
         $scope.pharmDrugs = response.data.properties.drugs;
-        console.log($scope.pharmDrugs);
     })
 
     var updateDrug = function updateDrug (drugID) {
@@ -112,8 +111,12 @@ angular.module('pharmassistApp')
         });
     }
     $scope.addDrugs  = function(){
-            var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
-            $location.path(go);
-        }
+        var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
+        $location.path(go);
+    }
+    $scope.Delete = function(row) {
+        var index = $scope.gridOptions.data.indexOf(row.entity);
+        $scope.gridOptions.data.splice(index, 1);
+    }
   });
 
