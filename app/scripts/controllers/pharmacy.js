@@ -5,6 +5,12 @@ angular.module('pharmassistApp')
     function ($scope, apiService, geolocation, $location, toastr) {
     var url = "http://localhost:8000/api/pharmacy/pharmacy/";
     $scope.pharmacyDetails = {};
+    $scope.pharmacyDetails.value = '';
+
+    apiService.get(url).then(function(response){
+        $scope.pharmacies = response.data.results.features;
+        console.log($scope.pharmacies)
+    });
 
     $scope.detectLocation = function() {
         geolocation.getLocation().then(function(data){
