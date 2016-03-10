@@ -10,7 +10,7 @@
             <h1 class="page-title">Pharmacy detail view</h1>
         </header>
         <!-- panel -->
-        <div class="panel panel-info">
+        <!-- <div class="panel panel-info">
           <div class="panel-heading">
             <h3 class="panel-title">Pharmacy Details</h3>
           </div>
@@ -23,11 +23,11 @@
             <button class="btn btn-action" ng-click="showDetails = ! showDetails">Edit Details</button>
             <button class="btn btn-action" ng-click="addDrugs()">Add Drugs</button>
           </div>
-        </div>
+        </div> -->
 
-        <div class="panel panel-info" ng-class="{ 'hidden': ! showDetails }">
+        <div class="panel panel-info">
           <div class="panel-heading">
-            <h3 class="panel-title">Edit Pharmacy Details</h3>
+            <h3 class="panel-title">Update Your Pharmacy Details</h3>
           </div>
           <div class="panel-body">
           <form ng-model="pharmacies" ng-submit="update()">
@@ -36,7 +36,7 @@
                 <label>Name</label>
                     <p><input class="form-control" type="text"
                     ng-model="pharmacies.name"
-                    placeholder="Name"></p>
+                    placeholder="Name" disabled></p>
                 </div>
             </div>
             <br>
@@ -45,7 +45,7 @@
                 <label>Town</label>
                     <p><input class="form-control" type="text"
                     ng-model="pharmacies.town"
-                    placeholder="Town"></p>
+                    placeholder="Town" disabled></p>
                 </div>
             </div>
             <br>
@@ -54,7 +54,7 @@
                 <label>Street</label>
                     <p><input class="form-control" type="text"
                     ng-model="pharmacies.street"
-                    placeholder="Street"></p>
+                    placeholder="Street" disabled></p>
                 </div>
             </div>
             <br>
@@ -63,7 +63,7 @@
                 <label>County</label>
                     <p><input class="form-control" type="text"
                     ng-model="pharmacies.county"
-                    placeholder="County"></p>
+                    placeholder="County" disabled="Sorry"></p>
                 </div>
             </div>
             <br>

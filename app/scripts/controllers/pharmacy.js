@@ -4,33 +4,41 @@ angular.module('pharmassistApp')
   .controller('PharmacyCtrl',
     function ($scope, apiService, geolocation, $location, toastr) {
     var url = "http://localhost:8000/api/pharmacy/pharmacy/";
-    $scope.pharmacyDetails = {};
-    $scope.pharmacyDetails.value = '';
+    // $scope.pharmacyDetails = {};
+    // $scope.pharmacyDetails.value = '';
+    $scope.selected = {};
+    $scope.selected.value = '';
 
     apiService.get(url).then(function(response){
         $scope.pharmacies = response.data.results.features;
-        console.log($scope.pharmacies)
     });
 
-    $scope.detectLocation = function() {
-        geolocation.getLocation().then(function(data){
-            var myPoint = "POINT(" + data.coords.latitude +
-                         " " + data.coords.longitude + ")";
-            $scope.pharmacyDetails.point = myPoint;
-        });
+    $scope.viewDetails = function(){
+        var go = '/pharmacy/' + $scope.selected.value.id;
+        console.log(go);
+        $location.path(go);
     }
 
-    $scope.savePharmacy = function(){
-        $scope.pharmacyDetails.no = 125484;
+    // $scope.detectLocation = function() {
+    //     geolocation.getLocation().then(function(data){
+    //         var myPoint = "POINT(" + data.coords.latitude +
+    //                      " " + data.coords.longitude + ")";
+    //         $scope.pharmacyDetails.point = myPoint;
+    //     });
+    // }
 
-        apiService.post(url, $scope.pharmacyDetails).then(function (response) {
-            var go = '/pharmacy/' + response.data.id;
-            toastr.success("Pharmacy saved successfully", 'Success');
-            $location.path(go);
-        }, function(err) {
-            console.log(err);
-        });
-    }
+    // $scope.savePharmacy = function(){
+    //     $scope.pharmacyDetails.no = 125484;
+
+    //     apiService.post(url, $scope.pharmacyDetails).then(function (response) {
+    //         var go = '/pharmacy/' + response.data.id;
+    //         toastr.success("Pharmacy saved successfully", 'Success');
+    //         $location.path(go);
+    //     }, function(err) {
+    //         console.log(err);
+    //     });
+    // }
+
 })
   .controller('PharmacyDetailCtrl',
     function ($scope, apiService, $routeParams,geolocation, toastr, $location) {

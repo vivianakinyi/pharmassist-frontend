@@ -18,19 +18,24 @@
         <div class="row">
                 <div class="col-sm-6">
                 <label>Search for your pharmacy</label>
-                    <ui-select ng-model="pharmacyDetails.value" theme="bootstrap">
+                    <ui-select ng-model="selected.value" theme="bootstrap">
                         <ui-select-match>
-                            <span ng-bind="$select.pharmacyDetails"></span>
+                            <span ng-bind="$select.selected.properties.name"></span>
                         </ui-select-match>
-                        <ui-select-choices repeat="pharmacy in (pharmacies | filter:$select.search) track by pharmacy.id">
-                        <span ng-bind="pharmacy.properties.name"></span>
+                        <ui-select-choices repeat="pharmacy in pharmacies | filter:$select.search">
+                            <span ng-bind="pharmacy.properties.name"></span>
                         </ui-select-choices>
                     </ui-select>
-                    <p>Selected: {{pharmacyDetails.value}}</p>
+                        <p>Selected: {{selected.value.id}}</p>
                 </div>
             </div>
             <br>
-        <form ng-model="pharmacyDetails" ng-submit="savePharmacy()">
+            <div class="row">
+                <div class="col-sm-6">
+                    <input class="btn btn-action" type="submit" ng-click="viewDetails()" value="View/Update Details">
+                </div>
+            </div>
+        <!-- <form ng-model="pharmacyDetails" ng-submit="savePharmacy()">
             <div class="row">
                 <div class="col-sm-6">
                 <label>Name *</label>
@@ -91,7 +96,7 @@
                     <input class="btn btn-action" type="submit" value="Save">
                 </div>
             </div>
-        </form>
+        </form> -->
 
     </article>
 </div>
