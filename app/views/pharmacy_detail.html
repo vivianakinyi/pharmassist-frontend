@@ -10,7 +10,7 @@
             <h1 class="page-title">Pharmacy detail view</h1>
         </header>
         <!-- panel -->
-        <!-- <div class="panel panel-info">
+        <div class="panel panel-info">
           <div class="panel-heading">
             <h3 class="panel-title">Pharmacy Details</h3>
           </div>
@@ -23,15 +23,15 @@
             <button class="btn btn-action" ng-click="showDetails = ! showDetails">Edit Details</button>
             <button class="btn btn-action" ng-click="addDrugs()">Add Drugs</button>
           </div>
-        </div> -->
+        </div>
 
-        <div class="panel panel-info">
+        <div class="panel panel-info" ng-class="{ 'hidden': ! showDetails }">
           <div class="panel-heading">
             <h3 class="panel-title">Update Your Pharmacy Details</h3>
           </div>
           <div class="panel-body">
           <form ng-model="pharmacies" ng-submit="update()">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-sm-6">
                 <label>Name</label>
                     <p><input class="form-control" type="text"
@@ -63,11 +63,12 @@
                 <label>County</label>
                     <p><input class="form-control" type="text"
                     ng-model="pharmacies.county"
-                    placeholder="County" disabled="Sorry"></p>
+                    placeholder="County" disabled=></p>
                 </div>
             </div>
-            <br>
+            <br> -->
             <div class="row">
+            <p>You are allowed to edit the following fields only incase you want to edit your name kindly visit the <a href="">PPB website</a> for more information</p>
                 <div class="col-sm-6">
                 <label>Location</label>
                     <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location" ng-model="pharmacies.point"></p>
