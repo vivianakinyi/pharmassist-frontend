@@ -23,19 +23,18 @@
                 <br>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Drug ID</th>
                         <th>Drug</th>
                         <th>Price</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
                         <tr ng-repeat="drug in pharmDrugs">
-                            <td>{{$index+1}}</td>
-                            <td>{{drug}}</td>
+                            <td>{{drug.id}}</td>
+                            <td>{{drug.full_name}}</td>
                             <td>200.00</td>
-                            <td class="text-center"><button class='btn btn-danger btn-xs' href="">Remove Drug</button></td>
-
-
+                            <td class="text-center"><button class='btn btn-danger btn-xs'
+                            ng-click="delete(drug.id)">Remove Drug</button></td>
                         </tr>
                 </table>
             </div>

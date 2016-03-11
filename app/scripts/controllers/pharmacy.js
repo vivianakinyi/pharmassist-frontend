@@ -4,27 +4,40 @@ angular.module('pharmassistApp')
   .controller('PharmacyCtrl',
     function ($scope, apiService, geolocation, $location, toastr) {
     var url = "http://localhost:8000/api/pharmacy/pharmacy/";
-    $scope.pharmacyDetails = {};
+    // $scope.pharmacyDetails = {};
+    // $scope.pharmacyDetails.value = '';
+    $scope.selected = {};
+    $scope.selected.value = '';
 
-    $scope.detectLocation = function() {
-        geolocation.getLocation().then(function(data){
-            var myPoint = "POINT(" + data.coords.latitude +
-                         " " + data.coords.longitude + ")";
-            $scope.pharmacyDetails.point = myPoint;
-        });
+    apiService.get(url).then(function(response){
+        $scope.pharmacies = response.data.results.features;
+    });
+
+    $scope.viewDetails = function(){
+        var go = '/pharmacy/' + $scope.selected.value.id;
+        $location.path(go);
     }
 
-    $scope.savePharmacy = function(){
-        $scope.pharmacyDetails.no = 125484;
+    // $scope.detectLocation = function() {
+    //     geolocation.getLocation().then(function(data){
+    //         var myPoint = "POINT(" + data.coords.latitude +
+    //                      " " + data.coords.longitude + ")";
+    //         $scope.pharmacyDetails.point = myPoint;
+    //     });
+    // }
 
-        apiService.post(url, $scope.pharmacyDetails).then(function (response) {
-            var go = '/pharmacy/' + response.data.id;
-            toastr.success("Pharmacy saved successfully", 'Success');
-            $location.path(go);
-        }, function(err) {
-            console.log(err);
-        });
-    }
+    // $scope.savePharmacy = function(){
+    //     $scope.pharmacyDetails.no = 125484;
+
+    //     apiService.post(url, $scope.pharmacyDetails).then(function (response) {
+    //         var go = '/pharmacy/' + response.data.id;
+    //         toastr.success("Pharmacy saved successfully", 'Success');
+    //         $location.path(go);
+    //     }, function(err) {
+    //         console.log(err);
+    //     });
+    // }
+
 })
   .controller('PharmacyDetailCtrl',
     function ($scope, apiService, $routeParams,geolocation, toastr, $location) {
@@ -57,7 +70,7 @@ angular.module('pharmassistApp')
         }
   })
   .controller('DrugsCtrl', function ($scope, apiService, $routeParams, toastr,
-     $q, $location) {
+     $q, $location, $http) {
     var currentID = $routeParams.id;
     var url = "http://localhost:8000/api/pharmacy/drugs/";
     var pharmDrugsUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID;
@@ -70,7 +83,6 @@ angular.module('pharmassistApp')
     })
     apiService.get(pharmDrugsUrl).then(function(response){
         $scope.pharmDrugs = response.data.properties.drugs;
-        console.log($scope.pharmDrugs);
     })
 
     var updateDrug = function updateDrug (drugID) {
@@ -112,8 +124,25 @@ angular.module('pharmassistApp')
         });
     }
     $scope.addDrugs  = function(){
-            var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
-            $location.path(go);
-        }
+        var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
+        $location.path(go);
+    }
+    $scope.delete = function(drug) {
+        var drugs = drug
+        var pharm = currentID
+
+        var endpoint = "http://localhost:8000/api/pharmacy/prices/?drug=" + drugs + '&pharmacy=' + pharm;
+        apiService.get(endpoint).then(function(response){
+            var endpointID = response.data.results[0].id;
+            var endpointDeleted = "http://localhost:8000/api/pharmacy/prices/" + endpointID + '/';
+
+            $http.delete(endpointDeleted).then(function(data){
+                var redirectTo = '/pharmacy/' + currentID +'/drugs/';
+                toastr.success("Drug has be deleted!", 'Success');
+                $location.path(redirectTo); //reloads page
+            });
+        });
+
+    }
   });
 
