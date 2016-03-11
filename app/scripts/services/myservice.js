@@ -28,5 +28,9 @@ angular.module('pharmassistApp')
             var endPoint = url + id + '/';
             return $http.patch(endPoint, data)
         };
+        e.delete = function (url, id, data) {
+            var endPoint = url + id + '/';
+            return $http.delete(endPoint, data)
+        };
 
   }]);

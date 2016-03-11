@@ -15,7 +15,6 @@ angular.module('pharmassistApp')
 
     $scope.viewDetails = function(){
         var go = '/pharmacy/' + $scope.selected.value.id;
-        console.log(go);
         $location.path(go);
     }
 
@@ -71,7 +70,7 @@ angular.module('pharmassistApp')
         }
   })
   .controller('DrugsCtrl', function ($scope, apiService, $routeParams, toastr,
-     $q, $location) {
+     $q, $location, $http) {
     var currentID = $routeParams.id;
     var url = "http://localhost:8000/api/pharmacy/drugs/";
     var pharmDrugsUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID;
@@ -128,9 +127,22 @@ angular.module('pharmassistApp')
         var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
         $location.path(go);
     }
-    $scope.Delete = function(row) {
-        var index = $scope.gridOptions.data.indexOf(row.entity);
-        $scope.gridOptions.data.splice(index, 1);
+    $scope.delete = function(drug) {
+        var drugs = drug
+        var pharm = currentID
+
+        var endpoint = "http://localhost:8000/api/pharmacy/prices/?drug=" + drugs + '&pharmacy=' + pharm;
+        apiService.get(endpoint).then(function(response){
+            var endpointID = response.data.results[0].id;
+            var endpointDeleted = "http://localhost:8000/api/pharmacy/prices/" + endpointID + '/';
+
+            $http.delete(endpointDeleted).then(function(data){
+                var redirectTo = '/pharmacy/' + currentID +'/drugs/';
+                toastr.success("Drug has be deleted!", 'Success');
+                $location.path(redirectTo); //reloads page
+            });
+        });
+
     }
   });
 
