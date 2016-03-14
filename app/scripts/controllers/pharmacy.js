@@ -127,6 +127,7 @@ angular.module('pharmassistApp')
         var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
         $location.path(go);
     }
+    // TODO cHECK CODE WITH IAN
     $scope.delete = function(drug) {
         var drugs = drug
         var pharm = currentID
