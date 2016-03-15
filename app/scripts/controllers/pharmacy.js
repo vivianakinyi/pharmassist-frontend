@@ -4,8 +4,7 @@ angular.module('pharmassistApp')
   .controller('PharmacyCtrl',
     function ($scope, apiService, geolocation, $location, toastr) {
     var url = "http://localhost:8000/api/pharmacy/pharmacy/";
-    // $scope.pharmacyDetails = {};
-    // $scope.pharmacyDetails.value = '';
+
     $scope.selected = {};
     $scope.selected.value = '';
 
@@ -139,7 +138,7 @@ angular.module('pharmassistApp')
 
             $http.delete(endpointDeleted).then(function(data){
                 var redirectTo = '/pharmacy/' + currentID +'/drugs/';
-                toastr.success("Drug has be deleted!", 'Success');
+                toastr.success("Removed drug successfully!", 'Success');
                 $location.path(redirectTo); //reloads page
             });
         });

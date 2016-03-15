@@ -14,24 +14,30 @@ angular.module('pharmassistApp')
             $scope.drugs = response.data.results;
         });
 
-    $scope.detectLocation = function() {
-        geolocation.getLocation().then(function(data){
-            $scope.coords = data.coords.latitude + ' ' + data.coords.longitude
+        $scope.detectLocation = function() {
+            geolocation.getLocation().then(function(data){
+                $scope.coords = data.coords.latitude + ' ' + data.coords.longitude
 
-        });
-    }
+            });
+        }
+        // distance combobox
+        $scope.selected_dist = [];
+        $scope.selected_dist.value = '';
+        $scope.distance = [100,200,300,400,500,4000]
 
-    $scope.searchResults = function() {
-        var url = 'http://localhost:8000/api/pharmacy/prices/';
-        var go = '/search/results/' + $scope.selected.value.id + '/'
-        $location.path(go);
-    }
+        $scope.searchResults = function() {
+            // var url = 'http://localhost:8000/api/pharmacy/prices/';
+            var go = '/search/results/' + $scope.selected.value.id + '/' + $scope.selected_dist.value
+            $location.path(go);
+        }
   })
 
   .controller('SearchResultsCtrl', ['$scope','apiService','$routeParams',
     function($scope, apiService, $routeParams) {
-        var currentID = $routeParams.id
-        var url = "http://localhost:8000/api/pharmacy/pharmacy/";
+        var currentID = $routeParams.drugID;
+        var distance = $routeParams.distID;
+
+        var url = "http://localhost:8000/api/pharmacy/pharmacy/?dist="+ distance + "&point=-1.2807808999999999,36.8123497&drugs=" + currentID ;
         var drugUrl = "http://localhost:8000/api/pharmacy/drugs/" + currentID + '/'
 
         $scope.gridOptions = {};
