@@ -34,14 +34,14 @@
                 <div class="row">
                     <div class="col-sm-6">
                     <label>Your Address/Location</label>
-                        <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location"ng-model="coords"></p>
+                        <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location" ng-model="coords"></p>
                         <br>
                         <button ng-click="detectLocation()"><span class="glyphicon glyphicon-map-marker">
                         </span>Detect your location</button>
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-6">
                         <label>Search Within</label>
                         <select class="form-control">
@@ -51,6 +51,22 @@
                             <option>400 m</option>
                             <option>500 m</option>
                         </select>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-sm-6">
+                    <label>Search Within (metres)</label>
+                        <!-- ui-select combo box -->
+                        <ui-select ng-model="selected_dist.value" theme="bootstrap">
+                            <ui-select-match>
+                                <span ng-bind="$select.selected"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="dist in distance | filter:$select.search">
+                                <span ng-bind="dist"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <p>Selected: {{selected_dist.value}}</p>
+
                     </div>
                 </div>
                 <br>

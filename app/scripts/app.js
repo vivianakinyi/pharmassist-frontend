@@ -82,7 +82,7 @@ angular
         controller: 'SearchCtrl',
         controllerAs: 'search'
       })
-      .when('/search/results/:id', {
+      .when('/search/results/:drugID/:distID/:locID', {
         templateUrl: 'views/results.html',
         controller: 'SearchResultsCtrl',
         controllerAs: 'search'
