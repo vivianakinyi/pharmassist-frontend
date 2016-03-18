@@ -72,17 +72,20 @@ angular.module('pharmassistApp')
      $q, $location, $http) {
     var currentID = $routeParams.id;
     var url = "http://localhost:8000/api/pharmacy/drugs/";
-    var pharmDrugsUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID;
 
+    // Fetch all drugs
     apiService.get(url).then(function(drugs){
         $scope.drugs = drugs.data.results
         $scope.multipleDrugs = {};
         $scope.multipleDrugs.value = [];
 
     })
-    apiService.get(pharmDrugsUrl).then(function(response){
-        $scope.pharmDrugs = response.data.properties.drugs;
-    })
+
+    //Add new drugs
+    $scope.addDrugs  = function(){
+        var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
+        $location.path(go);
+    }
 
     var updateDrug = function updateDrug (drugID) {
         var defferd = $q.defer();
@@ -122,6 +125,32 @@ angular.module('pharmassistApp')
             });
         });
     }
+  })
+  .controller('DrugsDetailCtrl', function ($scope, apiService, $routeParams, toastr,
+     $q, $location, $http) {
+    var currentID = $routeParams.id;
+    var pharmDrugsUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID;
+
+    apiService.get(pharmDrugsUrl).then(function(response){
+        $scope.pharmDrugs = response.data.properties.drugs;
+
+        $scope.pharmDrugs.selected = {};
+
+        $scope.getTemplate = function (drug) {
+            if (drug.id === $scope.pharmDrugs.selected.id){
+                return 'edit';
+            }
+            else return 'display';
+        };
+
+        $scope.editPrice = function (drug) {
+            $scope.pharmDrugs.selected = angular.copy(drug);
+        };
+        $scope.reset = function () {
+            $scope.pharmDrugs.selected = {};
+        };
+    });
+
     $scope.addDrugs  = function(){
         var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
         $location.path(go);

@@ -69,7 +69,7 @@ angular
       })
        .when('/pharmacy/:id/drugs', {
         templateUrl: 'views/drugs.html',
-        controller: 'DrugsCtrl',
+        controller: 'DrugsDetailCtrl',
         controllerAs: 'drugs'
       })
        .when('/pharmacy/:id/drugs/add_drugs', {
