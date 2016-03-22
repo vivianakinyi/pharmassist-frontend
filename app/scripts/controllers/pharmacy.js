@@ -130,6 +130,7 @@ angular.module('pharmassistApp')
      $q, $location, $http) {
     var currentID = $routeParams.id;
     var pharmDrugsUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID;
+    var endpoint = "http://localhost:8000/api/pharmacy/prices/?drug=6&pharmacy=5"
 
     apiService.get(pharmDrugsUrl).then(function(response){
         $scope.pharmDrugs = response.data.properties.drugs;
@@ -146,6 +147,23 @@ angular.module('pharmassistApp')
         $scope.editPrice = function (drug) {
             $scope.pharmDrugs.selected = angular.copy(drug);
         };
+        $scope.savePrice = function (idx) {
+            console.log("Saving contact");
+            // var updateObj = {
+            //     price: $scope.pharmDrugs.selected.recommended_price
+            // }
+            // apiService.get(endpoint).then(function(response){
+            //     var endpointID = response.data.results[0].id;
+            //     var endpointUpdate = "http://localhost:8000/api/pharmacy/prices/";
+
+            //     apiService.update(endpointUpdate, endpointID, updateObj).then(function(response){
+            //         console.log('Updated', response);
+            //     })
+            // })
+            $scope.pharmDrugs.selected[idx] = angular.copy($scope.pharmDrugs.selected);
+            $scope.reset();
+        };
+
         $scope.reset = function () {
             $scope.pharmDrugs.selected = {};
         };
@@ -173,5 +191,5 @@ angular.module('pharmassistApp')
         });
 
     }
-  });
+});
 

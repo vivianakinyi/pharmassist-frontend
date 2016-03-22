@@ -32,32 +32,28 @@
                 <tbody>
 
                 </tbody>
-
-                        <!-- <tr ng-repeat="drug in pharmDrugs">
-                            <td>{{drug.id}}</td>
-                            <td>{{drug.full_name}}</td>
-                            <td>200.00</td>
-                            <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs" ng-click="delete(drug.id)"><span class="glyphicon glyphicon-remove"></span> Remove</a></td>
-                        </tr> -->
                     <tr ng-repeat="drug in pharmDrugs" ng-include="getTemplate(drug)">
                     </tr>
 
                 </table>
+                <!-- To load different views for display or edit -->
                 <script type="text/ng-template" id="display">
                         <td>{{drug.id}}</td>
                         <td>{{drug.full_name}}</td>
-                        <td>200.00</td>
+                        <td>{{drug.recommended_price}}</td>
                         <td class="text-center"><a class='btn btn-info btn-xs'
                         ng-click="editPrice(drug)"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs" ng-click="delete(drug.id)"><span class="glyphicon glyphicon-remove"></span> Remove</a></td>
                 </script>
                 <script type="text/ng-template" id="edit">
-                        <td><input type="text" ng-model=drug.id class="form-control input-sm" readonly/></td>
-                        <td><input type="text" ng-model=drug.full_name class="form-control input-sm"readonly/></td>
-                        <td><input type="text" ng-model=drug.price class="form-control input-sm"/></td>
-                        <td>
-                         <button type="button" class="btn btn-primary">Save</button>
-                         <button type="button" class="btn btn-danger" ng-click="reset()">Cancel</button>
-                        </td>
+                    <td><input type="text" ng-model=drug.id class="form-control input-xs" readonly/></td>
+                    <td><input type="text" ng-model=drug.display_name class="form-control input-xs"readonly/></td>
+                    <td><input type="text" ng-model=drug.recommended_price class="form-control input-xs"/></td>
+                    <td class="text-center">
+                        <a class='btn btn-info btn-xs'><span class="glyphicon glyphicon-save" ng-click="savePrice($index)">
+                        </span>Save</a>
+                        <a class="btn btn-danger btn-xs" ng-click="reset()">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel</a>
+                    </td>
                 </script>
             </div>
           </div>
