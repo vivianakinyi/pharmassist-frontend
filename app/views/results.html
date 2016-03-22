@@ -77,10 +77,14 @@
                                 <p><strong>Town: </strong> {{pharmacy.properties.town}}</p>
                                 <p><strong>County: </strong> {{pharmacy.properties.county}}</p>
                                 <p><strong>Landmark: </strong> {{pharmacy.properties.landmark}}</p>
+                                <p><strong>Location: </strong> {{pharmacy.geometry.coordinates}}</p>
                             </div>
                             <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
-                                <p>Loading map...</p>
-                            </div>
+                                <ng-map center={{pharmacy.geometry.coordinates}} zoom="10">
+                                    <marker position={{pharmacy.geometry.coordinates}} title="Hello World!"></marker>
+                                </ng-map>
+                                <!-- <ng-map center={{pharmacy.geometry.coordinates}}></ng-map>
+                            </div> -->
                         </td>
                         <td>Ksh 300.00</td>
 

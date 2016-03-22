@@ -31,8 +31,8 @@ angular.module('pharmassistApp')
         }
   })
 
-  .controller('SearchResultsCtrl', ['$scope','apiService','$routeParams',
-    function($scope, apiService, $routeParams) {
+  .controller('SearchResultsCtrl', ['$scope','apiService','$routeParams','NgMap',
+    function($scope, apiService, $routeParams, NgMap) {
         var currentID = $routeParams.drugID;
         var distance = $routeParams.distID;
         var location = $routeParams.locID;
@@ -46,6 +46,12 @@ angular.module('pharmassistApp')
         apiService.get(drugUrl).then(function(response){
             $scope.drugs = response.data;
         });
+        // get maps
+        // NgMap.getMap().then(function(map) {
+        //     console.log('cemter',map.getCenter());
+        //     console.log('markers', map.markers);
+        //     console.log('shapes', map.shapes);
+        // });
 
         $scope.Delete = function(row) {
             var index = $scope.gridOptions.data.indexOf(row.entity);

@@ -16,6 +16,7 @@ angular
     'ngMessages',
     'ngResource',
     'ngRoute',
+    'ngMap',
     'ngSanitize',
     'ngTouch',
     'geolocation',
