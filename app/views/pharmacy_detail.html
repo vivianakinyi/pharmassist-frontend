@@ -2,12 +2,13 @@
 <div class="container">
 
     <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li class="active">Pharmacy details</li>
+            <li><a ng-href="#/">Home</a></li>
+            <li><a ng-href="#/pharmacy/">Pharmacy</a></li>
+            <li class="active">Pharmacy Details</li>
     </ol>
     <article>
          <header class="page-header">
-            <h1 class="page-title">Pharmacy detail view</h1>
+            <h1 class="page-title">{{pharmacies.name}}</h1>
         </header>
         <!-- panel -->
         <div class="panel panel-info">
@@ -21,7 +22,7 @@
             <p><strong>County: </strong> {{pharmacies.county}} </p>
             <p><strong>Landmark: </strong> {{pharmacies.landmarks}} </p>
             <button class="btn btn-action" ng-click="showDetails = ! showDetails">Edit Details</button>
-            <button class="btn btn-action" ng-click="addDrugs()">Add Drugs</button>
+            <button class="btn btn-success" ng-click="viewDrugs()">View Available Drugs</button>
           </div>
         </div>
 

@@ -2,13 +2,13 @@
 <div class="container">
 
     <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="pharmacy.html">Pharmacy</a></li>
+            <li><a ng-href="#/">Home</a></li>
+            <li><a ng-href="#/pharmacy/{{pharmID}}">Pharmacy Details</a></li>
             <li class="active">Drugs</li>
     </ol>
     <article>
         <header class="page-header">
-            <h1 class="page-title">Drugs</h1>
+            <h3 class="page-title">{{pharm_name}}</h3>
         </header>
         <div class="panel panel-info">
           <div class="panel-heading">
@@ -39,14 +39,14 @@
                 <!-- To load different views for display or edit -->
                 <script type="text/ng-template" id="display">
                         <td>{{drug.id}}</td>
-                        <td>{{drug.full_name}}</td>
+                        <td>{{drug.display_name}}</td>
                         <td>{{drug.recommended_price}}</td>
                         <td class="text-center"><a class='btn btn-info btn-xs'
                         ng-click="editPrice(drug)"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs" ng-click="delete(drug.id)"><span class="glyphicon glyphicon-remove"></span> Remove</a></td>
                 </script>
                 <script type="text/ng-template" id="edit">
-                    <td><input type="text" ng-model=drug.id class="form-control input-xs" readonly/></td>
-                    <td><input type="text" ng-model=drug.display_name class="form-control input-xs"readonly/></td>
+                    <td>{{drug.id}}</td>
+                    <td>{{drug.display_name}}</td>
                     <td><input type="text" ng-model=drug.recommended_price class="form-control input-xs"/></td>
                     <td class="text-center">
                         <a class='btn btn-info btn-xs'><span class="glyphicon glyphicon-save" ng-click="savePrice($index)">
