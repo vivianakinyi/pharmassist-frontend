@@ -81,10 +81,10 @@
                                 <p><strong>Location: </strong> {{pharmacy.geometry.coordinates}}</p>
                             </div>
                             <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
-                                <p>Loading map...</p>
-                                <!-- <ng-map center={{pharmacy.geometry.coordinates}} zoom="10">
+                                <!-- <p>Loading map...</p> -->
+                                <ng-map center={{pharmacy.geometry.coordinates}} zoom="10">
                                     <marker position={{pharmacy.geometry.coordinates}} title="Hello World!"></marker>
-                                </ng-map> -->
+                                </ng-map>
                                 <!-- <ng-map center={{pharmacy.geometry.coordinates}}></ng-map>
                             </div> -->
                         </td>
