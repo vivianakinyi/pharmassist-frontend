@@ -22,7 +22,9 @@
                             <ui-select-match>
                                 <span ng-bind="$select.selected.display_name"></span>
                             </ui-select-match>
-                            <ui-select-choices repeat="drug in (drugs | filter:$select.search) track by drug.id">
+                            <ui-select-choices repeat="drug in (drugs | filter:$select.search) track by drug.id"
+                            refresh="refreshAddresses($select.search)"
+                            refresh-delay="0">
                                 <span ng-bind="drug.display_name"></span>
                             </ui-select-choices>
                         </ui-select>

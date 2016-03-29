@@ -13,7 +13,7 @@ angular.module('pharmassistApp')
         apiService.get(url).then(function (response) {
             $scope.drugs = response.data.results;
         });
-        console.log('After',$scope.coords)
+
         $scope.detectLocation = function() {
             geolocation.getLocation().then(function(data){
                 $scope.coords = data.coords.latitude + ',' + data.coords.longitude;
@@ -99,4 +99,46 @@ angular.module('pharmassistApp')
           $scope.pharmacies = response.data.results.features;
         });
     }
-]);
+])
+.controller('MapCtrl', function ($http, $interval, apiService, $routeParams, NgMap) {
+    var currentID = $routeParams.drugID;
+    var distance = $routeParams.distID;
+    var location = $routeParams.locID;
+
+    var url = "http://localhost:8000/api/pharmacy/pharmacy/?dist="+ distance + "&point=" + location + "&drugs=" + currentID ;
+
+    var vm = this;
+    apiService.get(url).then(function(response){
+        var locations = [];
+        var data =  response.data.results.features
+        console.log(response.data.results.features[2].geometry.coordinates);
+        _.each(data, function getData(value, index) {
+            // console.log(value.geometry.coordinates + ',');
+            var positions = value.geometry.coordinates;
+            console.log(positions);
+            locations.push(positions);
+        });
+        console.log("My positions", locations);
+        vm.positions = locations;
+        // vm.positions = [
+        // [-1.2719192,36.8080739], [-1.281051,36.8122748],
+        // [-1.2819192,36.8280739], [-1.2719192,36.8080739],
+        // [-1.2619192,36.7980739], [-1.2819192,36.8180739]];
+        // vm.positions = data;
+        console.log(vm.positions);
+        vm.dynMarkers = []
+        NgMap.getMap().then(function(map) {
+            var bounds = new google.maps.LatLngBounds();
+            for (var k in map.customMarkers) {
+                var cm = map.customMarkers[k];
+                vm.dynMarkers.push(cm);
+                bounds.extend(cm.getPosition());
+            };
+
+            vm.markerClusterer = new MarkerClusterer(map, vm.dynMarkers, {});
+            map.setCenter(bounds.getCenter());
+            map.fitBounds(bounds);
+        });
+    });
+});
+

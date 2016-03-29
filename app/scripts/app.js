@@ -88,6 +88,11 @@ angular
         controller: 'SearchResultsCtrl',
         controllerAs: 'search'
       })
+      .when('/search/results/:drugID/:distID/:locID/map', {
+        templateUrl: 'views/map.html',
+        controller: 'MapCtrl as vm',
+        controllerAs: 'map'
+      })
       .when('/contact', {
         templateUrl: 'views/contact.html',
         controller: 'ContactCtrl',
