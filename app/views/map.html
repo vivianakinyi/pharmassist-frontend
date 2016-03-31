@@ -1,0 +1,37 @@
+<header id="head" class="secondary"></header>
+<!-- container -->
+    <div class="container">
+
+        <ol class="breadcrumb">
+            <li><a ng-href="#/">Home</a></li>
+            <li class="active">Map</li>
+        </ol>
+
+        <div class="row">
+
+            <!-- Article main content -->
+            <article class="col-sm-9 maincontent">
+                <header class="page-header">
+                    <h1 class="page-title">Full Map</h1>
+                </header>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">View Location of all Pharmacies near you</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ng-map zoom="10" center="[-1.3044564,36.7069642]" style="display:block; width:800px; height:400px;">
+                            <custom-marker position="[{{p[0]}}, {{p[1]}}]"
+                            ng-repeat="p in vm.positions">
+                              <div class="cm">
+                                position:<br>
+                                {{p[0]}}<br>
+                                {{p[1]}}
+                              </div>
+                            </custom-marker>
+                        </ng-map>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>  <!-- /container -->

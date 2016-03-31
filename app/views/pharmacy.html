@@ -2,7 +2,7 @@
 <div class="container">
 
     <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
+            <li><a ng-href="#/">Home</a></li>
             <li class="active">Register Pharmacy</li>
     </ol>
     <article>
@@ -22,11 +22,10 @@
                         <ui-select-match>
                             <span ng-bind="$select.selected.properties.name"></span>
                         </ui-select-match>
-                        <ui-select-choices repeat="pharmacy in pharmacies | filter:$select.search">
+                        <ui-select-choices repeat="pharmacy in pharmacies | filter:$select.search | limitTo:30">
                             <span ng-bind="pharmacy.properties.name"></span>
                         </ui-select-choices>
                     </ui-select>
-                        <p>Selected: {{selected.value.id}}</p>
                 </div>
             </div>
             <br>

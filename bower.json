@@ -17,7 +17,8 @@
     "ui-select": "angular-ui-select#~0.14.2",
     "angular-ui-grid": "~3.1.0",
     "angular-toastr": "~1.7.0",
-    "underscore": "~1.8.3"
+    "underscore": "~1.8.3",
+    "ngmap": "~1.16.7"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

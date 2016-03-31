@@ -2,7 +2,7 @@
 <div class="container">
 
     <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
+            <li><a ng-href="#/">Home</a></li>
             <li class="active">Drug Search</li>
     </ol>
     <article>
@@ -22,37 +22,14 @@
                             <ui-select-match>
                                 <span ng-bind="$select.selected.display_name"></span>
                             </ui-select-match>
-                            <ui-select-choices repeat="drug in (drugs | filter:$select.search) track by drug.id">
+                            <ui-select-choices repeat="drug in (drugs | filter:$select.search | limitTo:30) track by drug.id">
                                 <span ng-bind="drug.display_name"></span>
                             </ui-select-choices>
                         </ui-select>
-                        <p>Selected: {{selected.value.id}}</p>
+                    </div>
+                </div>
+                <br>
 
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-sm-6">
-                    <label>Your Address/Location</label>
-                        <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location" ng-model="coords"></p>
-                        <br>
-                        <button ng-click="detectLocation()"><span class="glyphicon glyphicon-map-marker">
-                        </span>Detect your location</button>
-                    </div>
-                </div>
-                <br>
-                <!-- <div class="row">
-                    <div class="col-sm-6">
-                        <label>Search Within</label>
-                        <select class="form-control">
-                            <option>100 m</option>
-                            <option>200 m</option>
-                            <option>300 m</option>
-                            <option>400 m</option>
-                            <option>500 m</option>
-                        </select>
-                    </div>
-                </div> -->
                 <div class="row">
                     <div class="col-sm-6">
                     <label>Search Within (metres)</label>
@@ -65,11 +42,21 @@
                                 <span ng-bind="dist"></span>
                             </ui-select-choices>
                         </ui-select>
-                        <p>Selected: {{selected_dist.value}}</p>
 
                     </div>
                 </div>
                 <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                    <label>Your Location</label>
+                        <!-- <p><input class="form-control" type="text" placeholder="Enter your address or allow detect location" ng-model="coords" readonly=""></p>
+                        <br> -->
+                        <p><button ng-click="detectLocation()"><span class="glyphicon glyphicon-map-marker">
+                        </span>Detect your location</button>{{coords}}</p>
+                    </div>
+                </div>
+                <br>
+
                 <div class="row">
                     <div class="col-sm-6">
                         <input class="btn btn-action" type="submit" ng-click="searchResults()" value="Search">

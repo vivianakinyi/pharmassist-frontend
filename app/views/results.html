@@ -2,7 +2,7 @@
 <div class="container">
 
     <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
+            <li><a ng-href="#/">Home</a></li>
             <li class="active">Search Results</li>
     </ol>
     <article>
@@ -55,7 +55,8 @@
         <!-- Normal table -->
         <div>
             <table class="table table-striped custab">
-            <input type=text placeholder="Search" class='pull-right'>
+                <button class='btn btn-success btn-xs pull-right'><span class="glyphicon glyphicon-map"></span> View Full Map</button>
+                <br>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -77,10 +78,15 @@
                                 <p><strong>Town: </strong> {{pharmacy.properties.town}}</p>
                                 <p><strong>County: </strong> {{pharmacy.properties.county}}</p>
                                 <p><strong>Landmark: </strong> {{pharmacy.properties.landmark}}</p>
+                                <p><strong>Location: </strong> {{pharmacy.geometry.coordinates}}</p>
                             </div>
                             <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
-                                <p>Loading map...</p>
-                            </div>
+                                <!-- <p>Loading map...</p> -->
+                                <ng-map center=[-1.3044564,36.7069642] zoom="10">
+                                    <marker position={{pharmacy.geometry.coordinates}} title="Hello World!"></marker>
+                                </ng-map>
+                                <!-- <ng-map center={{pharmacy.geometry.coordinates}}></ng-map>
+                            </div> -->
                         </td>
                         <td>Ksh 300.00</td>
 

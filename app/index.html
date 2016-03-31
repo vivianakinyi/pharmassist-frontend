@@ -64,7 +64,7 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
-
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -83,10 +83,12 @@
     <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
     <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/config.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
@@ -100,8 +102,10 @@
         <script src="scripts/filters/myfilter.js"></script>
         <script src="scripts/services/myservice.js"></script>
         <script src="js/headroom.min.js"></script>
+        <script src="js/google-map.js"></script>
         <script src="js/jQuery.headroom.min.js"></script>
         <script src="js/template.js"></script>
+        <script src="js/markerclusterer.js"></script>
         <!-- endbuild -->
 </body>
 </html>

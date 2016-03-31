@@ -2,9 +2,9 @@
 <div class="container">
 
     <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="pharmacy.html">Pharmacy</a></li>
-            <li class="active">Add_Drugs</li>
+            <li><a ng-href="#/">Home</a></li>
+            <li><a ng-href="#/pharmacy/{{pharmID}}">Pharmacy Details</a></li>
+            <li class="active">Add Drugs</li>
     </ol>
     <article>
         <header class="page-header">
@@ -33,7 +33,7 @@
                             <span ng-bind="$item.display_name"></span>
                             {{$item.display_name}}
                         </ui-select-match>
-                        <ui-select-choices repeat="drug in (drugs | propsFilter: {full_name: $select.search, display_name: $select.search}) track by drug.id">
+                        <ui-select-choices repeat="drug in (drugs | propsFilter: {full_name: $select.search, display_name: $select.search} | limitTo:30) track by drug.id">
                             <span ng-bind="drug.display_name"></span>
                         </ui-select-choices>
                     </ui-select>

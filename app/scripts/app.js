@@ -16,6 +16,7 @@ angular
     'ngMessages',
     'ngResource',
     'ngRoute',
+    'ngMap',
     'ngSanitize',
     'ngTouch',
     'geolocation',
@@ -33,7 +34,17 @@ angular
             "Content-Type": "application/json",
             "Accept": "application/json, */*"
         };
+        // $httpProvider.interceptors.push(
+        //     "madeasy.networking.interceptors.http");
+        // $httpProvider.interceptors.push(
+        //     "madeasy.networking.interceptors.httpactivity");
+        // $httpProvider.interceptors.push(
+        //     "madeasy.networking.interceptors.connection");
     }])
+
+  // .run(["api.oauth2",function (oauth2) {
+  //       oauth2.setXHRToken(oauth2.getToken());
+  //   }])
 
   .config(function ($routeProvider) {
     $routeProvider
@@ -86,6 +97,11 @@ angular
         templateUrl: 'views/results.html',
         controller: 'SearchResultsCtrl',
         controllerAs: 'search'
+      })
+      .when('/search/results/:drugID/:distID/:locID/map', {
+        templateUrl: 'views/map.html',
+        controller: 'MapCtrl as vm',
+        controllerAs: 'map'
       })
       .when('/contact', {
         templateUrl: 'views/contact.html',

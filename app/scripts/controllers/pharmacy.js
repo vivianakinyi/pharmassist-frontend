@@ -67,11 +67,21 @@ angular.module('pharmassistApp')
             var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
             $location.path(go);
         }
+        $scope.viewDrugs  = function(){
+            var go = "/pharmacy/" + currentID + "/drugs/";
+            $location.path(go);
+        }
   })
   .controller('DrugsCtrl', function ($scope, apiService, $routeParams, toastr,
      $q, $location, $http) {
     var currentID = $routeParams.id;
+    var pharmUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID + "/";
     var url = "http://localhost:8000/api/pharmacy/drugs/";
+
+    // Fetch pharmacy viewDetails
+    apiService.get(pharmUrl).then(function(response){
+        $scope.pharmID = response.data.id;
+    })
 
     // Fetch all drugs
     apiService.get(url).then(function(drugs){
@@ -81,7 +91,7 @@ angular.module('pharmassistApp')
 
     })
 
-    //Add new drugs
+    //Goto add new drugs
     $scope.addDrugs  = function(){
         var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
         $location.path(go);
@@ -111,7 +121,6 @@ angular.module('pharmassistApp')
                 var redirectTo = '/pharmacy/' + currentID +'/drugs/';
                 var msg = value.display_name + " drug saved successfully!";
                 toastr.success(msg, 'Success');
-                // $scope.$apply();
                 $location.path(redirectTo);
 
             }, function error (err) {
@@ -133,8 +142,10 @@ angular.module('pharmassistApp')
     var endpoint = "http://localhost:8000/api/pharmacy/prices/?drug=6&pharmacy=5"
 
     apiService.get(pharmDrugsUrl).then(function(response){
-        $scope.pharmDrugs = response.data.properties.drugs;
+        $scope.pharm_name = response.data.properties.name;
+        $scope.pharmID = response.data.id;
 
+        $scope.pharmDrugs = response.data.properties.drugs;
         $scope.pharmDrugs.selected = {};
 
         $scope.getTemplate = function (drug) {
