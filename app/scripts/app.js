@@ -34,17 +34,17 @@ angular
             "Content-Type": "application/json",
             "Accept": "application/json, */*"
         };
-        $httpProvider.interceptors.push(
-            "madeasy.networking.interceptors.http");
-        $httpProvider.interceptors.push(
-            "madeasy.networking.interceptors.httpactivity");
-        $httpProvider.interceptors.push(
-            "madeasy.networking.interceptors.connection");
+        // $httpProvider.interceptors.push(
+        //     "madeasy.networking.interceptors.http");
+        // $httpProvider.interceptors.push(
+        //     "madeasy.networking.interceptors.httpactivity");
+        // $httpProvider.interceptors.push(
+        //     "madeasy.networking.interceptors.connection");
     }])
 
-  .run(["api.oauth2",function (oauth2) {
-        oauth2.setXHRToken(oauth2.getToken());
-    }])
+  // .run(["api.oauth2",function (oauth2) {
+  //       oauth2.setXHRToken(oauth2.getToken());
+  //   }])
 
   .config(function ($routeProvider) {
     $routeProvider
