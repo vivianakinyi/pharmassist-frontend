@@ -39,6 +39,7 @@ module.exports = function(config) {
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
       'bower_components/underscore/underscore.js',
       'bower_components/ngmap/build/scripts/ng-map.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

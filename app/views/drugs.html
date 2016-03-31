@@ -2,8 +2,8 @@
 <div class="container">
 
     <ol class="breadcrumb">
-            <li><a ng-href="#/">Home</a></li>
-            <li><a ng-href="#/pharmacy/{{pharmID}}">Pharmacy Details</a></li>
+            <li><a ui-sref="home">Home</a></li>
+            <li><a ui-sref="#/pharmacy/{{pharmID}}">Pharmacy Details</a></li>
             <li class="active">Drugs</li>
     </ol>
     <article>
@@ -42,7 +42,7 @@
                         <td>{{drug.display_name}}</td>
                         <td>{{drug.recommended_price}}</td>
                         <td class="text-center"><a class='btn btn-info btn-xs'
-                        ng-click="editPrice(drug)"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs" ng-click="delete(drug.id)"><span class="glyphicon glyphicon-remove"></span> Remove</a></td>
+                        ng-click="editPrice(drug)"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs" ng-click="delete(drug.id, $index)"><span class="glyphicon glyphicon-remove"></span> Remove</a></td>
                 </script>
                 <script type="text/ng-template" id="edit">
                     <td>{{drug.id}}</td>

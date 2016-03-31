@@ -1,0 +1,26 @@
+<sil-js-data-alerts></sil-js-data-alerts>
+
+<div class="alert alert-success"
+  ng-if="params.reset_password||params.reset_password_confirm||params.change_pwd">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <p ng-if="params.reset_password">Check your e-mail for instructions on how to reset your password</p>
+  <p ng-if="params.reset_password_confirm||params.change_pwd">Password was changed successfully. Use the new password to log in</p>
+</div>
+<div class="alert alert-info" ng-if="params.timeout">
+     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <p ng-if="params.timeout">Your session has expired. Kindly log in to the resume your session.</p>
+</div>
+<form novalidate ng-submit="submitUser()" name="loginForm">
+<formly-form fields ="fields" model="loginForm.model" form="loginForm">
+    <div class="section">
+          <p><a href="#"></a></p>
+    </div>
+    <!-- end section -->
+      <div class="section">
+            <p><a href="/password/reset">Lost password?</a></p>
+      </div>
+    <button class="btn btn-primary" type="submit" id="loginFormSubmit">
+        <span class="fa fa-sign-in pr5"></span> Log in
+    </button>
+</formly-form>
+</form>
