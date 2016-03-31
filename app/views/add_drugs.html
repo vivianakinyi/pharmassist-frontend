@@ -33,7 +33,7 @@
                             <span ng-bind="$item.display_name"></span>
                             {{$item.display_name}}
                         </ui-select-match>
-                        <ui-select-choices repeat="drug in (drugs | propsFilter: {full_name: $select.search, display_name: $select.search}) track by drug.id">
+                        <ui-select-choices repeat="drug in (drugs | propsFilter: {full_name: $select.search, display_name: $select.search} | limitTo:30) track by drug.id">
                             <span ng-bind="drug.display_name"></span>
                         </ui-select-choices>
                     </ui-select>

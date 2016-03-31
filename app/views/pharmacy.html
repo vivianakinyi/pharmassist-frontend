@@ -22,7 +22,7 @@
                         <ui-select-match>
                             <span ng-bind="$select.selected.properties.name"></span>
                         </ui-select-match>
-                        <ui-select-choices repeat="pharmacy in pharmacies | filter:$select.search">
+                        <ui-select-choices repeat="pharmacy in pharmacies | filter:$select.search | limitTo:30">
                             <span ng-bind="pharmacy.properties.name"></span>
                         </ui-select-choices>
                     </ui-select>
