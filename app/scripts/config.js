@@ -68,7 +68,7 @@ angular
                     }
                 }
             }).state("pharmacy.detail", {
-                url: "/pharmacy/:id",
+                url: "/:id",
                 views:{
                     "content@":{
                         templateUrl: "views/pharmacy_detail.html",
@@ -76,7 +76,7 @@ angular
                     }
                 }
             }).state("pharmacy.detail.drugs", {
-                url: "/pharmacy/:id/drugs",
+                url: "/drugs",
                 views:{
                     "content@":{
                         templateUrl: "views/drugs.html",
@@ -85,7 +85,7 @@ angular
                 }
             })
             .state("pharmacy.detail.drugs.add_drugs", {
-                url: "/pharmacy/:id/drugs/add_drugs",
+                url: "/add_drugs",
                 views:{
                     "content@":{
                         templateUrl: "views/add_drugs.html",
@@ -101,7 +101,7 @@ angular
                     }
                 }
             }).state("search.results", {
-                url: "/search/results/:drugID/:distID/:locID",
+                url: "/results/:drugID/:distID/:locID",
                 views:{
                     "content@":{
                         templateUrl: "views/results.html",
@@ -109,7 +109,7 @@ angular
                     }
                 }
             }).state("search.results.map", {
-                url: "/search/results/:drugID/:distID/:locID/map",
+                url: "/map",
                 views:{
                     "content@":{
                         templateUrl: "views/map.html",

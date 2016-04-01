@@ -2,7 +2,7 @@
 
 angular.module('pharmassistApp')
   .controller('SearchCtrl', function ($scope, geolocation, apiService,
-    $location) {
+    $state) {
         var url = "http://localhost:8000/api/pharmacy/drugs/";
         // $scope.$watch('selected', function() {
         //     searchResults();
@@ -17,25 +17,28 @@ angular.module('pharmassistApp')
         $scope.detectLocation = function() {
             geolocation.getLocation().then(function(data){
                 $scope.coords = data.coords.latitude + ',' + data.coords.longitude;
-                console.log('Before location',$scope.coords)
             });
         }
         // distance combobox
         $scope.selected_dist = [];
         $scope.selected_dist.value = '';
         $scope.distance = [100,200,300,400,500,4000]
-        console.log('After after..',$scope.coords)
+
         $scope.searchResults = function() {
-            var go = '/search/results/' + $scope.selected.value.id + '/' + $scope.selected_dist.value + '/' + $scope.coords;
-            $location.path(go);
+            // var go = '/search/results/' + $scope.selected.value.id + '/' + $scope.selected_dist.value + '/' + $scope.coords;
+            $state.go("search.results", {
+                drugID:$scope.selected.value.id,
+                distID: $scope.selected_dist.value,
+                locID:  $scope.coords
+            });
         }
   })
 
-  .controller('SearchResultsCtrl', ['$scope','apiService','$routeParams','NgMap',
-    function($scope, apiService, $routeParams, NgMap) {
-        var currentID = $routeParams.drugID;
-        var distance = $routeParams.distID;
-        var location = $routeParams.locID;
+  .controller('SearchResultsCtrl', ['$scope','apiService','$stateParams','NgMap',
+    function($scope, apiService, $stateParams, NgMap) {
+        var currentID = $stateParams.drugID;
+        var distance = $stateParams.distID;
+        var location = $stateParams.locID;
 
         var url = "http://localhost:8000/api/pharmacy/pharmacy/?dist="+ distance + "&point=" + location + "&drugs=" + currentID ;
         var drugUrl = "http://localhost:8000/api/pharmacy/drugs/" + currentID + '/'
@@ -94,10 +97,10 @@ angular.module('pharmassistApp')
         });
     }
 ])
-.controller('MapCtrl', function ($http, $interval, apiService, $routeParams, NgMap) {
-    var currentID = $routeParams.drugID;
-    var distance = $routeParams.distID;
-    var location = $routeParams.locID;
+.controller('MapCtrl', function ($http, $interval, apiService, $stateParams, NgMap) {
+    var currentID = $stateParams.drugID;
+    var distance = $stateParams.distID;
+    var location = $stateParams.locID;
 
     var url = "http://localhost:8000/api/pharmacy/pharmacy/?dist="+ distance + "&point=" + location + "&drugs=" + currentID ;
 
