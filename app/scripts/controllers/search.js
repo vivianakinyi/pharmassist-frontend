@@ -25,9 +25,25 @@ angular.module('pharmassistApp')
         $scope.distance = [100,200,300,400,500,4000]
 
         $scope.searchResults = function() {
-            // var go = '/search/results/' + $scope.selected.value.id + '/' + $scope.selected_dist.value + '/' + $scope.coords;
+            // Get the frequency of a searched drug
+            var count = count + 1;
+            var drugCounter = "http://localhost:8000/api/pharmacy/drugs/" + $scope.selected.value.id;
+
+            apiService.get(drugCounter).then(function (response) {
+                var counter = response.data.counter + 1;
+
+                var updateObj = {
+                    counter: counter
+                }
+                apiService.update(url, $scope.selected.value.id, updateObj)
+                .then(function(response){
+                    console.log(response);
+                });
+            });
+
+
             $state.go("search.results", {
-                drugID:$scope.selected.value.id,
+                drugID: $scope.selected.value.id,
                 distID: $scope.selected_dist.value,
                 locID:  $scope.coords
             });
@@ -40,7 +56,7 @@ angular.module('pharmassistApp')
         var distance = $stateParams.distID;
         var location = $stateParams.locID;
 
-        var url = "http://localhost:8000/api/pharmacy/pharmacy/?dist="+ distance + "&point=" + location + "&drugs=" + currentID ;
+        var searchUrl = "http://localhost:8000/api/pharmacy/pharmacy/?dist="+ distance + "&point=" + location + "&drugs=" + currentID ;
         var drugUrl = "http://localhost:8000/api/pharmacy/drugs/" + currentID + '/'
 
         $scope.gridOptions = {};
@@ -91,7 +107,7 @@ angular.module('pharmassistApp')
         // }
         ];
 
-        apiService.get(url).then(function(response){
+        apiService.get(searchUrl).then(function(response){
           $scope.gridOptions.data = response.data.results.features;
           $scope.pharmacies = response.data.results.features;
         });

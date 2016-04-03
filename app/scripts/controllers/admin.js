@@ -29,7 +29,12 @@ angular.module('pharmassistApp')
             $scope.pharmacies = response.data.results.features;
         });
     }
+})
+  .controller('AnalyticsCtrl', function ($scope, apiService) {
+    var url = "http://localhost:8000/api/pharmacy/drugs/?ordering=-counter";
 
-
+    apiService.get(url).then(function(response){
+        $scope.drugs = response.data.results;
+    });
 });
 

@@ -144,6 +144,14 @@ angular
                         controller: "ReportCtrl"
                     }
                 }
+            }).state("admin.analytics", {
+                url: "/analytics",
+                views:{
+                    "content@":{
+                        templateUrl: "views/analytics.html",
+                        controller: "AnalyticsCtrl"
+                    }
+                }
             });
     }]);
 
