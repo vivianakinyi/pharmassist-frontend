@@ -33,10 +33,13 @@ angular
   //       oauth2.setXHRToken(oauth2.getToken());
   //   }])
 
+  // .config(["$urlRouterProvider", function ($urlRouterProvider) {
+  //       $urlRouterProvider.otherwise("/");
+
   .config(["$stateProvider", function stateProviderFunction ($stateProvider) {
         $stateProvider
             .state("home", {
-                url: "/",
+                url: "/home",
                 views:{
                     "content@":{
                         templateUrl: "views/main.html",
@@ -115,6 +118,30 @@ angular
                         templateUrl: "views/map.html",
                         controller: "MapCtrl",
                         controllerAs: "vm"
+                    }
+                }
+            }).state("admin", {
+                url: "/admin",
+                views:{
+                    "content@":{
+                        templateUrl: "views/admin.html",
+                        controller: "AdminCtrl"
+                    }
+                }
+            }).state("admin.pharmacies", {
+                url: "/pharmacies",
+                views:{
+                    "content@":{
+                        templateUrl: "views/pharmacies.html",
+                        controller: "AdminCtrl"
+                    }
+                }
+            }).state("admin.reports", {
+                url: "/reports",
+                views:{
+                    "content@":{
+                        templateUrl: "views/reports.html",
+                        controller: "ReportCtrl"
                     }
                 }
             });
