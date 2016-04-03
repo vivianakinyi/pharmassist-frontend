@@ -14,52 +14,49 @@
                 <h3 class="panel-title">Generate Reports</h3>
             </div>
             <div class="panel-body">
-               <a ng-click="showMap = ! showMap" href="">1. List Pharmacies per county</a>
-               <div class="row">
+               <!-- <a ng-click="showList = ! showList" href="">Get number of Pharmcies with a given drug</a> -->
+              <div class="row">
                     <div class="col-sm-6">
-                    <label>Select County </label>
+                    <label>Drug Name</label>
                         <!-- ui-select combo box -->
-                        <ui-select ng-model="selected_county.value" theme="bootstrap">
+                        <ui-select ng-model="selected.value" theme="bootstrap">
                             <ui-select-match>
-                                <span ng-bind="$select.selected"></span>
+                                <span ng-bind="$select.selected.display_name"></span>
                             </ui-select-match>
-                            <ui-select-choices repeat="county in counties | filter:$select.search">
-                                <span ng-bind="county"></span>
+                            <ui-select-choices repeat="drug in (drugs | filter:$select.search | limitTo:30) track by drug.id">
+                                <span ng-bind="drug.display_name"></span>
                             </ui-select-choices>
                         </ui-select>
-                        <button ng-click="list(selected_county.value)">Search</button>
 
+                        <!-- <button ng-click="list(selected.value.id)">Get number of Pharmcies with a given drug</button> -->
                     </div>
                 </div>
-                <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
-                    <div>
-                    <table class="table table-striped custab" id="pharmacies">
-                        <input type="text" class="pull-right" placeholder="Search Pharmacies" />
-                        <br>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input class="btn btn-info" ng-click="list(selected.value.id)" value="Get Pharmcies with drug">
+                    </div>
+                </div>
+
+                <h3>Report: The drug is in {{count}} pharmacies</h3>
+                <a href="" ng-click="showDetails = ! showDetails">Click to show the pharmacies</a>
+                <div class="well well-sm" ng-class="{ 'hidden': !  showDetails}">
+                    <table class="table table-striped custab">
+
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Drug</th>
                             <th>Pharmacy</th>
 
                         </tr>
                     </thead>
-                        <tr ng-repeat="pharmacy in pharmacies">
-                            <td>{{pharmacy.properties.no}}</td>
 
-                            <td>{{pharmacy.properties.name}}
-                            <p>
-                            <a href="" ng-click="showDetails = ! showDetails">Click to show pharmacy details</a></p>
-                                <div class="well well-sm" ng-class="{ 'hidden': ! showDetails }">
-
-                                   <p><strong>Location Details</strong><p>
-                                    <p><strong>Street:</strong> {{pharmacy.properties.street}}</p>
-                                    <p><strong>Town: </strong> {{pharmacy.properties.town}}</p>
-                                    <p><strong>County: </strong> {{pharmacy.properties.county}}</p>
-                                    <p><strong>Landmark: </strong> {{pharmacy.properties.landmark}}</p>
-                                    <p><strong>Location: </strong> {{pharmacy.geometry.coordinates}}</p>
-                                </div>
-
-                            <td class="text-center"><a class='btn btn-info btn-xs' href="">List Available Drugs</a></td>
+                        <tr ng-repeat="drug in drugs">
+                            <td>{{drug.id}}</td>
+                            <td>{{drug.drug_name}}
+                            <td>{{drug.pharmacy_name}}</td>
+                           <!--  <td class="text-center"><a class='btn btn-info btn-xs' href="">List Available Drugs</a></td> -->
                         </tr>
                     </table>
                 </div>
