@@ -17,7 +17,7 @@
                <!-- <a ng-click="showList = ! showList" href="">Get number of Pharmcies with a given drug</a> -->
               <div class="row">
                     <div class="col-sm-6">
-                    <label>Drug Name</label>
+                    <label>Search For Drug</label>
                         <!-- ui-select combo box -->
                         <ui-select ng-model="selected.value" theme="bootstrap">
                             <ui-select-match>
@@ -27,8 +27,6 @@
                                 <span ng-bind="drug.display_name"></span>
                             </ui-select-choices>
                         </ui-select>
-
-                        <!-- <button ng-click="list(selected.value.id)">Get number of Pharmcies with a given drug</button> -->
                     </div>
                 </div>
                 <br>
@@ -38,7 +36,7 @@
                     </div>
                 </div>
 
-                <h3>Report: The drug is in {{count}} pharmacies</h3>
+                <h3>Report: Number of Pharmcies with the Drug: <strong>{{count}}</strong></h3>
                 <a href="" ng-click="showDetails = ! showDetails">Click to show the pharmacies</a>
                 <div class="well well-sm" ng-class="{ 'hidden': !  showDetails}">
                     <table class="table table-striped custab">
@@ -48,7 +46,6 @@
                             <th>ID</th>
                             <th>Drug</th>
                             <th>Pharmacy</th>
-
                         </tr>
                     </thead>
 
@@ -56,7 +53,6 @@
                             <td>{{drug.id}}</td>
                             <td>{{drug.drug_name}}
                             <td>{{drug.pharmacy_name}}</td>
-                           <!--  <td class="text-center"><a class='btn btn-info btn-xs' href="">List Available Drugs</a></td> -->
                         </tr>
                     </table>
                 </div>

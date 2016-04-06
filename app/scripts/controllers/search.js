@@ -108,8 +108,9 @@ angular.module('pharmassistApp')
         ];
 
         apiService.get(searchUrl).then(function(response){
-          $scope.gridOptions.data = response.data.results.features;
-          $scope.pharmacies = response.data.results.features;
+            console.log(response);
+            $scope.gridOptions.data = response.data.results.features;
+            $scope.pharmacies = response.data.results.features;
         });
     }
 ])
@@ -124,14 +125,12 @@ angular.module('pharmassistApp')
     apiService.get(url).then(function(response){
         var locations = [];
         var data =  response.data.results.features
-        console.log(response.data.results.features[2].geometry.coordinates);
+
         _.each(data, function getData(value, index) {
-            // console.log(value.geometry.coordinates + ',');
             var positions = value.geometry.coordinates;
-            console.log(positions);
             locations.push(positions);
         });
-        console.log("My positions", locations);
+
         vm.positions = locations;
         // vm.positions = [
         // [-1.2719192,36.8080739], [-1.281051,36.8122748],

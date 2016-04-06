@@ -25,7 +25,8 @@
                     <tr>
                         <th>Drug ID</th>
                         <th>Drug</th>
-                        <th>Price</th>
+                        <th>Recommended Price</th>
+                        <th>Your Price</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -38,16 +39,18 @@
                 </table>
                 <!-- To load different views for display or edit -->
                 <script type="text/ng-template" id="display">
-                        <td>{{drug.id}}</td>
-                        <td>{{drug.display_name}}</td>
+                        <td>{{drug.drug}}</td>
+                        <td>{{drug.drug_name}}</td>
                         <td>{{drug.recommended_price}}</td>
+                        <td>{{drug.price}}</td>
                         <td class="text-center"><a class='btn btn-info btn-xs'
-                        ng-click="editPrice(drug)"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs" ng-click="delete(drug.id, $index)"><span class="glyphicon glyphicon-remove"></span> Remove</a></td>
+                        ng-click="editPrice(drug)"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs" ng-click="delete(drug.drug, $index)"><span class="glyphicon glyphicon-remove"></span> Remove</a></td>
                 </script>
                 <script type="text/ng-template" id="edit">
-                    <td>{{drug.id}}</td>
-                    <td>{{drug.display_name}}</td>
-                    <td><input type="text" ng-model=drug.recommended_price class="form-control input-xs"/></td>
+                    <td>{{drug.drug}}</td>
+                    <td>{{drug.drug_name}}</td>
+                    <td>{{drug.recommended_price}}</td>
+                    <td><input type="text" ng-model="drug.price" class="form-control input-xs"/></td>
                     <td class="text-center">
                         <a class='btn btn-info btn-xs'><span class="glyphicon glyphicon-save" ng-click="savePrice($index)">
                         </span>Save</a>

@@ -40,6 +40,9 @@ module.exports = function(config) {
       'bower_components/underscore/underscore.js',
       'bower_components/ngmap/build/scripts/ng-map.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/d3/d3.js',
+      'bower_components/nvd3/build/nv.d3.js',
+      'bower_components/angular-nvd3/dist/angular-nvd3.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

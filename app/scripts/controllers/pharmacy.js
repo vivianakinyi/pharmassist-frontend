@@ -138,14 +138,15 @@ angular.module('pharmassistApp')
   .controller('DrugsDetailCtrl', function ($scope, apiService, $stateParams, toastr,
      $q, $state, $http) {
     var currentID = $stateParams.id;
-    var pharmDrugsUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID;
-    var endpoint = "http://localhost:8000/api/pharmacy/prices/?drug=6&pharmacy=5"
+    // var pharmDrugsUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID;
+    var endpoint = "http://localhost:8000/api/pharmacy/prices/?pharmacy=" + currentID;
 
-    apiService.get(pharmDrugsUrl).then(function(response){
-        $scope.pharm_name = response.data.properties.name;
-        $scope.pharmID = response.data.id;
+    apiService.get(endpoint).then(function(response){
+        console.log(response.data.results);
+        // $scope.pharm_name = response.data.properties.name;
+        // $scope.pharmID = response.data.id;
 
-        $scope.pharmDrugs = response.data.properties.drugs;
+        $scope.pharmDrugs = response.data.results;
         $scope.pharmDrugs.selected = {};
 
         $scope.getTemplate = function (drug) {
@@ -159,19 +160,22 @@ angular.module('pharmassistApp')
             $scope.pharmDrugs.selected = angular.copy(drug);
         };
         $scope.savePrice = function (idx) {
-            console.log("Saving contact");
-            // var updateObj = {
-            //     price: $scope.pharmDrugs.selected.recommended_price
-            // }
-            // apiService.get(endpoint).then(function(response){
-            //     var endpointID = response.data.results[0].id;
-            //     var endpointUpdate = "http://localhost:8000/api/pharmacy/prices/";
 
-            //     apiService.update(endpointUpdate, endpointID, updateObj).then(function(response){
-            //         console.log('Updated', response);
-            //     })
-            // })
-            $scope.pharmDrugs.selected[idx] = angular.copy($scope.pharmDrugs.selected);
+            var updateObj = {
+                price: $scope.pharmDrugs.selected.price
+            }
+
+
+            apiService.get(endpoint).then(function(response){
+                var endpointID = response.data.results[0].id;
+                console.log('ID', endpointID);
+                var endpointUpdate = "http://localhost:8000/api/pharmacy/prices/";
+
+                apiService.update(endpointUpdate, endpointID, updateObj).then(function(response){
+                    console.log('Updated', response);
+                });
+            });
+            // $scope.pharmDrugs.selected[idx] = angular.copy($scope.pharmDrugs.selected);
             $scope.reset();
         };
 
@@ -195,9 +199,9 @@ angular.module('pharmassistApp')
             var endpointDeleted = "http://localhost:8000/api/pharmacy/prices/" + endpointID + '/';
 
             $http.delete(endpointDeleted).then(function(data){
-                // var redirectTo = '/pharmacy/' + currentID +'/drugs/';
                 toastr.success("Removed drug successfully!", 'Success');
                 $scope.pharmDrugs.splice(index, 1);
+                $state.go('pharmacy.detail.drugs', {id:currentID});
             });
         });
 

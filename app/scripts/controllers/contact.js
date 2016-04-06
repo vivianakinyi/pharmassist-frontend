@@ -8,10 +8,10 @@
  * Controller of the pharmassistApp
  */
 angular.module('pharmassistApp')
-  .controller('ContactCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('ContactCtrl', function ($scope, $state, toastr) {
+    $scope.message  = function(){
+        toastr.info('Message send successfully!');
+        $state.go('contact');
+    }
+
+});

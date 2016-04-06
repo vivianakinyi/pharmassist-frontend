@@ -14,10 +14,10 @@
                 <h3 class="panel-title">View all Pharmacies and Available drugs in each</h3>
             </div>
             <div class="panel-body">
-                <a ng-click="showList = ! showList" href="">Filter Pharmacies per county</a>
+                <!-- <a ng-click="showList = ! showList" href="">Filter Pharmacies per county</a> -->
                <div class="row">
                     <div class="col-sm-6">
-                    <label>Select County </label>
+                    <label>Filter by County </label>
                         <!-- ui-select combo box -->
                         <ui-select ng-model="selected_county.value" theme="bootstrap">
                             <ui-select-match>
@@ -27,15 +27,23 @@
                                 <span ng-bind="county"></span>
                             </ui-select-choices>
                         </ui-select>
-                        <button ng-click="list(selected_county.value)">Search</button>
-
+                        <!-- <button ng-click="list(selected_county.value)">Search</button> -->
                     </div>
                 </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a ng-click="showList = ! showList" href="">
+                            <input class="btn btn-success"
+                            ng-click="list(selected_county.value)" value="View Pharmacies">
+                        </a>
+                    </div>
+                </div>
+                </br>
                 <div class="well well-sm" ng-class="{ 'hidden': !  showList}">
                     <div>
                     <table class="table table-striped custab" id="pharmacies">
-                        <input type="text" class="pull-right" placeholder="Search Pharmacies" />
-                        <br>
+
                     <thead>
                         <tr>
                             <th>ID</th>
