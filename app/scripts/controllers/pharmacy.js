@@ -164,7 +164,7 @@ angular.module('pharmassistApp')
             var updateObj = {
                 price: $scope.pharmDrugs.selected.price
             }
-
+            console.log($scope.pharmDrugs.selected);
 
             apiService.get(endpoint).then(function(response){
                 var endpointID = response.data.results[0].id;
@@ -175,7 +175,7 @@ angular.module('pharmassistApp')
                     console.log('Updated', response);
                 });
             });
-            // $scope.pharmDrugs.selected[idx] = angular.copy($scope.pharmDrugs.selected);
+            $scope.pharmDrugs.selected[idx] = angular.copy($scope.pharmDrugs.selected);
             $scope.reset();
         };
 
@@ -185,7 +185,6 @@ angular.module('pharmassistApp')
     });
 
     $scope.addDrugs  = function(){
-        // var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
         $state.go('pharmacy.detail.drugs.add_drugs', {id:currentID});
     }
     // TODO cHECK CODE WITH IAN
