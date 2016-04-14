@@ -28,6 +28,9 @@ angular
         // $httpProvider.interceptors.push(
         //     "madeasy.networking.interceptors.connection");
     }])
+    .run(function(djangoAuth){
+      djangoAuth.initialize('http://localhost:8000/rest-auth', false);
+    })
 
   // .run(["api.oauth2",function (oauth2) {
   //       oauth2.setXHRToken(oauth2.getToken());
@@ -38,12 +41,105 @@ angular
 
   .config(["$stateProvider", function stateProviderFunction ($stateProvider) {
         $stateProvider
+            .state("main", {
+                url: "/",
+                views:{
+                    "content@":{
+                        templateUrl: "views/main.html",
+                        controller: "MainCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("register", {
+                url: "register",
+                views:{
+                    "content@":{
+                        templateUrl: "views/register.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("passwordReset", {
+                url: "/passwordReset",
+                views:{
+                    "content@":{
+                        templateUrl: "views/passwordreset.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("passwordResetConfirm", {
+                url: "/passwordResetConfirm/:firstToken/:passwordResetToken",
+                views:{
+                    "content@":{
+                        templateUrl: "views/passwordresetconfirm.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("login", {
+                url: "/login",
+                views:{
+                    "content@":{
+                        templateUrl: "views/login.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("verifyEmail", {
+                url: "/verifyEmail/:emailVerificationToken",
+                views:{
+                    "content@":{
+                        templateUrl: "views/verifyemail.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("logout", {
+                url: "/logout",
+                views:{
+                    "content@":{
+                        templateUrl: "views/logout.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
             .state("home", {
                 url: "/home",
                 views:{
                     "content@":{
-                        templateUrl: "views/main.html",
-                        controller: "MainCtrl"
+                        templateUrl: "views/home.html",
+                        controller: "MainCtrl",
+
                     }
                 }
             }).state("about", {

@@ -28,24 +28,7 @@
     <![endif]-->
 
   <div class="navbar navbar-inverse navbar-fixed-top headroom" >
-    <div class="container">
-      <div class="navbar-header">
-        <!-- Button for smallest screens -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <a class="navbar-brand" href="index.html"><h4>PharmAssist</h4></a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav pull-right">
-          <li class="active"><a ui-sref="home">Home</a></li>
-          <li><a ui-sref="search">Search</a></li>
-          <li><a ui-sref="pharmacy">Pharmacy</a></li>
-          <li><a ui-sref="admin">Admin</a></li>
-          <li><a ui-sref="about">About</a></li>
-          <li><a ui-sref="contact">Contact</a></li>
-          <li><a class="btn" ui-sref="#/login">SIGN IN / SIGN UP</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
-    </div>
+      <div ng-include="'views/main_nav.html'"></div>
   </div>
   <!-- /.navbar -->
 
@@ -121,6 +104,20 @@
         <script src="scripts/controllers/admin.js"></script>
         <script src="scripts/controllers/myroute.js"></script>
         <script src="scripts/controllers/user.js"></script>
+
+        <script src="scripts/controllers/register.js"></script>
+        <script src="scripts/controllers/passwordreset.js"></script>
+        <script src="scripts/controllers/passwordresetconfirm.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/verifyemail.js"></script>
+        <script src="scripts/controllers/logout.js"></script>
+        <script src="scripts/controllers/userprofile.js"></script>
+        <script src="scripts/controllers/passwordchange.js"></script>
+        <script src="scripts/controllers/master.js"></script>
+        <script src="scripts/controllers/restricted.js"></script>
+        <script src="scripts/controllers/authrequired.js"></script>
+        <script src="scripts/services/djangoAuth.js"></script>
+        <script src="scripts/services/validate.js"></script>
         <script src="scripts/directives/mydirective.js"></script>
         <script src="scripts/filters/myfilter.js"></script>
         <script src="scripts/services/myservice.js"></script>

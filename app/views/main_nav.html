@@ -1,0 +1,23 @@
+<div class="container">
+      <div class="navbar-header" ng-controller="MainCtrl">
+        <!-- Button for smallest screens -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <a class="navbar-brand" href="index.html"><h4>PharmAssist</h4></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav pull-right">
+          <li class="active"><a ui-sref="home">Home</a></li>
+          <li><a ui-sref="search">Search</a></li>
+          <li><a ui-sref="pharmacy">Pharmacy</a></li>
+          <li><a ui-sref="admin">Admin</a></li>
+          <li><a ui-sref="about">About</a></li>
+          <li><a ui-sref="contact">Contact</a></li>
+          <li><a ng-hide="authenticated" class="btn" ui-sref="login">SIGN IN / SIGN UP</a></li>
+          <li><div>
+            <a ng-if="show_login" class="btn" ng-click="login()">SIGN IN / SIGN UP</a>
+            <a ng-if="!show_login" class="btn" ng-click="logout*">LOGOUT</a>
+          </div></li>
+
+        </ul>
+      </div><!--/.nav-collapse -->
+</div>
