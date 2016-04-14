@@ -13,7 +13,6 @@ angular.module('pharmassistApp')
     });
 
     $scope.viewDetails = function(){
-        // var go = '/pharmacy/' + $scope.selected.value.id;
         $state.go('pharmacy.detail', {id: $scope.selected.value.id});
     }
 
@@ -64,11 +63,9 @@ angular.module('pharmassistApp')
             });
         }
         $scope.addDrugs  = function(){
-            // var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
             $state.go('pharmacy.detail.drugs.add_drugs', {id: currentID});
         }
         $scope.viewDrugs  = function(){
-            // var go = "/pharmacy/" + currentID + "/drugs/";
             $state.go('pharmacy.detail.drugs', {id: currentID});
         }
   })
@@ -93,7 +90,6 @@ angular.module('pharmassistApp')
 
     //Goto add new drugs
     $scope.addDrugs  = function(){
-        // var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
         $location.path('pharmacy.detail.drugs.add_drugs', {id:currentID});
     }
 
@@ -103,7 +99,7 @@ angular.module('pharmassistApp')
         var updateObj = {
                 drug: drugID,
                 pharmacy:currentID,
-                price: 300
+                price: 150
             }
         apiService.post(endpoint, updateObj)
         .then(function response (data) {
@@ -118,7 +114,6 @@ angular.module('pharmassistApp')
         _.each(data, function getData(value, index) {
             var drugID = value.id;
             updateDrug(drugID).then(function resolve(data) {
-                // var redirectTo = '/pharmacy/' + currentID +'/drugs/';
                 var msg = value.display_name + " drug saved successfully!";
                 toastr.success(msg, 'Success');
                 $state.go('pharmacy.detail.drugs', {id:currentID})
