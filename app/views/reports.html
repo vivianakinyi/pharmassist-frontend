@@ -1,0 +1,67 @@
+<header id="head" class="secondary"></header>
+<div class="container">
+
+    <ol class="breadcrumb">
+            <li><a ui-sref="admin">Admin</a></li>
+            <li class="active">Reports</li>
+    </ol>
+    <article>
+         <header class="page-header">
+            <h1 class="page-title">Generate Reports</h1>
+        </header>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Generate Reports</h3>
+            </div>
+            <div class="panel-body">
+               <!-- <a ng-click="showList = ! showList" href="">Get number of Pharmcies with a given drug</a> -->
+              <div class="row">
+                    <div class="col-sm-6">
+                    <label>Search For Drug</label>
+                        <!-- ui-select combo box -->
+                        <ui-select ng-model="selected.value" theme="bootstrap">
+                            <ui-select-match>
+                                <span ng-bind="$select.selected.display_name"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="drug in (drugs | filter:$select.search | limitTo:30) track by drug.id">
+                                <span ng-bind="drug.display_name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input class="btn btn-info" ng-click="list(selected.value.id)" value="Get Pharmcies with drug">
+                    </div>
+                </div>
+
+                <h3>Report: Number of Pharmcies with the Drug: <strong>{{count}}</strong></h3>
+                <a href="" ng-click="showDetails = ! showDetails">Click to show the pharmacies</a>
+                <div class="well well-sm" ng-class="{ 'hidden': !  showDetails}">
+                    <table class="table table-striped custab">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Drug</th>
+                            <th>Pharmacy</th>
+                        </tr>
+                    </thead>
+
+                        <tr ng-repeat="drug in drugs">
+                            <td>{{drug.id}}</td>
+                            <td>{{drug.drug_name}}
+                            <td>{{drug.pharmacy_name}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Normal table -->
+    </article>
+
+

@@ -1,0 +1,95 @@
+<header id="head" class="secondary"></header>
+<div class="container">
+
+    <ol class="breadcrumb">
+            <li><a ui-sref="admin">Admin</a></li>
+            <li class="active">All Pharmacies</li>
+    </ol>
+    <article>
+         <header class="page-header">
+            <h1 class="page-title">Pharmacies</h1>
+        </header>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">View all Pharmacies and Available drugs in each</h3>
+            </div>
+            <div class="panel-body">
+                <!-- <a ng-click="showList = ! showList" href="">Filter Pharmacies per county</a> -->
+               <div class="row">
+                    <div class="col-sm-6">
+                    <label>Filter by County </label>
+                        <!-- ui-select combo box -->
+                        <ui-select ng-model="selected_county.value" theme="bootstrap">
+                            <ui-select-match>
+                                <span ng-bind="$select.selected"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="county in counties | filter:$select.search">
+                                <span ng-bind="county"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <!-- <button ng-click="list(selected_county.value)">Search</button> -->
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a ng-click="showList = ! showList" href="">
+                            <input class="btn btn-success"
+                            ng-click="list(selected_county.value)" value="View Pharmacies">
+                        </a>
+                    </div>
+                </div>
+                </br>
+                <div class="well well-sm" ng-class="{ 'hidden': !  showList}">
+                    <div>
+                    <table class="table table-striped custab" id="pharmacies">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Pharmacy</th>
+                            <th>Price</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                        <tr ng-repeat="pharmacy in pharmacies">
+                            <td>{{pharmacy.properties.no}}</td>
+
+                            <td>{{pharmacy.properties.name}}
+
+                            <a href="" ng-click="showDetails = ! showDetails">Click to show pharmacy details</a></p>
+                                <div class="well well-sm" ng-class="{ 'hidden': ! showDetails }">
+
+                                   <p><strong>Location Details</strong><p>
+                                    <p><strong>Street:</strong> {{pharmacy.properties.street}}</p>
+                                    <p><strong>Town: </strong> {{pharmacy.properties.town}}</p>
+                                    <p><strong>County: </strong> {{pharmacy.properties.county}}</p>
+                                    <p><strong>Landmark: </strong> {{pharmacy.properties.landmark}}</p>
+                                    <p><strong>Location: </strong> {{pharmacy.geometry.coordinates}}</p>
+                                </div>
+                                <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
+
+                                    <!-- <ng-map center=[-1.3044564,36.7069642] zoom="10">
+                                        <marker position={{pharmacy.geometry.coordinates}} title="Hello World!"></marker>
+                                    </ng-map> -->
+                                    <p>Drugs the pharmacy has are: </p>
+                                    <div ng-repeat="drug in pharmacy.properties.drugs" id="reapeter">
+                                        <p>{{$index +1}} : {{drug.display_name}}</p>
+                                    </div>
+
+                                </div>
+                            </td>
+                            <td>Ksh 300.00</td>
+
+                            <td class="text-center"><a ng-click="showMap = ! showMap" class='btn btn-info btn-xs' href="">List Available Drugs</a></td>
+                        </tr>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Normal table -->
+    </article>
+
+

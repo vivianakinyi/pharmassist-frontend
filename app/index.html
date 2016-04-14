@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
     <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
     <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -35,12 +36,13 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav pull-right">
-          <li class="active"><a ng-href="#/">Home</a></li>
-          <li><a ng-href="#/search">Search</a></li>
-          <li><a ng-href="#/pharmacy">Pharmacy</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a href="#/contact">Contact</a></li>
-          <li><a class="btn" ng-href="#/login">SIGN IN / SIGN UP</a></li>
+          <li class="active"><a ui-sref="home">Home</a></li>
+          <li><a ui-sref="search">Search</a></li>
+          <li><a ui-sref="pharmacy">Pharmacy</a></li>
+          <li><a ui-sref="admin">Admin</a></li>
+          <li><a ui-sref="about">About</a></li>
+          <li><a ui-sref="contact">Contact</a></li>
+          <li><a class="btn" ui-sref="#/login">SIGN IN / SIGN UP</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -49,7 +51,7 @@
 
 <!--All views are rendered here-->
     <div>
-       <div ng-view=""></div>
+       <div ui-view="content"></div>
     </div>
 
 
@@ -84,18 +86,39 @@
     <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/nvd3/build/nv.d3.js"></script>
+    <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
+        <!-- <% scripts.forEach( function ( files ) { %>
+        <script type="text/javascript" src="<%= files %>"></script><% }); %>
+ -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <!-- compiled JavaScript -->
         <script src="scripts/config.js"></script>
         <script src="scripts/app.js"></script>
+
+       <!--  <script src="auth/ouath2.js"></script>
+        <script src="auth/modules.js"></script>
+        <script src="auth/exceptions.js"></script>
+        <script src="auth/states.js"></script>
+        <script src="auth/controllers/auth_base.js"></script>
+        <script src="auth/controllers/login_auth.js"></script>
+        <script src="auth/controller/logout.js"></script>
+        <script src="auth/controller/modules.js"></script>
+        <script src="auth/controller/password_reset.js"></script>
+        <script src="auth/controller/password_reset_confirm.js"></script>
+        <script src="auth/controller/user_details.js"></script> -->
+
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/search.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/contact.js"></script>
         <script src="scripts/controllers/pharmacy.js"></script>
+        <script src="scripts/controllers/admin.js"></script>
         <script src="scripts/controllers/myroute.js"></script>
         <script src="scripts/controllers/user.js"></script>
         <script src="scripts/directives/mydirective.js"></script>

@@ -93,3 +93,24 @@ img.pull-left { margin-right: 10px; }
     box-shadow: 3px 3px 0px transparent;
     transition: 0.5s;
     }
+
+/*Dashboard css*/
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}

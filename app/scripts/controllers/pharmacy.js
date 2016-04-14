@@ -2,7 +2,7 @@
 
 angular.module('pharmassistApp')
   .controller('PharmacyCtrl',
-    function ($scope, apiService, geolocation, $location, toastr) {
+    function ($scope, apiService, geolocation, $state, toastr) {
     var url = "http://localhost:8000/api/pharmacy/pharmacy/";
 
     $scope.selected = {};
@@ -13,8 +13,7 @@ angular.module('pharmassistApp')
     });
 
     $scope.viewDetails = function(){
-        var go = '/pharmacy/' + $scope.selected.value.id;
-        $location.path(go);
+        $state.go('pharmacy.detail', {id: $scope.selected.value.id});
     }
 
     // $scope.detectLocation = function() {
@@ -39,8 +38,8 @@ angular.module('pharmassistApp')
 
 })
   .controller('PharmacyDetailCtrl',
-    function ($scope, apiService, $routeParams,geolocation, toastr, $location) {
-        var currentID = $routeParams.id;
+    function ($scope, apiService, $stateParams,geolocation, toastr, $state) {
+        var currentID = $stateParams.id;
         var url = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID + "/";
         $scope.pharmacy = {};
 
@@ -64,17 +63,15 @@ angular.module('pharmassistApp')
             });
         }
         $scope.addDrugs  = function(){
-            var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
-            $location.path(go);
+            $state.go('pharmacy.detail.drugs.add_drugs', {id: currentID});
         }
         $scope.viewDrugs  = function(){
-            var go = "/pharmacy/" + currentID + "/drugs/";
-            $location.path(go);
+            $state.go('pharmacy.detail.drugs', {id: currentID});
         }
   })
-  .controller('DrugsCtrl', function ($scope, apiService, $routeParams, toastr,
-     $q, $location, $http) {
-    var currentID = $routeParams.id;
+  .controller('DrugsCtrl', function ($scope, apiService, $stateParams, toastr,
+     $q, $state, $http) {
+    var currentID = $stateParams.id;
     var pharmUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID + "/";
     var url = "http://localhost:8000/api/pharmacy/drugs/";
 
@@ -93,8 +90,7 @@ angular.module('pharmassistApp')
 
     //Goto add new drugs
     $scope.addDrugs  = function(){
-        var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
-        $location.path(go);
+        $location.path('pharmacy.detail.drugs.add_drugs', {id:currentID});
     }
 
     var updateDrug = function updateDrug (drugID) {
@@ -103,7 +99,7 @@ angular.module('pharmassistApp')
         var updateObj = {
                 drug: drugID,
                 pharmacy:currentID,
-                price: 300
+                price: 150
             }
         apiService.post(endpoint, updateObj)
         .then(function response (data) {
@@ -118,10 +114,9 @@ angular.module('pharmassistApp')
         _.each(data, function getData(value, index) {
             var drugID = value.id;
             updateDrug(drugID).then(function resolve(data) {
-                var redirectTo = '/pharmacy/' + currentID +'/drugs/';
                 var msg = value.display_name + " drug saved successfully!";
                 toastr.success(msg, 'Success');
-                $location.path(redirectTo);
+                $state.go('pharmacy.detail.drugs', {id:currentID})
 
             }, function error (err) {
                 var msg = "Sorry " + value.display_name +
@@ -135,17 +130,18 @@ angular.module('pharmassistApp')
         });
     }
   })
-  .controller('DrugsDetailCtrl', function ($scope, apiService, $routeParams, toastr,
-     $q, $location, $http) {
-    var currentID = $routeParams.id;
-    var pharmDrugsUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID;
-    var endpoint = "http://localhost:8000/api/pharmacy/prices/?drug=6&pharmacy=5"
+  .controller('DrugsDetailCtrl', function ($scope, apiService, $stateParams, toastr,
+     $q, $state, $http) {
+    var currentID = $stateParams.id;
+    // var pharmDrugsUrl = "http://localhost:8000/api/pharmacy/pharmacy/" + currentID;
+    var endpoint = "http://localhost:8000/api/pharmacy/prices/?pharmacy=" + currentID;
 
-    apiService.get(pharmDrugsUrl).then(function(response){
-        $scope.pharm_name = response.data.properties.name;
-        $scope.pharmID = response.data.id;
+    apiService.get(endpoint).then(function(response){
+        console.log(response.data.results);
+        // $scope.pharm_name = response.data.properties.name;
+        // $scope.pharmID = response.data.id;
 
-        $scope.pharmDrugs = response.data.properties.drugs;
+        $scope.pharmDrugs = response.data.results;
         $scope.pharmDrugs.selected = {};
 
         $scope.getTemplate = function (drug) {
@@ -159,18 +155,21 @@ angular.module('pharmassistApp')
             $scope.pharmDrugs.selected = angular.copy(drug);
         };
         $scope.savePrice = function (idx) {
-            console.log("Saving contact");
-            // var updateObj = {
-            //     price: $scope.pharmDrugs.selected.recommended_price
-            // }
-            // apiService.get(endpoint).then(function(response){
-            //     var endpointID = response.data.results[0].id;
-            //     var endpointUpdate = "http://localhost:8000/api/pharmacy/prices/";
 
-            //     apiService.update(endpointUpdate, endpointID, updateObj).then(function(response){
-            //         console.log('Updated', response);
-            //     })
-            // })
+            var updateObj = {
+                price: $scope.pharmDrugs.selected.price
+            }
+            console.log($scope.pharmDrugs.selected);
+
+            apiService.get(endpoint).then(function(response){
+                var endpointID = response.data.results[0].id;
+                console.log('ID', endpointID);
+                var endpointUpdate = "http://localhost:8000/api/pharmacy/prices/";
+
+                apiService.update(endpointUpdate, endpointID, updateObj).then(function(response){
+                    console.log('Updated', response);
+                });
+            });
             $scope.pharmDrugs.selected[idx] = angular.copy($scope.pharmDrugs.selected);
             $scope.reset();
         };
@@ -181,11 +180,10 @@ angular.module('pharmassistApp')
     });
 
     $scope.addDrugs  = function(){
-        var go = "/pharmacy/" + currentID + "/drugs/add_drugs";
-        $location.path(go);
+        $state.go('pharmacy.detail.drugs.add_drugs', {id:currentID});
     }
     // TODO cHECK CODE WITH IAN
-    $scope.delete = function(drug) {
+    $scope.delete = function(drug, index) {
         var drugs = drug
         var pharm = currentID
 
@@ -195,9 +193,9 @@ angular.module('pharmassistApp')
             var endpointDeleted = "http://localhost:8000/api/pharmacy/prices/" + endpointID + '/';
 
             $http.delete(endpointDeleted).then(function(data){
-                var redirectTo = '/pharmacy/' + currentID +'/drugs/';
                 toastr.success("Removed drug successfully!", 'Success');
-                $location.path(redirectTo); //reloads page
+                $scope.pharmDrugs.splice(index, 1);
+                $state.go('pharmacy.detail.drugs', {id:currentID});
             });
         });
 

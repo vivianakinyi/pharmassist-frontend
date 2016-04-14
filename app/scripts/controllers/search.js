@@ -2,7 +2,7 @@
 
 angular.module('pharmassistApp')
   .controller('SearchCtrl', function ($scope, geolocation, apiService,
-    $location) {
+    $state) {
         var url = "http://localhost:8000/api/pharmacy/drugs/";
         // $scope.$watch('selected', function() {
         //     searchResults();
@@ -17,27 +17,46 @@ angular.module('pharmassistApp')
         $scope.detectLocation = function() {
             geolocation.getLocation().then(function(data){
                 $scope.coords = data.coords.latitude + ',' + data.coords.longitude;
-                console.log('Before location',$scope.coords)
             });
         }
         // distance combobox
         $scope.selected_dist = [];
         $scope.selected_dist.value = '';
         $scope.distance = [100,200,300,400,500,4000]
-        console.log('After after..',$scope.coords)
+
         $scope.searchResults = function() {
-            var go = '/search/results/' + $scope.selected.value.id + '/' + $scope.selected_dist.value + '/' + $scope.coords;
-            $location.path(go);
+            // Get the frequency of a searched drug
+            var count = count + 1;
+            var drugCounter = "http://localhost:8000/api/pharmacy/drugs/" + $scope.selected.value.id;
+
+            apiService.get(drugCounter).then(function (response) {
+                var counter = response.data.counter + 1;
+
+                var updateObj = {
+                    counter: counter
+                }
+                apiService.update(url, $scope.selected.value.id, updateObj)
+                .then(function(response){
+                    console.log(response);
+                });
+            });
+
+
+            $state.go("search.results", {
+                drugID: $scope.selected.value.id,
+                distID: $scope.selected_dist.value,
+                locID:  $scope.coords
+            });
         }
   })
 
-  .controller('SearchResultsCtrl', ['$scope','apiService','$routeParams','NgMap',
-    function($scope, apiService, $routeParams, NgMap) {
-        var currentID = $routeParams.drugID;
-        var distance = $routeParams.distID;
-        var location = $routeParams.locID;
+  .controller('SearchResultsCtrl', ['$scope','apiService','$stateParams','NgMap',
+    function($scope, apiService, $stateParams, NgMap) {
+        var currentID = $stateParams.drugID;
+        var distance = $stateParams.distID;
+        var location = $stateParams.locID;
 
-        var url = "http://localhost:8000/api/pharmacy/pharmacy/?dist="+ distance + "&point=" + location + "&drugs=" + currentID ;
+        var searchUrl = "http://localhost:8000/api/pharmacy/pharmacy/?dist="+ distance + "&point=" + location + "&drugs=" + currentID ;
         var drugUrl = "http://localhost:8000/api/pharmacy/drugs/" + currentID + '/'
 
         $scope.gridOptions = {};
@@ -88,16 +107,17 @@ angular.module('pharmassistApp')
         // }
         ];
 
-        apiService.get(url).then(function(response){
-          $scope.gridOptions.data = response.data.results.features;
-          $scope.pharmacies = response.data.results.features;
+        apiService.get(searchUrl).then(function(response){
+            console.log(response);
+            $scope.gridOptions.data = response.data.results.features;
+            $scope.pharmacies = response.data.results.features;
         });
     }
 ])
-.controller('MapCtrl', function ($http, $interval, apiService, $routeParams, NgMap) {
-    var currentID = $routeParams.drugID;
-    var distance = $routeParams.distID;
-    var location = $routeParams.locID;
+.controller('MapCtrl', function ($http, $interval, apiService, $stateParams, NgMap) {
+    var currentID = $stateParams.drugID;
+    var distance = $stateParams.distID;
+    var location = $stateParams.locID;
 
     var url = "http://localhost:8000/api/pharmacy/pharmacy/?dist="+ distance + "&point=" + location + "&drugs=" + currentID ;
 
@@ -105,14 +125,12 @@ angular.module('pharmassistApp')
     apiService.get(url).then(function(response){
         var locations = [];
         var data =  response.data.results.features
-        console.log(response.data.results.features[2].geometry.coordinates);
+
         _.each(data, function getData(value, index) {
-            // console.log(value.geometry.coordinates + ',');
             var positions = value.geometry.coordinates;
-            console.log(positions);
             locations.push(positions);
         });
-        console.log("My positions", locations);
+
         vm.positions = locations;
         // vm.positions = [
         // [-1.2719192,36.8080739], [-1.281051,36.8122748],

@@ -1,0 +1,57 @@
+<header id="head" class="secondary"></header>
+<div class="container">
+
+    <ol class="breadcrumb">
+            <li><a ui-sref="admin">Admin</a></li>
+            <li class="active">Analytics</li>
+    </ol>
+    <article>
+         <header class="page-header">
+            <h1 class="page-title">Frequency</h1>
+        </header>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Most Searched Drug</h3>
+            </div>
+            <div class="panel-body">
+            <div>
+                <nvd3 options="options" data="data"></nvd3>
+            </div>
+
+                <div>
+                    <table class="table table-striped custab" id="pharmacies">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Drug</th>
+                            <th>Number of searches</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                        <tr ng-repeat="drug in drugs | limitTo:30">
+                            <td>{{drug.id}}</td>
+
+                            <td>{{drug.full_name}}
+
+                                <div class="well well-sm"
+                                    ng-class="{ 'hidden': ! showMap }">
+                                        <p>Graph</p>
+                                    </div>
+
+                                </div>
+                            </td>
+                            <td>{{drug.counter}}</td>
+
+                            <td class="text-center"><a ng-click="showMap = ! showMap" class='btn btn-info btn-xs' href="">Generate Graph</a></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Normal table -->
+    </article>
+
+
