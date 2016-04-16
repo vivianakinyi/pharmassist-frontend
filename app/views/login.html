@@ -50,6 +50,21 @@
                     <div id="login_view" ng-controller="LoginCtrl">
                       <form role="form" ng-submit="login(loginForm)" name="loginForm" novalidate>
                         <div class="form-group">
+                          <label for="id_username">Log in as</label>
+                          <select ng-model="selection" ng-options="item for item in types"></select>
+                        </div>
+                        <div class="animate-switch-container"
+                            ng-switch on="selection">
+                              <div class="animate-switch" ng-switch-when="admin">Admin Div</div>
+                              <div class="animate-switch" ng-switch-when="pharmacist">Pharmacist
+                                  <!-- <div class="navbar navbar-inverse navbar-fixed-top headroom" > -->
+                                  <!-- <div ng-include="'views/main_nav.html'"></div> -->
+                              </div>
+                              </div>
+                              <div class="animate-switch" ng-switch-default>default</div>
+                          </div>
+
+                        <div class="form-group">
                           <label for="id_username">Username</label>
                           <input name="username" id="id_username" type="text" ng-model="model.username" placeholder="Username" class="form-control" required />
                         </div>
@@ -64,10 +79,7 @@
                         <button type="submit" class="btn btn-primary">Login</button>
                       </form>
                     </div>
-
-
                 </div>
-
             </article>
             <!-- /Article -->
 
