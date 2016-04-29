@@ -2,14 +2,19 @@
 
 angular.module('pharmassistApp')
   .controller('PharmacyCtrl',
-    function ($scope, apiService, geolocation, $state, toastr) {
+    function ($scope, apiService, geolocation, $state, toastr, $stateParams) {
+
     var url = "http://localhost:8000/api/pharmacy/pharmacy/";
+    var pharmacy = $stateParams.username;
+    var owner_url = "http://localhost:8000/api/pharmacy/pharmacy/?owner=" + pharmacy
+
 
     $scope.selected = {};
     $scope.selected.value = '';
 
-    apiService.get(url).then(function(response){
+    apiService.get(owner_url).then(function(response){
         $scope.pharmacies = response.data.results.features;
+        $scope.number = $scope.pharmacies.length;
     });
 
     $scope.viewDetails = function(){
@@ -55,6 +60,7 @@ angular.module('pharmassistApp')
         }
         $scope.update = function(){
             var endpoint = "http://localhost:8000/api/pharmacy/pharmacy/";
+            $scope.pharmacies.updated = new Date();
             apiService.update(endpoint, currentID, $scope.pharmacies)
             .then(function(response){
                 toastr.success("Pharmacy updated successfully", 'Success');
@@ -95,11 +101,13 @@ angular.module('pharmassistApp')
 
     var updateDrug = function updateDrug (drugID) {
         var defferd = $q.defer();
+        var time = new Date()
         var endpoint = "http://localhost:8000/api/pharmacy/prices/";
         var updateObj = {
                 drug: drugID,
                 pharmacy:currentID,
-                price: 150
+                price: 150,
+                update: time
             }
         apiService.post(endpoint, updateObj)
         .then(function response (data) {

@@ -18,7 +18,7 @@
     <!-- build:css(.tmp) styles/main.css -->
 
     <link rel="stylesheet" href="styles/bootstrap-theme.css" media="screen" >
-
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/main2.css">
     <!-- endbuild -->
   </head>
@@ -27,26 +27,9 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-  <div class="navbar navbar-inverse navbar-fixed-top headroom" >
-    <div class="container">
-      <div class="navbar-header">
-        <!-- Button for smallest screens -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <a class="navbar-brand" href="index.html"><h4>PharmAssist</h4></a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav pull-right">
-          <li class="active"><a ui-sref="home">Home</a></li>
-          <li><a ui-sref="search">Search</a></li>
-          <li><a ui-sref="pharmacy">Pharmacy</a></li>
-          <li><a ui-sref="admin">Admin</a></li>
-          <li><a ui-sref="about">About</a></li>
-          <li><a ui-sref="contact">Contact</a></li>
-          <li><a class="btn" ui-sref="#/login">SIGN IN / SIGN UP</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
-    </div>
-  </div>
+ <!--  <div class="navbar navbar-inverse navbar-fixed-top headroom" >
+      <div ng-include="'views/main_nav.html'"></div>
+  </div> -->
   <!-- /.navbar -->
 
 <!--All views are rendered here-->
@@ -92,25 +75,11 @@
     <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-        <!-- <% scripts.forEach( function ( files ) { %>
-        <script type="text/javascript" src="<%= files %>"></script><% }); %>
- -->
+
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <!-- compiled JavaScript -->
         <script src="scripts/config.js"></script>
         <script src="scripts/app.js"></script>
-
-       <!--  <script src="auth/ouath2.js"></script>
-        <script src="auth/modules.js"></script>
-        <script src="auth/exceptions.js"></script>
-        <script src="auth/states.js"></script>
-        <script src="auth/controllers/auth_base.js"></script>
-        <script src="auth/controllers/login_auth.js"></script>
-        <script src="auth/controller/logout.js"></script>
-        <script src="auth/controller/modules.js"></script>
-        <script src="auth/controller/password_reset.js"></script>
-        <script src="auth/controller/password_reset_confirm.js"></script>
-        <script src="auth/controller/user_details.js"></script> -->
 
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
@@ -121,6 +90,21 @@
         <script src="scripts/controllers/admin.js"></script>
         <script src="scripts/controllers/myroute.js"></script>
         <script src="scripts/controllers/user.js"></script>
+
+        <script src="scripts/controllers/register.js"></script>
+        <script src="scripts/controllers/passwordreset.js"></script>
+        <script src="scripts/controllers/passwordresetconfirm.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/pharmacy_login.js"></script>
+        <script src="scripts/controllers/verifyemail.js"></script>
+        <script src="scripts/controllers/logout.js"></script>
+        <script src="scripts/controllers/userprofile.js"></script>
+        <script src="scripts/controllers/passwordchange.js"></script>
+        <script src="scripts/controllers/master.js"></script>
+        <script src="scripts/controllers/restricted.js"></script>
+        <script src="scripts/controllers/authrequired.js"></script>
+        <script src="scripts/services/djangoAuth.js"></script>
+        <script src="scripts/services/validate.js"></script>
         <script src="scripts/directives/mydirective.js"></script>
         <script src="scripts/filters/myfilter.js"></script>
         <script src="scripts/services/myservice.js"></script>

@@ -26,6 +26,5 @@ angular
     'ui.grid',
     'toastr',
     'nvd3',
-    // 'madeasy.auth',
     'pharmassistApp.config'
   ]);

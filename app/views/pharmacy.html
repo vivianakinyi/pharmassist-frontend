@@ -1,23 +1,25 @@
+<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+      <div ng-include="'views/pharmacist_nav.html'"></div>
+  </div>
 <header id="head" class="secondary"></header>
 <div class="container">
 
     <ol class="breadcrumb">
             <li><a ng-href="#/">Home</a></li>
-            <li class="active">Register Pharmacy</li>
+            <li class="active">Pharmacy</li>
     </ol>
     <article>
         <header class="page-header">
-            <h1 class="page-title">Register your Pharmacy</h1>
+            <h1 class="page-title">Select Pharmacy</h1>
         </header>
         <p>
-        Search for you Pharmacy in the PPB List to confirm if you
-        are registered then register where customers will find you.
-        </p>
+        <strong>Welcome to the pharmacist dashboard</strong><br>
+        You are the owner of {{number}} registered pharmacies. Kindly select the pharmacy you would like to access</p>
         <br>
         <!-- combo-box to search for pharmacy -->
         <div class="row">
                 <div class="col-sm-6">
-                <label>Search for your pharmacy</label>
+                <label>Select Pharmacy</label>
                     <ui-select ng-model="selected.value" theme="bootstrap">
                         <ui-select-match>
                             <span ng-bind="$select.selected.properties.name"></span>

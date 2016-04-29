@@ -10,7 +10,6 @@
  */
 angular
   .module('pharmassistApp.config', [
-    // "madeasy.auth",
     "ui.router"
   ])
 
@@ -21,32 +20,112 @@ angular
             "Content-Type": "application/json",
             "Accept": "application/json, */*"
         };
-        // $httpProvider.interceptors.push(
-        //     "madeasy.networking.interceptors.http");
-        // $httpProvider.interceptors.push(
-        //     "madeasy.networking.interceptors.httpactivity");
-        // $httpProvider.interceptors.push(
-        //     "madeasy.networking.interceptors.connection");
+
     }])
+    .run(function(djangoAuth){
+      djangoAuth.initialize('http://localhost:8000/rest-auth', false);
+    })
 
-  // .run(["api.oauth2",function (oauth2) {
-  //       oauth2.setXHRToken(oauth2.getToken());
-  //   }])
+  .config(function ($urlRouterProvider) {
+    $urlRouterProvider.otherwise("/");
+  })
 
-  // .config(["$urlRouterProvider", function ($urlRouterProvider) {
-  //       $urlRouterProvider.otherwise("/");
 
   .config(["$stateProvider", function stateProviderFunction ($stateProvider) {
         $stateProvider
             .state("home", {
-                url: "/home",
+                url: "/",
                 views:{
                     "content@":{
-                        templateUrl: "views/main.html",
-                        controller: "MainCtrl"
+                        templateUrl: "views/home.html",
+                        controller: "MainCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
-            }).state("about", {
+            })
+            .state("register", {
+                url: "register",
+                views:{
+                    "content@":{
+                        templateUrl: "views/register.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("passwordReset", {
+                url: "/passwordReset",
+                views:{
+                    "content@":{
+                        templateUrl: "views/passwordreset.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("passwordResetConfirm", {
+                url: "/passwordResetConfirm/:firstToken/:passwordResetToken",
+                views:{
+                    "content@":{
+                        templateUrl: "views/passwordresetconfirm.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("login", {
+                url: "/login",
+                views:{
+                    "content@":{
+                        templateUrl: "views/login.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("verifyEmail", {
+                url: "/verifyEmail/:emailVerificationToken",
+                views:{
+                    "content@":{
+                        templateUrl: "views/verifyemail.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("logout", {
+                url: "/logout",
+                views:{
+                    "content@":{
+                        templateUrl: "views/logout.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("about", {
                 url: "/about",
                 views:{
                     "content@":{
@@ -62,12 +141,30 @@ angular
                         controller: "ContactCtrl"
                     }
                 }
-            }).state("pharmacy", {
-                url: "/pharmacy",
+            }).state("pharmacy_login", {
+                url: "/pharmacy_login",
+                views:{
+                    "content@":{
+                        templateUrl: "views/pharmacy_login.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("pharmacy", {
+                url: "/pharmacy/:username",
                 views:{
                     "content@":{
                         templateUrl: "views/pharmacy.html",
-                        controller: "PharmacyCtrl"
+                        controller: "PharmacyCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             }).state("pharmacy.detail", {
@@ -75,7 +172,12 @@ angular
                 views:{
                     "content@":{
                         templateUrl: "views/pharmacy_detail.html",
-                        controller: "PharmacyDetailCtrl"
+                        controller: "PharmacyDetailCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             }).state("pharmacy.detail.drugs", {
@@ -95,7 +197,21 @@ angular
                         controller: "DrugsCtrl"
                     }
                 }
-            }).state("search", {
+            })
+            .state("userProfile", {
+                url: '/userProfile',
+                views:{
+                    "content@":{
+                        templateUrl: "views/userprofile.html",
+                        resolve: {
+                              authenticated: ['djangoAuth', function(djangoAuth){
+                                return djangoAuth.authenticationStatus();
+                              }],
+                            }
+                    }
+                }
+            })
+            .state("search", {
                 url: "/search",
                 views:{
                     "content@":{
@@ -152,78 +268,13 @@ angular
                         controller: "AnalyticsCtrl"
                     }
                 }
+            }).state("admin.prices", {
+                url: "/prices",
+                views:{
+                    "content@":{
+                        templateUrl: "views/prices.html",
+                        controller: "PricesCtrl"
+                    }
+                }
             });
     }]);
-
-
-  // .config(function ($routeProvider) {
-  //   $routeProvider
-  //     .when('/', {
-  //       templateUrl: 'views/main.html',
-  //       controller: 'MainCtrl',
-  //       controllerAs: 'main'
-  //     })
-  //     .when('/login', {
-  //       templateUrl: 'views/login.html',
-  //       controller: 'LoginCtrl',
-  //       controllerAs: 'login'
-  //     })
-  //     .when('/register', {
-  //       templateUrl: 'views/register.html',
-  //       controller: 'RegisterCtrl',
-  //       controllerAs: 'register'
-  //     })
-  //     .when('/about', {
-  //       templateUrl: 'views/about.html',
-  //       controller: 'AboutCtrl',
-  //       controllerAs: 'about'
-  //     })
-  //     .when('/pharmacy', {
-  //       templateUrl: 'views/pharmacy.html',
-  //       controller: 'PharmacyCtrl',
-  //       controllerAs: 'pharmacy'
-  //     })
-  //      .when('/pharmacy/:id', {
-  //       templateUrl: 'views/pharmacy_detail.html',
-  //       controller: 'PharmacyDetailCtrl',
-  //       controllerAs: 'pharmacyDetail'
-  //     })
-  //      .when('/pharmacy/:id/drugs', {
-  //       templateUrl: 'views/drugs.html',
-  //       controller: 'DrugsDetailCtrl',
-  //       controllerAs: 'drugs'
-  //     })
-  //      .when('/pharmacy/:id/drugs/add_drugs', {
-  //       templateUrl: 'views/add_drugs.html',
-  //       controller: 'DrugsCtrl',
-  //       controllerAs: 'drugs'
-  //     })
-  //     .when('/search', {
-  //       templateUrl: 'views/search.html',
-  //       controller: 'SearchCtrl',
-  //       controllerAs: 'search'
-  //     })
-  //     .when('/search/results/:drugID/:distID/:locID', {
-  //       templateUrl: 'views/results.html',
-  //       controller: 'SearchResultsCtrl',
-  //       controllerAs: 'search'
-  //     })
-  //     .when('/search/results/:drugID/:distID/:locID/map', {
-  //       templateUrl: 'views/map.html',
-  //       controller: 'MapCtrl as vm',
-  //       controllerAs: 'map'
-  //     })
-  //     .when('/contact', {
-  //       templateUrl: 'views/contact.html',
-  //       controller: 'ContactCtrl',
-  //       controllerAs: 'contact'
-  //     })
-  //     .when('/my/route', {
-  //       templateUrl: 'views/myroute.html',
-  //       controller: 'MyrouteCtrl',
-  //       controllerAs: 'myRoute'
-  //     })
-  //     .otherwise({
-  //       redirectTo: '/'
-  //     });
-  // });

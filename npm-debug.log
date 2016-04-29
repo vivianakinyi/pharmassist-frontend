@@ -1,0 +1,73 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', 'ngCookies' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.37
+4 verbose node symlink /usr/bin/node
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'ngCookies', null ]
+7 verbose cache add name=undefined spec="ngCookies" args=["ngCookies",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'ngCookies',
+8 verbose parsed url   path: 'ngCookies',
+8 verbose parsed url   href: 'ngCookies' }
+9 silly lockFile 584da53c-ngCookies ngCookies
+10 verbose lock ngCookies /home/vivian/.npm/584da53c-ngCookies.lock
+11 silly lockFile 584da53c-ngCookies ngCookies
+12 silly lockFile 584da53c-ngCookies ngCookies
+13 verbose addNamed [ 'ngCookies', '' ]
+14 verbose addNamed [ null, '*' ]
+15 silly lockFile 7da90939-ngCookies ngCookies@
+16 verbose lock ngCookies@ /home/vivian/.npm/7da90939-ngCookies.lock
+17 silly addNameRange { name: 'ngCookies', range: '*', hasData: false }
+18 verbose request where is /ngCookies
+19 verbose request registry https://registry.npmjs.org/
+20 verbose request id 4920b7b4ca4d80a7
+21 verbose url raw /ngCookies
+22 verbose url resolving [ 'https://registry.npmjs.org/', './ngCookies' ]
+23 verbose url resolved https://registry.npmjs.org/ngCookies
+24 verbose request where is https://registry.npmjs.org/ngCookies
+25 info trying registry request attempt 1 at 22:59:32
+26 http GET https://registry.npmjs.org/ngCookies
+27 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+28 info trying registry request attempt 2 at 22:59:42
+29 http GET https://registry.npmjs.org/ngCookies
+30 http 404 https://registry.npmjs.org/ngCookies
+31 silly registry.get cb [ 404,
+31 silly registry.get   { 'content-type': 'application/json',
+31 silly registry.get     'cache-control': 'max-age=0',
+31 silly registry.get     'content-length': '2',
+31 silly registry.get     'accept-ranges': 'bytes',
+31 silly registry.get     date: 'Thu, 28 Apr 2016 19:59:45 GMT',
+31 silly registry.get     via: '1.1 varnish',
+31 silly registry.get     age: '0',
+31 silly registry.get     connection: 'keep-alive',
+31 silly registry.get     'x-served-by': 'cache-fra1227-FRA',
+31 silly registry.get     'x-cache': 'MISS',
+31 silly registry.get     'x-cache-hits': '0',
+31 silly registry.get     'x-timer': 'S1461873585.552447,VS0,VE191',
+31 silly registry.get     vary: 'Accept-Encoding' } ]
+32 silly lockFile 7da90939-ngCookies ngCookies@
+33 silly lockFile 7da90939-ngCookies ngCookies@
+34 error 404 Not Found
+34 error 404
+34 error 404 'ngCookies' is not in the npm registry.
+34 error 404 You should bug the author to publish it
+34 error 404 It was specified as a dependency of 'pharmassist'
+34 error 404
+34 error 404 Note that you can also install from a
+34 error 404 tarball, folder, or http url, or git url.
+35 error System Linux 3.19.0-51-generic
+36 error command "/usr/bin/node" "/usr/bin/npm" "install" "ngCookies"
+37 error cwd /home/vivian/Project/pharm-frontend
+38 error node -v v0.10.37
+39 error npm -v 1.4.28
+40 error code E404
+41 verbose exit [ 1, true ]
