@@ -4,9 +4,7 @@ angular.module('pharmassistApp')
   .controller('SearchCtrl', function ($scope, geolocation, apiService,
     $state) {
         var url = "http://localhost:8000/api/pharmacy/drugs/";
-        // $scope.$watch('selected', function() {
-        //     searchResults();
-        // });
+
         $scope.selected = {};
         $scope.selected.value = '';
 
@@ -31,10 +29,13 @@ angular.module('pharmassistApp')
 
             apiService.get(drugCounter).then(function (response) {
                 var counter = response.data.counter + 1;
+                var clock = new Date();
 
                 var updateObj = {
-                    counter: counter
+                    counter: counter,
+                    updated: clock
                 }
+
                 apiService.update(url, $scope.selected.value.id, updateObj)
                 .then(function(response){
                     console.log(response);
@@ -71,41 +72,9 @@ angular.module('pharmassistApp')
             $scope.gridOptions.data.splice(index, 1);
         };
         $scope.Edit = function(row) {
-            // var index = $scope.gridOptions.data.indexOf(row.entity);
-            // $scope.gridOptions.data.splice(index, 1);
             $scope.gridOptions.data.indexOf(row.entity);
         };
-        $scope.gridOptions.columnDefs = [{
-            name: 'Index',
-            field: 'properties.no'
-        },
-        {
-            name: 'Pharmacy',
-            field: 'properties.name'
-        },
-        {
-            name: 'Town',
-            field: 'properties.town'
-        },
-        {   name: 'Street',
-            field: 'properties.street'
-        },
-        {   name: 'County',
-            field: 'properties.county'
-        },
-        {   name: 'Landmarks',
-            field: 'properties.landmarks'
-        },
-        {
-            name: 'Action',
-            cellTemplate: '<a ng-href="#/pharmacy/{{gridOptions.data.indexOf(row.entity)}}" class="btn default">Edit</a>'
 
-        },
-        // {
-        //     name: 'ShowScope',
-        //     cellTemplate: '<button class="btn primary" ng-click="grid.appScope.Delete(row)">Delete Me</button>'
-        // }
-        ];
 
         apiService.get(searchUrl).then(function(response){
             console.log(response);
@@ -132,12 +101,7 @@ angular.module('pharmassistApp')
         });
 
         vm.positions = locations;
-        // vm.positions = [
-        // [-1.2719192,36.8080739], [-1.281051,36.8122748],
-        // [-1.2819192,36.8280739], [-1.2719192,36.8080739],
-        // [-1.2619192,36.7980739], [-1.2819192,36.8180739]];
-        // vm.positions = data;
-        console.log(vm.positions);
+
         vm.dynMarkers = []
         NgMap.getMap().then(function(map) {
             var bounds = new google.maps.LatLngBounds();

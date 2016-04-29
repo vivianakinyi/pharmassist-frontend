@@ -13,7 +13,7 @@ angular.module('pharmassistApp')
     $scope.selected_county = [];
     $scope.selected_county.value = '';
 
-    $scope.counties = ['#', 'NAIROBI', 'BARINGO'];
+    $scope.counties = ['#', 'NAIROBI', 'BARINGO', 'BUNGOMA', 'MURANGA', 'NAKURU', 'NANDI', 'NAROK', 'NYERI', 'WAJIR', 'VIHIGA', 'UASIN GISHU', 'TRANS NZOIA'];
 
     $scope.list = function(county){
 
@@ -36,10 +36,20 @@ angular.module('pharmassistApp')
     $scope.list = function(drug){
         var url = "http://localhost:8000/api/pharmacy/prices/?drug=" + drug;
         apiService.get(url).then(function(response){
+            console.log(response)
             $scope.drugs = response.data.results;
             $scope.count = response.data.count;
         });
     }
+
+})
+  .controller('PricesCtrl', function ($scope, apiService) {
+    var drugUrl = "http://localhost:8000/api/pharmacy/prices/";
+
+    apiService.get(drugUrl).then(function (response) {
+        $scope.drugs = response.data.results;
+        console.log($scope.drugs)
+    });
 
 })
   .controller('AnalyticsCtrl', function ($scope, apiService) {
@@ -205,20 +215,48 @@ angular.module('pharmassistApp')
     //             ]
     //         }
     //      ]
+    // $scope.fetchData = function(){
+    //     apiService.get(url).then(function(response){
+    //         $scope.drugs = response.data.results;
+    //         console.log($scope.drugs)
+    //         var dta = [{key:"test3", values:[]}];
+    //         dta[0].values=response.data.results.values;
+    //         $scope.leads = dta;
+    //     });
+    // }
+    // $scope.refreshInterval = 5;
+    // setInterval(function(){
+    //         $scope.$apply(function(){
+    //             $scope.fetchData();
+    //         })
+    //     }, 150);
+
 
     apiService.get(url).then(function(response){
         $scope.drugs = response.data.results;
 
-        var data =  response.data.results;
-        var values = [];
-        // $scope.data = [{ values: [], key: 'Random Walk' }];
-        _.each(data, function getData(value, index) {
-           values.push({'label:' : value.display_name, 'value:' : value.counter});
-        });
-        console.log(values);
-        $scope.data =[{ values: values}];
-        console.log($scope.data);
-
+        var dta=[];
+        for(var i=0 ; i < response.data.results.length ; i++){
+            console.log(response.data.results[i].counter)
+            dta.push({key:response.data.results[i].counter , value:response.data.results[i].display_name});
+        }
+        $scope.leads = dta;
     });
+
+
+    // apiService.get(url).then(function(response){
+    //     $scope.drugs = response.data.results;
+
+    //     var data =  response.data.results;
+    //     var values = [];
+    //     // $scope.data = [{ values: [], key: 'Random Walk' }];
+    //     _.each(data, function getData(value, index) {
+    //        values.push({'label:' : value.display_name, 'value:' : value.counter});
+    //     });
+    //     console.log(values);
+    //     $scope.data = values;
+    //     console.log($scope.data);
+
+    // });
 
 });

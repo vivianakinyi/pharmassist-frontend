@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pharmassistApp')
-  .controller('LoginCtrl', function ($scope, $state, djangoAuth, Validate) {
+  .controller('PharmLoginCtrl', function ($scope, $state, djangoAuth, Validate) {
     $scope.types = ['user', 'pharmacist', 'admin'];
     $scope.selection = $scope.types[0];
 
@@ -14,20 +14,11 @@ angular.module('pharmassistApp')
       if(!formData.$invalid){
         djangoAuth.login($scope.model.username, $scope.model.password)
         .then(function(data){
-          console.log($scope.selection);
-          if ($scope.selection === 'admin') {
-            $state.go("admin");
-          }
-          else if ($scope.selection === 'pharmacist') {
-            $state.go("pharmacy");
-          }
-          else {
-            $state.go("home");
-          }
-
+          console.log($scope.model.username)
+          $state.go('pharmacy', {username:$scope.model.username})
         },function(data){
-        	// error case
-        	$scope.errors = data;
+          // error case
+          $scope.errors = data;
         });
       }
     }

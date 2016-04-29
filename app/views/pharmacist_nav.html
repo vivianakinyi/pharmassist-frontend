@@ -6,17 +6,11 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav pull-right">
-          <li class="active"><a ui-sref="home">Home</a></li>
-          <!-- <li><a ui-sref="search">Search</a></li> -->
-          <li><a ui-sref="pharmacy">Pharmacy</a></li>
-          <!-- <li><a ui-sref="admin">Admin</a></li> -->
+          <li class="active"><a ui-sref="pharmacy">Pharmacy</a></li>
+          <li><a ui-sref="userProfile">Profile</a></li>
           <li><a ui-sref="about">About</a></li>
           <li><a ui-sref="contact">Contact</a></li>
-          <!-- <li><a ng-hide="authenticated" class="btn" ui-sref="login">SIGN IN / SIGN UP</a></li> -->
-          <li><div>
-            <a ng-if="authenticated" class="btn" ui-sref="login">SIGN IN / SIGN UP</a>
-            <a ng-if="!authenticated" class="btn" ui-sref="logout">LOGOUT</a>
-          </div></li>
+          <li><a ng-if="!authenticated" class="btn" ui-sref="pharmacy_login">LOGOUT</a></li>
 
         </ul>
       </div><!--/.nav-collapse -->
