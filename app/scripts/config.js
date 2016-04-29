@@ -244,12 +244,30 @@ angular
                         controller: "AdminCtrl"
                     }
                 }
-            }).state("admin.pharmacies", {
+            }).state("admin_login", {
+                url: "/admin_login",
+                views:{
+                    "content@":{
+                        templateUrl: "views/admin_login.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+            .state("admin.pharmacies", {
                 url: "/pharmacies",
                 views:{
                     "content@":{
                         templateUrl: "views/pharmacies.html",
-                        controller: "AdminCtrl"
+                        controller: "AdminCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             }).state("admin.reports", {
