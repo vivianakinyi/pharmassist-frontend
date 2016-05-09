@@ -48,7 +48,7 @@ angular
                 }
             })
             .state("register", {
-                url: "register",
+                url: "/register",
                 views:{
                     "content@":{
                         templateUrl: "views/register.html",
@@ -86,7 +86,20 @@ angular
                     }
                 }
             })
-            .state("login", {
+            .state("passwordChange", {
+                url: "/passwordChange",
+                views:{
+                    "content@":{
+                        templateUrl: "views/passwordchange.html",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
+                    }
+                }
+            })
+           .state("login", {
                 url: "/login",
                 views:{
                     "content@":{
@@ -162,7 +175,7 @@ angular
                         controller: "PharmacyCtrl",
                         resolve: {
                           authenticated: ['djangoAuth', function(djangoAuth){
-                            return djangoAuth.authenticationStatus();
+                            return djangoAuth.authenticationStatus(true);
                           }],
                         }
                     }
@@ -185,7 +198,12 @@ angular
                 views:{
                     "content@":{
                         templateUrl: "views/drugs.html",
-                        controller: "DrugsDetailCtrl"
+                        controller: "DrugsDetailCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             })
@@ -194,7 +212,12 @@ angular
                 views:{
                     "content@":{
                         templateUrl: "views/add_drugs.html",
-                        controller: "DrugsCtrl"
+                        controller: "DrugsCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             })
@@ -205,7 +228,7 @@ angular
                         templateUrl: "views/userprofile.html",
                         resolve: {
                               authenticated: ['djangoAuth', function(djangoAuth){
-                                return djangoAuth.authenticationStatus();
+                                return djangoAuth.authenticationStatus(true);
                               }],
                             }
                     }
@@ -216,7 +239,12 @@ angular
                 views:{
                     "content@":{
                         templateUrl: "views/search.html",
-                        controller: "SearchCtrl"
+                        controller: "SearchCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             }).state("search.results", {
@@ -224,7 +252,12 @@ angular
                 views:{
                     "content@":{
                         templateUrl: "views/results.html",
-                        controller: "SearchResultsCtrl"
+                        controller: "SearchResultsCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             }).state("search.results.map", {
@@ -233,7 +266,12 @@ angular
                     "content@":{
                         templateUrl: "views/map.html",
                         controller: "MapCtrl",
-                        controllerAs: "vm"
+                        controllerAs: "vm",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             }).state("admin", {
@@ -241,7 +279,12 @@ angular
                 views:{
                     "content@":{
                         templateUrl: "views/admin.html",
-                        controller: "AdminCtrl"
+                        controller: "AdminCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             }).state("admin_login", {
@@ -265,7 +308,7 @@ angular
                         controller: "AdminCtrl",
                         resolve: {
                           authenticated: ['djangoAuth', function(djangoAuth){
-                            return djangoAuth.authenticationStatus();
+                            return djangoAuth.authenticationStatus(true);
                           }],
                         }
                     }
@@ -275,7 +318,12 @@ angular
                 views:{
                     "content@":{
                         templateUrl: "views/reports.html",
-                        controller: "ReportCtrl"
+                        controller: "ReportCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             }).state("admin.analytics", {
@@ -283,7 +331,12 @@ angular
                 views:{
                     "content@":{
                         templateUrl: "views/analytics.html",
-                        controller: "AnalyticsCtrl"
+                        controller: "AnalyticsCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             }).state("admin.prices", {
@@ -291,7 +344,12 @@ angular
                 views:{
                     "content@":{
                         templateUrl: "views/prices.html",
-                        controller: "PricesCtrl"
+                        controller: "PricesCtrl",
+                        resolve: {
+                          authenticated: ['djangoAuth', function(djangoAuth){
+                            return djangoAuth.authenticationStatus();
+                          }],
+                        }
                     }
                 }
             });

@@ -30,7 +30,7 @@
                                 <span ng-bind="county"></span>
                             </ui-select-choices>
                         </ui-select>
-                        <!-- <button ng-click="list(selected_county.value)">Search</button> -->
+
                     </div>
                 </div>
                 <br>
@@ -46,7 +46,17 @@
                 <div class="well well-sm" ng-class="{ 'hidden': !  showList}">
                     <div>
                     <table class="table table-striped custab" id="pharmacies">
-
+                        <!-- search -->
+                        <div id="custom-search-input">
+                            <div class="input-group col-md-12">
+                                <input type="text" ng-model="search" class="search-query form-control" placeholder="Search Pharmacies" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -55,7 +65,7 @@
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                        <tr ng-repeat="pharmacy in pharmacies">
+                        <tr ng-repeat="pharmacy in pharmacies | filter:search">
                             <td>{{pharmacy.properties.no}}</td>
 
                             <td>{{pharmacy.properties.name}}

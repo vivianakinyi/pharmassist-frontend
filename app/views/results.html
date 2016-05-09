@@ -16,7 +16,6 @@
                     <h3 class="panel-title">Drug Basic Information</h3>
                 </div>
                 <div class="panel-body">
-
                     <form ng-model="drugs">
                             <div class="col-sm-6">
                             <label>Drug Display Name</label>
@@ -56,10 +55,24 @@
         </div> -->
 
         <!-- Normal table -->
+
         <div>
+
             <table class="table table-striped custab">
                 <button class='btn btn-success btn-xs pull-right' ui-sref="search.results.map"><span class="glyphicon glyphicon-map"></span> View Full Map</button>
+                <br/>
                 <br>
+                <!-- search -->
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <input type="text" ng-model="search" class="search-query form-control" placeholder="Search Pharmacies" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button">
+                                <span class=" glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -68,7 +81,7 @@
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
-                    <tr ng-repeat="pharmacy in pharmacies">
+                    <tr ng-repeat="pharmacy in pharmacies | filter:search">
                         <td>{{pharmacy.properties.no}}</td>
 
                         <td>{{pharmacy.properties.name}}
