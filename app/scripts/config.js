@@ -175,7 +175,7 @@ angular
                         controller: "PharmacyCtrl",
                         resolve: {
                           authenticated: ['djangoAuth', function(djangoAuth){
-                            return djangoAuth.authenticationStatus(true);
+                            return djangoAuth.authenticationStatus();
                           }],
                         }
                     }
@@ -228,7 +228,7 @@ angular
                         templateUrl: "views/userprofile.html",
                         resolve: {
                               authenticated: ['djangoAuth', function(djangoAuth){
-                                return djangoAuth.authenticationStatus(true);
+                                return djangoAuth.authenticationStatus();
                               }],
                             }
                     }
@@ -308,7 +308,7 @@ angular
                         controller: "AdminCtrl",
                         resolve: {
                           authenticated: ['djangoAuth', function(djangoAuth){
-                            return djangoAuth.authenticationStatus(true);
+                            return djangoAuth.authenticationStatus();
                           }],
                         }
                     }
