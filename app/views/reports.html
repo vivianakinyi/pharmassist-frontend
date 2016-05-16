@@ -23,7 +23,7 @@
                     <label>Search For Drug</label>
                         <!-- ui-select combo box -->
                         <ui-select ng-model="selected.value" theme="bootstrap">
-                            <ui-select-match>
+                            <ui-select-match placeholder="Select a drug">
                                 <span ng-bind="$select.selected.display_name"></span>
                             </ui-select-match>
                             <ui-select-choices repeat="drug in (drugs | filter:$select.search | limitTo:30) track by drug.id">

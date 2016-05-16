@@ -23,7 +23,7 @@
                     <label>Filter by County </label>
                         <!-- ui-select combo box -->
                         <ui-select ng-model="selected_county.value" theme="bootstrap">
-                            <ui-select-match>
+                            <ui-select-match placeholder="Pick a county(# for all)">
                                 <span ng-bind="$select.selected"></span>
                             </ui-select-match>
                             <ui-select-choices repeat="county in counties | filter:$select.search">
