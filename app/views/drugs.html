@@ -18,6 +18,18 @@
             <h3 class="panel-title">Drug List</h3>
           </div>
           <div class="panel-body">
+          <!-- search -->
+            <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <input type="text" ng-model="search" class="search-query form-control" placeholder="Search Pharmacies" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button">
+                                <span class=" glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <br>
             <!-- Normal table -->
             <div>
                 <table class="table table-striped custab">
@@ -36,7 +48,7 @@
                 <tbody>
 
                 </tbody>
-                    <tr ng-repeat="drug in pharmDrugs" ng-include="getTemplate(drug)">
+                    <tr ng-repeat="drug in pharmDrugs | filter:search" ng-include="getTemplate(drug)">
                     </tr>
 
                 </table>

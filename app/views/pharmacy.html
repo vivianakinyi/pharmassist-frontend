@@ -1,6 +1,6 @@
 <div class="navbar navbar-inverse navbar-fixed-top headroom" >
       <div ng-include="'views/pharmacist_nav.html'"></div>
-  </div>
+</div>
 <header id="head" class="secondary"></header>
 <div class="container">
 
@@ -21,7 +21,7 @@
                 <div class="col-sm-6">
                 <label>Select Pharmacy</label>
                     <ui-select ng-model="selected.value" theme="bootstrap">
-                        <ui-select-match>
+                        <ui-select-match placeholder="Pick a pharmacy">
                             <span ng-bind="$select.selected.properties.name"></span>
                         </ui-select-match>
                         <ui-select-choices repeat="pharmacy in pharmacies | filter:$select.search | limitTo:30">

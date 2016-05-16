@@ -23,7 +23,7 @@
                     <label>Search For Drug</label>
                         <!-- ui-select combo box -->
                         <ui-select ng-model="selected.value" theme="bootstrap">
-                            <ui-select-match>
+                            <ui-select-match placeholder="Select a drug">
                                 <span ng-bind="$select.selected.display_name"></span>
                             </ui-select-match>
                             <ui-select-choices repeat="drug in (drugs | filter:$select.search | limitTo:30) track by drug.id">
@@ -43,6 +43,17 @@
                 <a href="" ng-click="showDetails = ! showDetails">Click to show the pharmacies</a>
                 <div class="well well-sm" ng-class="{ 'hidden': !  showDetails}">
                     <table class="table table-striped custab">
+                    <!-- search -->
+                    <div id="custom-search-input">
+                            <div class="input-group col-md-12">
+                                <input type="text" ng-model="search" class="search-query form-control" placeholder="Search Pharmacies" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
 
                     <thead>
                         <tr>
@@ -54,7 +65,7 @@
                         </tr>
                     </thead>
 
-                        <tr ng-repeat="drug in drugs">
+                        <tr dir-paginate="drug in drugs | limitTo:30 | filter:search | itemsPerPage: 10">
                             <td>{{drug.id}}</td>
                             <td>{{drug.drug_name}}
                             <td>{{drug.pharmacy_name}}</td>
@@ -62,6 +73,7 @@
                             <td>{{drug.town}}</td>
                         </tr>
                     </table>
+                    <dir-pagination-controls class="pull-right"></dir-pagination-controls>
                 </div>
 
                 </div>

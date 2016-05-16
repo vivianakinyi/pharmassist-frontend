@@ -21,38 +21,20 @@
             <div>
                 <nvd3 options="options" data="data" api="api"></nvd3>
             </div>
-            <!-- <div class="block news scrollBox">
-
-                <div class="scroll" style="height: 240px;">
-                    <ul style="margin-top:10px;line-height:20px;margin-bottom:-30px;">
-                            <div ng-repeat="(key,val) in  leads">
-                                <li ng-repeat="row in  val.values" style="font-size:10px;">
-                                   <strong style="font-weight:bold;color:red;">{{row[row.length-2]}}<a href="#" ng-click="displayAll({{row[row.length-2]}})" style="padding:5px;"> View </a></strong>
-                                </li>
-                                </div>
-                               </ul>
-                            <nvd3-discrete-bar-chart
-                                options="options"
-                                data="leads"
-                                id="leads_id"
-                                width="420"
-                                height="300"
-                                tooltips="true"
-                                showXAxis="true"
-                                showYAxis="true"
-                                showlegend="true"
-                                showValues="true"
-                                showcontrols="true">
-
-                            <svg></svg>
-                        </nvd3-discrete-bar-chart>
-                </div>
-                </div>
-                </div></div> -->
 
                 <div>
                     <table class="table table-striped custab" id="pharmacies">
-
+                    <!-- search -->
+                        <div id="custom-search-input">
+                            <div class="input-group col-md-12">
+                                <input type="text" ng-model="search" class="search-query form-control" placeholder="Search Drugs" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -61,7 +43,8 @@
                             <!-- <th class="text-center">Action</th> -->
                         </tr>
                     </thead>
-                        <tr ng-repeat="drug in drugs | limitTo:30">
+                        <!-- Grid with pagination -->
+                        <tr dir-paginate="drug in drugs | limitTo:30 | filter:search | itemsPerPage: 10">
                             <td>{{drug.id}}</td>
 
                             <td>{{drug.full_name}}
@@ -78,6 +61,7 @@
                             <!-- td class="text-center"><a ng-click="showMap = ! showMap" class='btn btn-info btn-xs' href="">Generate Graph</a></td> -->
                         </tr>
                     </table>
+                    <dir-pagination-controls class="pull-right"></dir-pagination-controls>
                 </div>
 
             </div>

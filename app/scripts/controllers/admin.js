@@ -69,7 +69,7 @@ angular.module('pharmassistApp')
             y: function(d){return d.value;},
             showValues: true,
             valueFormat: function(d){
-                return d3.format(',.4f')(d);
+                return d3.format(',.1f')(d);
             },
             duration: 500,
             xAxis: {
@@ -77,21 +77,21 @@ angular.module('pharmassistApp')
             },
             yAxis: {
                 axisLabel: 'Y Axis',
-                axisLabelDistance: 10
+                axisLabelDistance: 500
             }
         }
     };
     // $scope.data = [
     //         {
-    //             // key: "Cumulative Return",
+    //             key: "Cumulative Return",
     //             values: [
     //                 {
     //                     "label" : "A" ,
-    //                     "value" : 9
+    //                     "value" : 10
     //                 } ,
     //                 {
     //                     "label" : "B" ,
-    //                     "value" : 0
+    //                     "value" : 12
     //                 } ,
     //                 {
     //                     "label" : "C" ,
@@ -211,52 +211,85 @@ angular.module('pharmassistApp')
     //                 {
     //                     "label" : "Y" ,
     //                     "value" : 5
+    //                 },
+    //                 {
+    //                     "label" : "Z" ,
+    //                     "value" : 5
+    //                 }, {
+    //                     "label" : "A" ,
+    //                     "value" : 10
+    //                 } ,
+    //                 {
+    //                     "label" : "B" ,
+    //                     "value" : 12
+    //                 } ,
+    //                 {
+    //                     "label" : "C" ,
+    //                     "value" : 3
+    //                 } ,
+    //                 {
+    //                     "label" : "D" ,
+    //                     "value" : 1
+    //                 } ,
+    //                 {
+    //                     "label" : "E" ,
+    //                     "value" : 0
+    //                 } ,
+    //                 {
+    //                     "label" : "F" ,
+    //                     "value" : 4
+    //                 } ,
+    //                 {
+    //                     "label" : "G" ,
+    //                     "value" : 6
+    //                 } ,
+    //                 {
+    //                     "label" : "H" ,
+    //                     "value" : 5
+    //                 },
+    //                 {
+    //                     "label" : "a" ,
+    //                     "value" : 9
+    //                 } ,
+    //                 {
+    //                     "label" : "b" ,
+    //                     "value" : 0
+    //                 } ,
+    //                 {
+    //                     "label" : "c" ,
+    //                     "value" : 3
+    //                 } ,
+    //                 {
+    //                     "label" : "d" ,
+    //                     "value" : 1
+    //                 } ,
+    //                 {
+    //                     "label" : "e" ,
+    //                     "value" : 0
+    //                 } ,
+    //                 {
+    //                     "label" : "f" ,
+    //                     "value" : 4
+    //                 } ,
+    //                 {
+    //                     "label" : "g" ,
+    //                     "value" : 6
     //                 }
     //             ]
     //         }
     //      ]
-    // $scope.fetchData = function(){
-    //     apiService.get(url).then(function(response){
-    //         $scope.drugs = response.data.results;
-    //         console.log($scope.drugs)
-    //         var dta = [{key:"test3", values:[]}];
-    //         dta[0].values=response.data.results.values;
-    //         $scope.leads = dta;
-    //     });
-    // }
-    // $scope.refreshInterval = 5;
-    // setInterval(function(){
-    //         $scope.$apply(function(){
-    //             $scope.fetchData();
-    //         })
-    //     }, 150);
 
 
     apiService.get(url).then(function(response){
         $scope.drugs = response.data.results;
 
-        var dta=[];
-        for(var i=0 ; i < response.data.results.length ; i++){
-            console.log(response.data.results[i].counter)
-            dta.push({key:response.data.results[i].counter , value:response.data.results[i].display_name});
-        }
-        $scope.leads = dta;
+        var data =  response.data.results;
+        var values = [];
+        // $scope.data = [{ values: [], key: 'Random Walk' }];
+        _.each(data, function getData(value, index) {
+           values.push({ 'value' : value.counter, 'label' : value.display_name});
+        });
+       $scope.data = [{ values: values, key: 'Random Walk' }];
     });
-
-
-    // apiService.get(url).then(function(response){
-    //     $scope.drugs = response.data.results;
-
-    //     var data =  response.data.results;
-    //     var values = [];
-    //     // $scope.data = [{ values: [], key: 'Random Walk' }];
-    //     _.each(data, function getData(value, index) {
-    //        values.push({'label:' : value.display_name, 'value:' : value.counter});
-    //     });
-    //     console.log(values);
-    //     $scope.data = values;
-    //     console.log($scope.data);
-
-    // });
 
 });

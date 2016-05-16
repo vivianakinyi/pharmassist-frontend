@@ -22,7 +22,7 @@
                     <label>Drug Name</label>
                         <!-- ui-select combo box -->
                         <ui-select ng-model="selected.value" theme="bootstrap">
-                            <ui-select-match>
+                            <ui-select-match placeholder="Search and select a drug">
                                 <span ng-bind="$select.selected.display_name"></span>
                             </ui-select-match>
                             <ui-select-choices repeat="drug in (drugs | filter:$select.search | limitTo:30) track by drug.id">
@@ -38,7 +38,7 @@
                     <label>Search Within (metres)</label>
                         <!-- ui-select combo box -->
                         <ui-select ng-model="selected_dist.value" theme="bootstrap">
-                            <ui-select-match>
+                            <ui-select-match placeholder="Select distance to search">
                                 <span ng-bind="$select.selected"></span>
                             </ui-select-match>
                             <ui-select-choices repeat="dist in distance | filter:$select.search">

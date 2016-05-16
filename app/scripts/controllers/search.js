@@ -2,7 +2,7 @@
 
 angular.module('pharmassistApp')
   .controller('SearchCtrl', function ($scope, geolocation, apiService,
-    $state) {
+    $state, toastr) {
         var url = "http://localhost:8000/api/pharmacy/drugs/";
 
         $scope.selected = {};
@@ -11,12 +11,18 @@ angular.module('pharmassistApp')
         apiService.get(url).then(function (response) {
             $scope.drugs = response.data.results;
         });
-
+        var location = false;
         $scope.detectLocation = function() {
             geolocation.getLocation().then(function(data){
                 $scope.coords = data.coords.latitude + ',' + data.coords.longitude;
-            });
-        }
+                location = true;
+                toastr.success("Location detected successfully", 'Success');
+            }),function(error){
+                console.log(error);
+                $rootScope.$broadcast('error',CONSTANTS['errors.location.notFound']);
+                toastr.error("Failed to get location", 'Error');
+            }
+        };
         // distance combobox
         $scope.selected_dist = [];
         $scope.selected_dist.value = '';
