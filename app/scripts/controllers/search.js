@@ -65,6 +65,7 @@ angular.module('pharmassistApp')
 
         var searchUrl = "http://localhost:8000/api/pharmacy/pharmacy/?dist="+ distance + "&point=" + location + "&drugs=" + currentID ;
         var drugUrl = "http://localhost:8000/api/pharmacy/drugs/" + currentID + '/'
+        var priceUrl = "http://localhost:8000/api/pharmacy/prices/?drug=25"
 
         $scope.gridOptions = {};
 
@@ -83,9 +84,16 @@ angular.module('pharmassistApp')
 
 
         apiService.get(searchUrl).then(function(response){
-            console.log(response);
             $scope.gridOptions.data = response.data.results.features;
             $scope.pharmacies = response.data.results.features;
+
+            apiService.get(priceUrl).then(function(resp){
+                $scope.prices = resp.data.results[1].price;
+                $scope.recommended = resp.data.results[1].recommended_price;
+                console.log($scope.prices)
+                console.log($scope.recommended)
+            });
+
         });
     }
 ])

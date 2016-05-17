@@ -10,17 +10,50 @@
 angular.module('pharmassistApp')
   .controller('AdminCtrl', function ($scope, apiService) {
     var url = "http://localhost:8000/api/pharmacy/pharmacy/";
+
     $scope.selected_county = [];
     $scope.selected_county.value = '';
 
     $scope.counties = ['#', 'NAIROBI', 'BARINGO', 'BUNGOMA', 'MURANGA', 'NAKURU', 'NANDI', 'NAROK', 'NYERI', 'WAJIR', 'VIHIGA', 'UASIN GISHU', 'TRANS NZOIA'];
+
+    // nvd3 data options
+     $scope.options = {
+            chart: {
+                type: 'pieChart',
+                height: 500,
+                x: function(d){return d.key;},
+                y: function(d){return d.y;},
+                showLabels: true,
+                duration: 500,
+                labelThreshold: 0.01,
+                labelSunbeamLayout: true,
+                legend: {
+                    margin: {
+                        top: 5,
+                        right: 35,
+                        bottom: 5,
+                        left: 0
+                    }
+                }
+            }
+        };
+
 
     $scope.list = function(county){
 
         var url = "http://localhost:8000/api/pharmacy/pharmacy/?county=" + county;
 
         apiService.get(url).then(function(response){
+
             $scope.pharmacies = response.data.results.features;
+
+            var data =  response.data.results.features;
+            var values = [];
+            _.each(data, function getData(value, index) {
+                values.push({'key' : value.properties.name, 'y' : value.properties.drugs.length});
+            });
+            $scope.data = values
+
         });
     }
 })
@@ -36,7 +69,6 @@ angular.module('pharmassistApp')
     $scope.list = function(drug){
         var url = "http://localhost:8000/api/pharmacy/prices/?drug=" + drug;
         apiService.get(url).then(function(response){
-            console.log(response)
             $scope.drugs = response.data.results;
             $scope.count = response.data.count;
         });
@@ -111,168 +143,6 @@ angular.module('pharmassistApp')
     //                 } ,
     //                 {
     //                     "label" : "G" ,
-    //                     "value" : 6
-    //                 } ,
-    //                 {
-    //                     "label" : "H" ,
-    //                     "value" : 5
-    //                 },
-    //                 {
-    //                     "label" : "A" ,
-    //                     "value" : 9
-    //                 } ,
-    //                 {
-    //                     "label" : "B" ,
-    //                     "value" : 0
-    //                 } ,
-    //                 {
-    //                     "label" : "C" ,
-    //                     "value" : 3
-    //                 } ,
-    //                 {
-    //                     "label" : "D" ,
-    //                     "value" : 1
-    //                 } ,
-    //                 {
-    //                     "label" : "E" ,
-    //                     "value" : 0
-    //                 } ,
-    //                 {
-    //                     "label" : "F" ,
-    //                     "value" : 4
-    //                 } ,
-    //                 {
-    //                     "label" : "G" ,
-    //                     "value" : 6
-    //                 } ,
-    //                 {
-    //                     "label" : "H" ,
-    //                     "value" : 5
-    //                 },{
-    //                     "label" : "I" ,
-    //                     "value" : 9
-    //                 } ,
-    //                 {
-    //                     "label" : "J" ,
-    //                     "value" : 0
-    //                 } ,
-    //                 {
-    //                     "label" : "L" ,
-    //                     "value" : 3
-    //                 } ,
-    //                 {
-    //                     "label" : "M" ,
-    //                     "value" : 1
-    //                 } ,
-    //                 {
-    //                     "label" : "N" ,
-    //                     "value" : 0
-    //                 } ,
-    //                 {
-    //                     "label" : "O" ,
-    //                     "value" : 4
-    //                 } ,
-    //                 {
-    //                     "label" : "P" ,
-    //                     "value" : 6
-    //                 } ,
-    //                 {
-    //                     "label" : "Q" ,
-    //                     "value" : 5
-    //                 },
-    //                 {
-    //                     "label" : "R" ,
-    //                     "value" : 9
-    //                 } ,
-    //                 {
-    //                     "label" : "S" ,
-    //                     "value" : 0
-    //                 } ,
-    //                 {
-    //                     "label" : "T" ,
-    //                     "value" : 3
-    //                 } ,
-    //                 {
-    //                     "label" : "u" ,
-    //                     "value" : 1
-    //                 } ,
-    //                 {
-    //                     "label" : "v" ,
-    //                     "value" : 0
-    //                 } ,
-    //                 {
-    //                     "label" : "W" ,
-    //                     "value" : 4
-    //                 } ,
-    //                 {
-    //                     "label" : "X" ,
-    //                     "value" : 6
-    //                 } ,
-    //                 {
-    //                     "label" : "Y" ,
-    //                     "value" : 5
-    //                 },
-    //                 {
-    //                     "label" : "Z" ,
-    //                     "value" : 5
-    //                 }, {
-    //                     "label" : "A" ,
-    //                     "value" : 10
-    //                 } ,
-    //                 {
-    //                     "label" : "B" ,
-    //                     "value" : 12
-    //                 } ,
-    //                 {
-    //                     "label" : "C" ,
-    //                     "value" : 3
-    //                 } ,
-    //                 {
-    //                     "label" : "D" ,
-    //                     "value" : 1
-    //                 } ,
-    //                 {
-    //                     "label" : "E" ,
-    //                     "value" : 0
-    //                 } ,
-    //                 {
-    //                     "label" : "F" ,
-    //                     "value" : 4
-    //                 } ,
-    //                 {
-    //                     "label" : "G" ,
-    //                     "value" : 6
-    //                 } ,
-    //                 {
-    //                     "label" : "H" ,
-    //                     "value" : 5
-    //                 },
-    //                 {
-    //                     "label" : "a" ,
-    //                     "value" : 9
-    //                 } ,
-    //                 {
-    //                     "label" : "b" ,
-    //                     "value" : 0
-    //                 } ,
-    //                 {
-    //                     "label" : "c" ,
-    //                     "value" : 3
-    //                 } ,
-    //                 {
-    //                     "label" : "d" ,
-    //                     "value" : 1
-    //                 } ,
-    //                 {
-    //                     "label" : "e" ,
-    //                     "value" : 0
-    //                 } ,
-    //                 {
-    //                     "label" : "f" ,
-    //                     "value" : 4
-    //                 } ,
-    //                 {
-    //                     "label" : "g" ,
     //                     "value" : 6
     //                 }
     //             ]

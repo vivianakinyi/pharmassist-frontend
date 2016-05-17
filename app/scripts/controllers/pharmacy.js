@@ -106,7 +106,6 @@ angular.module('pharmassistApp')
         var updateObj = {
                 drug: drugID,
                 pharmacy:currentID,
-                price: 150,
                 update: time
             }
         apiService.post(endpoint, updateObj)
@@ -146,8 +145,6 @@ angular.module('pharmassistApp')
 
     apiService.get(endpoint).then(function(response){
         console.log(response.data.results);
-        // $scope.pharm_name = response.data.properties.name;
-        // $scope.pharmID = response.data.id;
 
         $scope.pharmDrugs = response.data.results;
         $scope.pharmDrugs.selected = {};
@@ -163,23 +160,23 @@ angular.module('pharmassistApp')
             $scope.pharmDrugs.selected = angular.copy(drug);
         };
         $scope.savePrice = function (idx) {
+            $scope.pharmDrugs[idx] = angular.copy($scope.pharmDrugs.selected);
+            $scope.reset();
 
             var updateObj = {
                 price: $scope.pharmDrugs.selected.price
             }
-            console.log($scope.pharmDrugs.selected);
 
             apiService.get(endpoint).then(function(response){
                 var endpointID = response.data.results[0].id;
-                console.log('ID', endpointID);
                 var endpointUpdate = "http://localhost:8000/api/pharmacy/prices/";
 
                 apiService.update(endpointUpdate, endpointID, updateObj).then(function(response){
-                    console.log('Updated', response);
+                    toastr.success("Edited price successfully!", 'Success');
                 });
             });
-            $scope.pharmDrugs.selected[idx] = angular.copy($scope.pharmDrugs.selected);
-            $scope.reset();
+            // $scope.pharmDrugs[idx] = angular.copy($scope.pharmDrugs.selected);
+
         };
 
         $scope.reset = function () {
