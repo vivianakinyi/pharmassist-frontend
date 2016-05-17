@@ -3,19 +3,13 @@
     <!-- container -->
     <div class="container">
 
-        <!-- <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li class="active">Registration</li>
-        </ol> -->
-
         <div class="row">
 
-            <!-- Article main content -->
             <article class="col-xs-12 maincontent">
                 <!-- <header class="page-header">
                     <h1 class="page-title">Registration</h1>
                 </header> -->
-                <div id="register_view" ng-controller="RegisterCtrl">
+                <!-- <div id="register_view" ng-controller="RegisterCtrl">
     <div ng-if="complete == false">
         <form role="form" ng-if="authenticated != true" name="registerForm" ng-submit="register(registerForm)" novalidate>
             <div class="form-group">
@@ -45,65 +39,62 @@
     <div ng-if="complete == true">
         <div class="alert alert-success">Great!  You've just registered.  You should receive an email shortly with instructions on how to activate your account.</div>
     </div>
-</div>
+</div> -->
 
-               <!--  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h3 class="thin text-center">Register a new account</h3>
-                            <p class="text-center text-muted">Already a member
-                            <a href="#/login">Login here</a></p>
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <div class="panel panel-default" id="register_view" ng-controller="RegisterCtrl">
+                    <div class="panel-body">
+                        <h3 class="thin text-center">Register a new account</h3>
+                        <p class="text-center text-muted">Already a member
+                        <a href="#/login">Login here</a></p>
+                        <hr>
+                        <div ng-if="complete == false">
+                        <form role="form" ng-if="authenticated != true" name="registerForm" ng-submit="register(registerForm)" novalidate>
+                            <div class="top-margin">
+                                <label>Username</label>
+                                <input type="text" class="form-control" ng-model="model.username" required>
+                            </div>
+                            <div class="alert alert-danger" ng-repeat="error in errors.username">{{error}}</div>
+
+                            <div class="top-margin">
+                                <label>Email Address <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" ng-model="model.email" placeholder="myemail@x.yz" required>
+                            </div>
+                           <div class="alert alert-danger" ng-repeat="error in errors.email">{{error}}</div>
+
+                            <div class="row top-margin">
+                                <div class="col-sm-6">
+                                    <label>Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" ng-model="model.password1" placeholder="Password" required>
+                                </div>
+                                <div class="alert alert-danger" ng-repeat="error in errors.password1">{{error}}</div>
+
+                                <div class="col-sm-6">
+                                    <label>Confirm Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" ng-model="model.password2" placeholder="Repeat Password" required>
+                                </div>
+                                <div class="alert alert-danger" ng-repeat="error in errors.password2">{{error}}</div>
+                            </div>
+
                             <hr>
 
-                            <form>
-                                <div class="top-margin">
-                                    <label>First Name</label>
-                                    <input type="text" class="form-control">
+                                <div class="col-lg-4 text-right">
+                                    <button class="btn btn-action" type="submit">Register</button>
                                 </div>
-                                <div class="top-margin">
-                                    <label>Last Name</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="top-margin">
-                                    <label>Email Address <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="top-margin">
-                                    <label>Location <span class="glyphicon glyphicon-map-marker"></span> </label>
-                                    <input type="text" class="form-control" placeholder="Enter your address">
-                                </div>
-
-                                <div class="row top-margin">
-                                    <div class="col-sm-6">
-                                        <label>Password <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Confirm Password <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <label class="checkbox">
-                                            <input type="checkbox">
-                                            I've read the <a href="page_terms.html">Terms and Conditions</a>
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-4 text-right">
-                                        <button class="btn btn-action" type="submit">Register</button>
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
+                        </form>
+                        <p ng-if="authenticated">You are already logged in!  You don't need to register.</p>
+                        </div>
+                        <div ng-if="complete == true">
+                            <div class="alert alert-success">Great!  You've just registered.  You should receive an email shortly with instructions on how to activate your account.</div>
+                        </div>
                         </div>
                     </div>
+                </div>
 
-                </div> -->
+            </div>
 
-            </article>
+        </article>
             <!-- /Article -->
 
         </div>

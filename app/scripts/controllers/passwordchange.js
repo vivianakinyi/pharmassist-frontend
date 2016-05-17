@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pharmassistApp')
-  .controller('PasswordchangeCtrl', function ($scope, djangoAuth, Validate) {
+  .controller('PasswordchangeCtrl', function ($scope, djangoAuth, Validate, $state, toastr) {
     $scope.model = {'new_password1':'','new_password2':''};
   	$scope.complete = false;
     $scope.changePassword = function(formData){
@@ -12,9 +12,15 @@ angular.module('pharmassistApp')
         .then(function(data){
         	// success case
         	$scope.complete = true;
+          $state.go('pharmacy_login')
+          toastr.success('Password changed successfully', 'Success')
+
         },function(data){
         	// error case
         	$scope.errors = data;
+          toastr.error($scope.errors, 'Error')
+
+          console.log($scope.errors)
         });
       }
     }
