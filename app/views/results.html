@@ -88,6 +88,13 @@
                         <td>{{pharmacy.properties.no}}</td>
 
                         <td>{{pharmacy.properties.name}}
+                        <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
+                                <!-- <p>Loading map...</p> -->
+                                <ng-map center=[-1.3044564,36.7069642] zoom="13">
+                                    <marker position={{pharmacy.geometry.coordinates}} title="Hello World!"></marker>
+                                </ng-map>
+                                <!-- <ng-map center={{pharmacy.geometry.coordinates}}></ng-map> -->
+                            </div>
                         <p>
                         <a href="" ng-click="showDetails = ! showDetails">Click to show pharmacy details</a></p>
                             <div class="well well-sm" ng-class="{ 'hidden': ! showDetails }">
