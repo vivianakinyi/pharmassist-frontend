@@ -88,6 +88,13 @@
                         <td>{{pharmacy.properties.no}}</td>
 
                         <td>{{pharmacy.properties.name}}
+                        <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
+                                <!-- <p>Loading map...</p> -->
+                                <ng-map center=[-1.3044564,36.7069642] zoom="13">
+                                    <marker position={{pharmacy.geometry.coordinates}} title="Hello World!"></marker>
+                                </ng-map>
+                                <!-- <ng-map center={{pharmacy.geometry.coordinates}}></ng-map> -->
+                            </div>
                         <p>
                         <a href="" ng-click="showDetails = ! showDetails">Click to show pharmacy details</a></p>
                             <div class="well well-sm" ng-class="{ 'hidden': ! showDetails }">
@@ -99,17 +106,19 @@
                                 <p><strong>Landmark: </strong> {{pharmacy.properties.landmark}}</p>
                                 <p><strong>Location: </strong> {{pharmacy.geometry.coordinates}}</p>
                             </div>
-                            <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
+
+                        </td>
+                        <td>{{drugs.recommended_price}}</td>
+
+
+                        <td class="text-center"><a ng-click="showMap = ! showMap" class='btn btn-info btn-xs' href="">Show Map</a><br>
+                        <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
                                 <!-- <p>Loading map...</p> -->
-                                <ng-map center=[-1.3044564,36.7069642] zoom="10">
+                                <ng-map center=[-1.3044564,36.7069642] zoom="13">
                                     <marker position={{pharmacy.geometry.coordinates}} title="Hello World!"></marker>
                                 </ng-map>
-                                <!-- <ng-map center={{pharmacy.geometry.coordinates}}></ng-map>
-                            </div> -->
-                        </td>
-                        <td>Ksh 300.00</td>
-
-                        <td class="text-center"><a ng-click="showMap = ! showMap" class='btn btn-info btn-xs' href="">Show Map</a>
+                                <!-- <ng-map center={{pharmacy.geometry.coordinates}}></ng-map> -->
+                            </div>
                         </td>
                     </tr>
             </table>

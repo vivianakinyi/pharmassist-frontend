@@ -45,6 +45,11 @@
                 </br>
                 <div class="well well-sm" ng-class="{ 'hidden': !  showList}">
                     <div>
+                    <!-- nvd3 chart -->
+                    <div>
+                        <h3>Pie Chart: Comparison of number of drugs per pharmacies</h3>
+                        <nvd3 options="options" data="data" api="api"></nvd3>
+                    </div>
                     <table class="table table-striped custab" id="pharmacies">
                         <!-- search -->
                         <div id="custom-search-input">
@@ -57,11 +62,11 @@
                                 </span>
                             </div>
                         </div>
+
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Pharmacy</th>
-                            <th>Price</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -78,21 +83,17 @@
                                     <p><strong>Town: </strong> {{pharmacy.properties.town}}</p>
                                     <p><strong>County: </strong> {{pharmacy.properties.county}}</p>
                                     <p><strong>Landmark: </strong> {{pharmacy.properties.landmark}}</p>
-                                    <p><strong>Location: </strong> {{pharmacy.geometry.coordinates}}</p>
                                 </div>
                                 <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
 
-                                    <!-- <ng-map center=[-1.3044564,36.7069642] zoom="10">
-                                        <marker position={{pharmacy.geometry.coordinates}} title="Hello World!"></marker>
-                                    </ng-map> -->
-                                    <p>Drugs the pharmacy has are: </p>
+                                    <p>Drugs the pharmacy has are:{{pharmacy.properties.drugs.length}} </p>
                                     <div ng-repeat="drug in pharmacy.properties.drugs" id="reapeter">
+                                        <!-- <p>Count : {{drug.length}}</p> -->
                                         <p>{{$index +1}} : {{drug.display_name}}</p>
                                     </div>
 
                                 </div>
                             </td>
-                            <td>Ksh 300.00</td>
 
                             <td class="text-center"><a ng-click="showMap = ! showMap" class='btn btn-info btn-xs' href="">List Available Drugs</a></td>
                         </tr>

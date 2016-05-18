@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pharmassistApp')
-  .controller('RegisterCtrl', function ($scope, djangoAuth, Validate) {
+  .controller('RegisterCtrl', function ($scope, djangoAuth, Validate, $state, toastr) {
   	$scope.model = {'username':'','password':'','email':''};
   	$scope.complete = false;
     $scope.register = function(formData){
@@ -12,9 +12,15 @@ angular.module('pharmassistApp')
         .then(function(data){
         	// success case
         	$scope.complete = true;
+          toastr.success('You have registered successfully. Now go and login', 'Success')
+
+          $state.go('login');
+
         },function(data){
         	// error case
         	$scope.errors = data;
+          toastr.error($scope.errors, 'Error')
+
         });
       }
     }
