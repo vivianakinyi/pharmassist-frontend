@@ -103,7 +103,7 @@ angular.module('pharmassistApp')
                 'url': "/logout/"
             }).then(function(data){
                 delete $http.defaults.headers.common.Authorization;
-                delete $cookies.token;
+                $cookies.remove("token");
                 djangoAuth.authenticated = false;
                 $rootScope.$broadcast("djangoAuth.logged_out");
             });
