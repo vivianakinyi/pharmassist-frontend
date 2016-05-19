@@ -12,7 +12,7 @@ angular.module('pharmassistApp')
   		$scope.model = data;
       console.log('Data',$scope.model)
   	});
-    console.log('Data')
+
     $scope.updateProfile = function(formData, model){
       $scope.errors = [];
       Validate.form_validation(formData,$scope.errors);

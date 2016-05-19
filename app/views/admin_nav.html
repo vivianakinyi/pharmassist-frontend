@@ -12,8 +12,16 @@
           <li ui-sref-active="active"><a ui-sref="admin.analytics">Analytics</a></li>
           <li ui-sref-active="active"><a ui-sref="admin.reports">Reports</a></li>
           <li ui-sref-active="active"><a ui-sref="admin.prices">Prices</a></li>
+           <li ng-if="authenticated" class="dropdown">
+            <a  class="btn" class="dropdown-toggle" data-toggle="dropdown">{{firstName}} {{lastName}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a ui-sref="admin_login" ng-click="logout()">Logout</a></li>
 
-          <li><a ng-hide="authenticated" class="btn" ui-sref="logout">LOGOUT</a></li>
+            </ul>
+          </li>
+          <li><a ng-if="!authenticated" class="btn" ui-sref="admin_login">LOGIN</a></li>
+
+          <!-- <li><a ng-hide="authenticated" class="btn" ui-sref="logout">LOGOUT</a></li> -->
 
         </ul>
       </div><!--/.nav-collapse -->

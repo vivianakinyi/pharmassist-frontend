@@ -19,18 +19,9 @@ angular.module('pharmassistApp')
       if(!formData.$invalid){
         djangoAuth.login($scope.model.username, $scope.model.password)
         .then(function(data){
-          $cookies.put('username', $scope.model.username);
-          $cookies.put('password', $scope.model.password);
-          if ($scope.selection === 'admin') {
-            $state.go("admin");
-          }
-          else if ($scope.selection === 'pharmacist') {
-            $state.go("pharmacy");
-          }
-          else {
-            $state.go("home");
-          }
-
+          // $cookies.put('username', $scope.model.username);
+          // $cookies.put('password', $scope.model.password);
+          $state.go("home");
         },function(data){
         	// error case
         	$scope.errors = data;

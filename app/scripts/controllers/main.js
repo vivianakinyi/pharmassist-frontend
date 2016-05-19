@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pharmassistApp')
-  .controller('MainCtrl', function ($scope, $cookies, $location, djangoAuth) {
+  .controller('MainCtrl', function ($scope,$rootScope, $cookies, $location, djangoAuth, apiService) {
 
     $scope.login = function(){
       djangoAuth.login(prompt('Username'),prompt('password'))
@@ -72,6 +72,14 @@ angular.module('pharmassistApp')
     });
     $scope.$on("djangoAuth.logged_out", function(data){
       $scope.show_login = true;
+    });
+
+    // Getting user profile info
+    var url = 'http://localhost:8000/rest-auth/user/'
+    apiService.get(url).then(function(response){
+        $rootScope.firstName = response.data.first_name
+        $rootScope.lastName = response.data.last_name
+        console.log(response.data.last_name)
     });
 
   });
