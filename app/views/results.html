@@ -57,7 +57,13 @@
         <!-- Normal table -->
 
         <div>
+        <div>
+        <p>ID: {{pharmacy.id}}
+            Name: {{pharmacy.pharmacy_name}}
+             price: {{pharmacy.price}}
+              Recommended price: {{pharmacy.recommended_price}}</p>
 
+        </div>
             <table class="table table-striped custab">
                 <button class='btn btn-success btn-xs pull-right' ui-sref="search.results.map"><span class="glyphicon glyphicon-map"></span> View Full Map</button>
                 <br/>
@@ -73,9 +79,9 @@
                         </span>
                     </div>
                 </div>
-                <div ng-init="rating = star.rating + 1">Rating</div>
+                <!-- <div ng-init="rating = star.rating + 1">Rating</div>
                 <div class="star-rating" star-rating rating-value="rating"
-                data-max="10" on-rating-selected="rateFunction(rating)"></div>
+                data-max="10" on-rating-selected="rateFunction(rating)"></div> -->
             <thead>
                 <tr>
                     <th>ID</th>
@@ -90,8 +96,8 @@
                         <td>{{pharmacy.properties.name}}
                         <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
                                 <!-- <p>Loading map...</p> -->
-                                <ng-map center=[-1.3044564,36.7069642] zoom="13">
-                                    <marker position={{pharmacy.geometry.coordinates}} title="Hello World!"></marker>
+                                <ng-map center=[-1.3044564,36.7069642] zoom="9">
+                                    <marker position={{pharmacy.geometry.coordinates}} title={{pharmacy.properties.name}}></marker>
                                 </ng-map>
                                 <!-- <ng-map center={{pharmacy.geometry.coordinates}}></ng-map> -->
                             </div>
@@ -112,13 +118,6 @@
 
 
                         <td class="text-center"><a ng-click="showMap = ! showMap" class='btn btn-info btn-xs' href="">Show Map</a><br>
-                        <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
-                                <!-- <p>Loading map...</p> -->
-                                <ng-map center=[-1.3044564,36.7069642] zoom="13">
-                                    <marker position={{pharmacy.geometry.coordinates}} title="Hello World!"></marker>
-                                </ng-map>
-                                <!-- <ng-map center={{pharmacy.geometry.coordinates}}></ng-map> -->
-                            </div>
                         </td>
                     </tr>
             </table>
