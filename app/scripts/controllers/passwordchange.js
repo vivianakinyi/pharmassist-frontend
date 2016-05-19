@@ -12,8 +12,8 @@ angular.module('pharmassistApp')
         .then(function(data){
         	// success case
         	$scope.complete = true;
-          $state.go('pharmacy_login')
-          toastr.success('Password changed successfully', 'Success')
+          toastr.success('Password changed successfully. You need to login to see the changes', 'Success')
+          // $state.go('')
 
         },function(data){
         	// error case

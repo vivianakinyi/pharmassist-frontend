@@ -9,10 +9,16 @@
           <li ui-sref-active="active"><a ui-sref="pharmacy">Pharmacy</a></li>
           <li ui-sref-active="active"><a ui-sref="userProfile">Profile</a></li>
           <li ui-sref-active="active"><a ui-sref="passwordChange">Account</a></li>
-          <!-- <li><a ui-sref="about">About</a></li>
-          <li><a ui-sref="contact">Contact</a></li> -->
-          <li><a ng-if="authenticated" class="btn" ui-sref="pharmacy_login">LOGOUT</a></li>
-          <li><a ng-if="!authenticated" class="btn" ui-sref="pharmacy_login">LOGin</a></li>
+          <!-- <li><a ui-sref="contact">Contact</a></li> -->
+          <li ng-if="authenticated" class="dropdown">
+            <a  class="btn" class="dropdown-toggle" data-toggle="dropdown">{{firstName}} {{lastName}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a ui-sref="pharmacy_login">Logout</a></li>
+
+            </ul>
+          </li>
+          <!-- <li><a ng-if="authenticated" class="btn" ui-sref="pharmacy_login">LOGOUT</a></li> -->
+          <li><a ng-if="!authenticated" class="btn" ui-sref="pharmacy_login">LOGIN</a></li>
 
         </ul>
       </div><!--/.nav-collapse -->

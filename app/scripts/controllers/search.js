@@ -82,17 +82,12 @@ angular.module('pharmassistApp')
             $scope.gridOptions.data.indexOf(row.entity);
         };
 
-
+        // Get all pharmacies within the selected radius with the drug
         apiService.get(searchUrl).then(function(response){
+            $scope.drugID = currentID;
+
             $scope.gridOptions.data = response.data.results.features;
             $scope.pharmacies = response.data.results.features;
-
-            apiService.get(priceUrl).then(function(resp){
-                $scope.prices = resp.data.results[1].price;
-                $scope.recommended = resp.data.results[1].recommended_price;
-                console.log($scope.prices)
-                console.log($scope.recommended)
-            });
 
         });
     }
