@@ -46,7 +46,7 @@
                 <div class="well well-sm" ng-class="{ 'hidden': !  showList}">
                     <div>
                     <!-- nvd3 chart -->
-                    <div>
+                    <div cg-busy="promise">
                         <h3>Pie Chart: Comparison of number of drugs per pharmacies</h3>
                         <nvd3 options="options" data="data" api="api"></nvd3>
                     </div>

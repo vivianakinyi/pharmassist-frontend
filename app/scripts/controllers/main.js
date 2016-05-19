@@ -79,7 +79,6 @@ angular.module('pharmassistApp')
     apiService.get(url).then(function(response){
         $rootScope.firstName = response.data.first_name
         $rootScope.lastName = response.data.last_name
-        console.log(response.data.last_name)
     });
 
   });

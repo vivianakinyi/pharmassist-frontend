@@ -65,7 +65,7 @@
 
             </div> -->
 
-            <table class="table table-striped custab">
+            <table class="table table-striped custab" cg-busy="myPromise">
                 <button class='btn btn-success btn-xs pull-right' ui-sref="search.results.map"><span class="glyphicon glyphicon-map"></span> View Full Map</button>
                 <br/>
                 <br>
@@ -98,7 +98,7 @@
                         <td>{{pharmacy.properties.name}}
                         <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
                                 <!-- <p>Loading map...</p> -->
-                                <ng-map center=[-1.3044564,36.7069642] zoom="9">
+                                <ng-map center=[-1.3044564,36.7069642] zoom="6">
                                     <marker position={{pharmacy.geometry.coordinates}} title={{pharmacy.properties.name}}></marker>
                                 </ng-map>
                                 <!-- <ng-map center={{pharmacy.geometry.coordinates}}></ng-map> -->

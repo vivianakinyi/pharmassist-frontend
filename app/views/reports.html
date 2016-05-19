@@ -42,7 +42,7 @@
                 <h3>Report: Number of Pharmcies with the Drug: <strong>{{count}}</strong></h3>
                 <a href="" ng-click="showDetails = ! showDetails">Click to show the pharmacies</a>
                 <div class="well well-sm" ng-class="{ 'hidden': !  showDetails}">
-                    <table class="table table-striped custab">
+                    <table class="table table-striped custab" cg-busy="promise">
                     <!-- search -->
                     <div id="custom-search-input">
                             <div class="input-group col-md-12">

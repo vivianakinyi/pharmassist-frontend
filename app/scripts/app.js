@@ -26,6 +26,7 @@ angular
     'ui.grid',
     'toastr',
     'nvd3',
+    'cgBusy',
     'angularUtils.directives.dirPagination',
     'pharmassistApp.config'
   ]);

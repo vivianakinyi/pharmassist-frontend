@@ -87,7 +87,7 @@ angular.module('pharmassistApp')
     })
 
     // Fetch all drugs
-    apiService.get(url).then(function(drugs){
+    $scope.myPromise = apiService.get(url).then(function(drugs){
         $scope.drugs = drugs.data.results
         $scope.multipleDrugs = {};
         $scope.multipleDrugs.value = [];
@@ -116,6 +116,9 @@ angular.module('pharmassistApp')
         });
         return defferd.promise;
     };
+    $scope.cancel = function(){
+        $state.go('pharmacy.detail.drugs', {id:currentID})
+    }
 
     $scope.saveDrugs = function(data){
         _.each(data, function getData(value, index) {

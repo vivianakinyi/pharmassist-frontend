@@ -43,7 +43,7 @@ angular.module('pharmassistApp')
 
         var url = "http://localhost:8000/api/pharmacy/pharmacy/?county=" + county;
 
-        apiService.get(url).then(function(response){
+        $scope.promise = apiService.get(url).then(function(response){
 
             $scope.pharmacies = response.data.results.features;
 
@@ -68,7 +68,7 @@ angular.module('pharmassistApp')
 
     $scope.list = function(drug){
         var url = "http://localhost:8000/api/pharmacy/prices/?drug=" + drug;
-        apiService.get(url).then(function(response){
+        $scope.promise = apiService.get(url).then(function(response){
             $scope.drugs = response.data.results;
             $scope.count = response.data.count;
         });
@@ -78,7 +78,7 @@ angular.module('pharmassistApp')
   .controller('PricesCtrl', function ($scope, apiService) {
     var drugUrl = "http://localhost:8000/api/pharmacy/prices/";
 
-    apiService.get(drugUrl).then(function (response) {
+    $scope.promise = apiService.get(drugUrl).then(function (response) {
         $scope.drugs = response.data.results;
         console.log($scope.drugs)
     });
@@ -113,44 +113,8 @@ angular.module('pharmassistApp')
             }
         }
     };
-    // $scope.data = [
-    //         {
-    //             key: "Cumulative Return",
-    //             values: [
-    //                 {
-    //                     "label" : "A" ,
-    //                     "value" : 10
-    //                 } ,
-    //                 {
-    //                     "label" : "B" ,
-    //                     "value" : 12
-    //                 } ,
-    //                 {
-    //                     "label" : "C" ,
-    //                     "value" : 3
-    //                 } ,
-    //                 {
-    //                     "label" : "D" ,
-    //                     "value" : 1
-    //                 } ,
-    //                 {
-    //                     "label" : "E" ,
-    //                     "value" : 0
-    //                 } ,
-    //                 {
-    //                     "label" : "F" ,
-    //                     "value" : 4
-    //                 } ,
-    //                 {
-    //                     "label" : "G" ,
-    //                     "value" : 6
-    //                 }
-    //             ]
-    //         }
-    //      ]
 
-
-    apiService.get(url).then(function(response){
+    $scope.promise = apiService.get(url).then(function(response){
         $scope.drugs = response.data.results;
 
         var data =  response.data.results;
