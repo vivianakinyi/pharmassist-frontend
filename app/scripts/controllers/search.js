@@ -82,7 +82,7 @@ angular.module('pharmassistApp')
         };
 
         // Get all pharmacies within the selected radius with the drug
-        $scope.myPromise = apiService.get(searchUrl).then(function(response){
+        $scope.promise = apiService.get(searchUrl).then(function(response){
             $scope.drugID = currentID;
 
             $scope.gridOptions.data = response.data.results.features;

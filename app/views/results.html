@@ -53,7 +53,7 @@
         <!-- Normal table -->
         <div>
 
-            <table class="table table-striped custab" cg-busy="myPromise">
+            <table class="table table-striped custab" ng-if="pharmacies && pharmacies.length > 0" cg-busy="promise">
                 <button class='btn btn-success btn-xs pull-right' ui-sref="search.results.map"><span class="glyphicon glyphicon-map"></span> View Full Map</button>
                 <br/>
                 <br>
@@ -71,6 +71,11 @@
                 <!-- <div ng-init="rating = star.rating + 1">Rating</div>
                 <div class="star-rating" star-rating rating-value="rating"
                 data-max="10" on-rating-selected="rateFunction(rating)"></div> -->
+
+                <!-- no data -->
+                <div ng-if="pharmacies && pharmacies.length === 0">
+                    <h3>Sorry. No results were found!</h3>
+                </div>
             <thead>
                 <tr>
                     <th>ID</th>
