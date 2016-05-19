@@ -144,7 +144,7 @@ angular.module('pharmassistApp')
     var endpoint = "http://localhost:8000/api/pharmacy/prices/?pharmacy=" + currentID;
 
     apiService.get(endpoint).then(function(response){
-        console.log(response.data.results);
+
 
         $scope.pharmDrugs = response.data.results;
         $scope.pharmDrugs.selected = {};
@@ -158,17 +158,18 @@ angular.module('pharmassistApp')
 
         $scope.editPrice = function (drug) {
             $scope.pharmDrugs.selected = angular.copy(drug);
+            $scope.pharmDrugs.selected.id
         };
         $scope.savePrice = function (idx) {
             $scope.pharmDrugs[idx] = angular.copy($scope.pharmDrugs.selected);
-            $scope.reset();
+            var endpointID = $scope.pharmDrugs.selected.id;
 
             var updateObj = {
                 price: $scope.pharmDrugs.selected.price
             }
 
             apiService.get(endpoint).then(function(response){
-                var endpointID = response.data.results[0].id;
+                // var endpointID = $scope.pharmDrugs.selected.id;
                 var endpointUpdate = "http://localhost:8000/api/pharmacy/prices/";
 
                 apiService.update(endpointUpdate, endpointID, updateObj).then(function(response){
@@ -176,7 +177,7 @@ angular.module('pharmassistApp')
                 });
             });
             // $scope.pharmDrugs[idx] = angular.copy($scope.pharmDrugs.selected);
-
+            $scope.reset();
         };
 
         $scope.reset = function () {

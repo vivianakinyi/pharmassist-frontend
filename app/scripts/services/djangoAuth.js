@@ -10,14 +10,14 @@ angular.module('pharmassistApp')
         'API_URL': '/rest-auth',
         // Set use_session to true to use Django sessions to store security token.
         // Set use_session to false to store the security token locally and transmit it as a custom header.
-        'use_session': true,
+        'use_session': false,
         /* END OF CUSTOMIZATION */
         'authenticated': null,
         'authPromise': null,
         'request': function(args) {
             // Let's retrieve the token from the cookie, if available
-            if($cookies.token){
-                $http.defaults.headers.common.Authorization = 'Token ' + $cookies.token;
+            if($cookies.get("token")){
+                $http.defaults.headers.common.Authorization = 'Token ' + $cookies.get("token");
             }
             // Continue
             params = args.params || {}
@@ -90,7 +90,7 @@ angular.module('pharmassistApp')
             }).then(function(data){
                 if(!djangoAuth.use_session){
                     $http.defaults.headers.common.Authorization = 'Token ' + data.key;
-                    $cookies.token = data.key;
+                    $cookies.put("token", data.key);
                 }
                 djangoAuth.authenticated = true;
                 $rootScope.$broadcast("djangoAuth.logged_in", data);
@@ -103,7 +103,7 @@ angular.module('pharmassistApp')
                 'url': "/logout/"
             }).then(function(data){
                 delete $http.defaults.headers.common.Authorization;
-                delete $cookies.token;
+                $cookies.remove("token");
                 djangoAuth.authenticated = false;
                 $rootScope.$broadcast("djangoAuth.logged_out");
             });

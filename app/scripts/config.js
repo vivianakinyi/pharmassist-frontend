@@ -25,12 +25,7 @@ angular
     .run(function(djangoAuth){
       djangoAuth.initialize('http://localhost:8000/rest-auth', false);
     })
-    .run(function($cookies){
-    // Let's retrieve the token from the cookie, if available
-        if($cookies.token){
-            $http.defaults.headers.common.Authorization = 'Token ' + $cookies.token;
-        }
-    })
+
 
   .config(function ($urlRouterProvider) {
     $urlRouterProvider.otherwise("/");
