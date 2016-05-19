@@ -32,7 +32,11 @@
                 <br>
             <!-- Normal table -->
             <div>
-                <table class="table table-striped custab">
+                <div ng-if="pharmDrugs && pharmDrugs.length === 0">
+                    <h3>No results were found!</h3>
+                </div>
+                <table class="table table-striped custab" cg-busy="myPromise"
+                ng-if="pharmDrugs && pharmDrugs.length > 0" >
                     <button class='btn btn-success btn-xs pull-right'
                     ng-click="addDrugs()">+ Add New Drugs</button>
                 <br>

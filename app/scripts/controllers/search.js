@@ -18,9 +18,8 @@ angular.module('pharmassistApp')
                 location = true;
                 toastr.success("Location detected successfully", 'Success');
             }),function(error){
-                console.log(error);
-                $rootScope.$broadcast('error',CONSTANTS['errors.location.notFound']);
-                toastr.error("Failed to get location", 'Error');
+                console.log('Geolocation eror',error);
+                toastr.error(error, 'Error');
             }
         };
         // distance combobox
@@ -83,7 +82,7 @@ angular.module('pharmassistApp')
         };
 
         // Get all pharmacies within the selected radius with the drug
-        apiService.get(searchUrl).then(function(response){
+        $scope.promise = apiService.get(searchUrl).then(function(response){
             $scope.drugID = currentID;
 
             $scope.gridOptions.data = response.data.results.features;

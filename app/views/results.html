@@ -49,23 +49,11 @@
                 </div>
             </div>
         </header>
-        <!-- ui-grid -->
-        <!-- <div ng-if="gridOptions.Response !== 'False'">
-          <div id="grid1" ui-grid="gridOptions" class="grid"></div>
-        </div> -->
 
         <!-- Normal table -->
-
         <div>
-            <!-- <div>
-            <p>ID: {{pharmacy.id}}
-                Name: {{pharmacy.pharmacy_name}}
-                 price: {{pharmacy.price}}
-                  Recommended price: {{pharmacy.recommended_price}}</p>
 
-            </div> -->
-
-            <table class="table table-striped custab">
+            <table class="table table-striped custab" ng-if="pharmacies && pharmacies.length > 0" cg-busy="promise">
                 <button class='btn btn-success btn-xs pull-right' ui-sref="search.results.map"><span class="glyphicon glyphicon-map"></span> View Full Map</button>
                 <br/>
                 <br>
@@ -83,6 +71,11 @@
                 <!-- <div ng-init="rating = star.rating + 1">Rating</div>
                 <div class="star-rating" star-rating rating-value="rating"
                 data-max="10" on-rating-selected="rateFunction(rating)"></div> -->
+
+                <!-- no data -->
+                <div ng-if="pharmacies && pharmacies.length === 0">
+                    <h3>Sorry. No results were found!</h3>
+                </div>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -98,7 +91,7 @@
                         <td>{{pharmacy.properties.name}}
                         <div class="well well-sm" ng-class="{ 'hidden': ! showMap }">
                                 <!-- <p>Loading map...</p> -->
-                                <ng-map center=[-1.3044564,36.7069642] zoom="9">
+                                <ng-map center=[-1.3044564,36.7069642] zoom="6">
                                     <marker position={{pharmacy.geometry.coordinates}} title={{pharmacy.properties.name}}></marker>
                                 </ng-map>
                                 <!-- <ng-map center={{pharmacy.geometry.coordinates}}></ng-map> -->
