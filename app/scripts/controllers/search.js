@@ -84,8 +84,7 @@ angular.module('pharmassistApp')
 
 
         apiService.get(searchUrl).then(function(response){
-            // console.log('Search results', response.data.results.features[1].properties.pharmacy_prices)
-            // var data = response.data.results.features[1].properties.pharmacy_prices
+
             var all = response.data.results.features;
 
             _.each(all, function getData(value, index) {
@@ -94,7 +93,7 @@ angular.module('pharmassistApp')
                 _.each(data, function getData(value, index) {
                     if (value.drug == currentID){
                         $scope.pharmacy = value;
-                        console.log(value)
+                        // console.log(value)
                     }
                 });
                 // $scope.pharmacy = value
@@ -104,7 +103,7 @@ angular.module('pharmassistApp')
 
             $scope.gridOptions.data = response.data.results.features;
             $scope.pharmacies = response.data.results.features;
-
+            console.log('Pharmacies',$scope.pharmacies);
             apiService.get(priceUrl).then(function(resp){
                 // $scope.prices = resp.data.results[currentID].price;
                 // $scope.recommended = resp.data.results[1].recommended_price;
